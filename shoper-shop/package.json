@@ -1,0 +1,26 @@
+{
+  "name": "shoper",
+  "version": "0.0.1",
+  "description": "Simple web shop",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "start:dev": "ts-node main/src/server.ts",
+    "start": "tsc && node main/dist/server.js"
+  },
+  "author": "Mariusz Baran <mariusz.baran23@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/compression": "0.0.36",
+    "@types/express": "^4.17.0",
+    "@types/helmet": "0.0.43",
+    "class-validator": "^0.9.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^3.20.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "ts-node": "^8.3.0"
+  }
+}
