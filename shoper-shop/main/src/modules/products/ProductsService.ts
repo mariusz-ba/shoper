@@ -1,17 +1,7 @@
-import { NotFoundException } from "../../core/exceptions/NotFoundException";
+import { NotFoundException } from '../../core/exceptions/NotFoundException';
+import { Product } from './ProductEntity';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
-
-export class ProductsService {  
-  private readonly products: Product[] = [
-    { id: 1, name: 'Shoes', price: 100 },
-    { id: 2, name: 'T-Shirt', price: 90.99 }
-  ];
-
+export class ProductsService {
   private static instance: ProductsService;
   private constructor() {}
 
@@ -23,12 +13,12 @@ export class ProductsService {
     return ProductsService.instance;
   }
 
-  getProducts(): Product[] {
-    return this.products;
+  async getProducts(): Promise<Product[]> {
+    return Product.find();
   }
 
-  getProduct(id: number): Product {
-    const product = this.products.find(product => product.id === id);
+  async getProduct(id: number): Promise<Product> {
+    const product = await Product.findOne(id);
 
     if (!product) {
       throw new NotFoundException(`Product with ID "${id}" not found.`);

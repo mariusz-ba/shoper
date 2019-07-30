@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import { createConnection } from 'typeorm';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
@@ -6,6 +7,7 @@ import path from 'path';
 import { HttpError } from './core/exceptions/HttpError';
 import { Controller } from './core/controllers/ControllerInterface';
 import { ProductsController } from './modules/products/ProductsController';
+import { typeOrmConfig } from './config/typeOrmConfig';
 
 export class App {
   private listenning: Boolean = false;
@@ -22,12 +24,17 @@ export class App {
     this.app.use(helmet());
     this.app.use(compression());
 
+    this.initDatabaseConnection();
     this.initControllers();
     this.initErrorHandlingMiddleware();
   }
 
   getPublicPath(filename: string = '') {
     return path.join(__dirname, '..', 'public', filename);
+  }
+
+  initDatabaseConnection() {
+    createConnection(typeOrmConfig);
   }
 
   initControllers() {

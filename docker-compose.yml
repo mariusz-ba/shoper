@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  shoper-mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: shoper
+      MYSQL_USER: shoper
+      MYSQL_PASSWORD: shoper
+    networks:
+      - shoper
+  shoper-phpmyadmin:
+    depends_on:
+      - shoper-mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: shoper-mysql
+      MYSQL_ROOT_PASSWORD: password 
+    networks:
+      - shoper
+
+networks:
+  shoper:

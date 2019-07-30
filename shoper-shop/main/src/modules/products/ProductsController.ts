@@ -3,6 +3,7 @@ import { Validator } from 'class-validator';
 import { Controller } from '../../core/controllers/ControllerInterface';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
 import { ProductsService } from './ProductsService';
+import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 
 const validator = new Validator();
 
@@ -14,23 +15,23 @@ export class ProductsController implements Controller {
 
   private static instance: ProductsController; 
   private constructor() {
-    this.router.get('/', this.getProducts.bind(this));
-    this.router.get('/:id', this.getProduct.bind(this));
+    this.router.get('/', exceptionsCatcher(this.getProducts.bind(this)));
+    this.router.get('/:id', exceptionsCatcher(this.getProduct.bind(this)));
   }
 
-  getProducts(req: Request, res: Response) {
-    const products = this.productsService.getProducts();
+  async getProducts(req: Request, res: Response) {
+    const products = await this.productsService.getProducts();
     res.json(products);
   }
 
-  getProduct(req: Request, res: Response) {
+  async getProduct(req: Request, res: Response) {
     const id = Number(req.params.id);
 
     if (!validator.isNumber(id)) {
       throw new BadRequestException('Product id must be a number');
     }
 
-    const product = this.productsService.getProduct(id);
+    const product = await this.productsService.getProduct(id);
     res.json(product);
   }
 
