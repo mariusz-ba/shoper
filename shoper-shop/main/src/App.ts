@@ -4,19 +4,15 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import path from 'path';
-import { HttpError } from './core/exceptions/HttpError';
-import { Controller } from './core/controllers/ControllerInterface';
-import { ProductsController } from './modules/products/ProductsController';
 import { typeOrmConfig } from './config/typeOrmConfig';
+import { HttpError } from './core/exceptions/HttpError';
+import { ProductsModule } from './modules/products/ProductsModule';
 
 export class App {
   private listenning: Boolean = false;
   private static instance: App;
   private readonly app: Application = express();
-  private readonly controllers: Controller[] = [
-    ProductsController.getInstance()
-  ]; 
-  
+
   private constructor() {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,29 +20,35 @@ export class App {
     this.app.use(helmet());
     this.app.use(compression());
 
-    this.initDatabaseConnection();
-    this.initControllers();
-    this.initErrorHandlingMiddleware();
+    this.init().then(() => {
+      console.log('Connected to database.');
+    });
   }
 
   getPublicPath(filename: string = '') {
     return path.join(__dirname, '..', 'public', filename);
   }
 
+  async init(): Promise<void> {
+    await this.initDatabaseConnection();
+    this.initControllers();
+    this.initErrorHandlingMiddleware();
+  }
+
   initDatabaseConnection() {
-    createConnection(typeOrmConfig);
+    return createConnection(typeOrmConfig);
   }
 
   initControllers() {
     // Init rest api controllers
-    this.controllers.forEach(controller => {
+    [ProductsModule.getInstance().productsController].forEach(controller => {
       this.app.use(controller.path, controller.router);
     });
 
     // Init route for frontend application
     this.app.get('*', (req: Request, res: Response) => {
       res.sendFile(this.getPublicPath('index.html'));
-    })
+    });
   }
 
   initErrorHandlingMiddleware() {

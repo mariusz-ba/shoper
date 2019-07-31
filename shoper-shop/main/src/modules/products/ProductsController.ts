@@ -11,10 +11,7 @@ export class ProductsController implements Controller {
   public readonly path: string = '/api/products';
   public readonly router: Router = Router();
 
-  private readonly productsService: ProductsService = ProductsService.getInstance();
-
-  private static instance: ProductsController; 
-  private constructor() {
+  constructor(private readonly productsService: ProductsService) {
     this.router.get('/', exceptionsCatcher(this.getProducts.bind(this)));
     this.router.get('/:id', exceptionsCatcher(this.getProduct.bind(this)));
   }
@@ -33,13 +30,5 @@ export class ProductsController implements Controller {
 
     const product = await this.productsService.getProduct(id);
     res.json(product);
-  }
-
-  static getInstance(): ProductsController {
-    if (!ProductsController.instance) {
-      ProductsController.instance = new ProductsController();
-    }
-
-    return ProductsController.instance;
   }
 }
