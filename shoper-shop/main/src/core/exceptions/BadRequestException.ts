@@ -4,7 +4,10 @@ export class BadRequestException extends HttpError {
   readonly name: string = 'Bad request';
   readonly code: number = 400;
 
-  constructor(readonly message: string) {
+  constructor(
+    readonly message: string,
+    readonly data: any = null
+  ) {
     super();
   }
 
@@ -12,7 +15,8 @@ export class BadRequestException extends HttpError {
     return {
       name: this.name,
       code: this.code,
-      message: this.message
+      message: this.message,
+      data: this.data
     };
   }
 }

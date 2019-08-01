@@ -1,6 +1,7 @@
 import { NotFoundException } from '../../core/exceptions/NotFoundException';
 import { ProductsRepository } from './ProductsRepository';
 import { Product } from './ProductEntity';
+import { CreateProductDto } from './dto/CreateProductDto';
 
 export class ProductsService {
   constructor(private readonly productsRepository: ProductsRepository) {}
@@ -16,6 +17,15 @@ export class ProductsService {
       throw new NotFoundException(`Product with ID "${id}" not found.`);
     }
 
+    return product;
+  }
+
+  async createProduct(createProductDto: CreateProductDto): Promise<Product> {
+    const product = new Product();
+    product.name = createProductDto.name;
+    product.price = createProductDto.price;
+    await product.save();
+    
     return product;
   }
 }

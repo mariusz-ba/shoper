@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express, { Application, Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 import compression from 'compression';

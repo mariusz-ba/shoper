@@ -4,7 +4,10 @@ export class NotFoundException extends HttpError {
   readonly name: string = 'Not found';
   readonly code: number = 404;
 
-  constructor(readonly message: string) {
+  constructor(
+    readonly message: string,
+    readonly data: any = null
+  ) {
     super();
   }
 
@@ -12,7 +15,8 @@ export class NotFoundException extends HttpError {
     return {
       name: this.name,
       code: this.code,
-      message: this.message
+      message: this.message,
+      data: this.data
     };
   }
 }
