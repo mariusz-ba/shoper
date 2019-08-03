@@ -2,4 +2,5 @@
 .DS_Store
 # ignore server artefacts
 /main/dist
+/main/public/assets/base
 /node_modules
