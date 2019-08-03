@@ -1,0 +1,17 @@
+@import 'fontsFaces';
+@import 'fonts';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: percentage(10px / 16px);
+}
+
+body {
+  font-family: $fontFamily;
+  font-size: $fontSizeRegular;
+}

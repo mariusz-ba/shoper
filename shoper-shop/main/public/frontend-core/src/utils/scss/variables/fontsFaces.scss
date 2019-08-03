@@ -1,0 +1,29 @@
+$fontsPath: 'assets/fonts';
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica Neue Light'), local('Helvetica-Neue-Light'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-light.woff2') format('woff2'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Helvetica Neue Bold'), local('Helvetica-Neue-Bold'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-bold.woff2') format('woff2'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'iconfont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$fontsPath}/iconfont/iconfont.ttf'),
+    url('#{$fontsPath}/iconfont/iconfont.eot'),
+    url('#{$fontsPath}/iconfont/iconfont.woff'),
+    url('#{$fontsPath}/iconfont/iconfont.woff2');
+}

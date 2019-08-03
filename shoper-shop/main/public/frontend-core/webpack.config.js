@@ -9,7 +9,8 @@ const paths = {
   bundleOutputFilename: 'main.js',
   htmlTemplateEntry: path.join(__dirname, 'src/templates', 'index.html'),
   htmlTemplateOutput: path.join(__dirname, '../assets/base', 'index.html'),
-  cssFilename: 'main.css'
+  cssFilename: 'main.css',
+  assetsFonts: path.relative(__dirname, 'fonts'),
 }
 
 function createWebpackConfig(environment) {
@@ -22,13 +23,14 @@ function createWebpackConfig(environment) {
     output: {
       path: paths.bundleOutputPath,
       filename: paths.bundleOutputFilename,
-      publicPath: '/assets/base'
+      publicPath: '/assets/base/'
     },
     module: {
       rules:[
         vueLoaderRule(),
         babelLoaderRule(),
-        styleLoaderRule(env)
+        styleLoaderRule(env),
+        fontsLoaderRule()
       ]
     },
     resolve: {
@@ -71,6 +73,21 @@ function styleLoaderRule(env) {
       env === 'dev' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
       'css-loader',
       'sass-loader'
+    ]
+  };
+}
+
+function fontsLoaderRule() {
+  return {
+    test: /\.(ttf|eot|woff2?)/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          outputPath: paths.assetsFonts,
+          name: '[name].[ext]'
+        }
+      }
     ]
   };
 }

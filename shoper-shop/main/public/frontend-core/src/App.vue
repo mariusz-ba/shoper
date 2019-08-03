@@ -1,23 +1,21 @@
 <template>
   <div class="app">
-    <h1 class="app__title">Shoper</h1>
+    <main-header />
+    <router-view />
   </div>
 </template>
 
 <script>
+import MainHeader from './components/MainHeader/MainHeader.vue';
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    MainHeader
+  }
 };
 </script>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-}
+@import 'utils/scss/variables/global';
 </style>

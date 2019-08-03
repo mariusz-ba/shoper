@@ -1,0 +1,9 @@
+@import '../variables/icons';
+
+@mixin iconFont($name, $selector: before) {
+  &::#{$selector} {
+    content: map-get($icons, $name);
+    font-family: 'iconfont';
+    @content;
+  }
+}
