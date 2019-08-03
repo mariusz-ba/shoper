@@ -17,21 +17,23 @@ export class App {
   private constructor() {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(express.static(this.getPublicPath()));
+    this.app.use('/assets', express.static(this.getPublicPath()));
     this.app.use(helmet());
     this.app.use(compression());
+    this.app.set('json spaces', 2);
 
     this.init().then(() => {
       console.log('Connected to database.');
     });
   }
 
-  getPublicPath(filename: string = '') {
-    return path.join(__dirname, '..', 'public', filename);
+  getPublicPath(subPath: string = '') {
+    return path.join(__dirname, '..', 'public/assets', subPath);
   }
 
   async init(): Promise<void> {
-    await this.initDatabaseConnection();
+    const connection = await this.initDatabaseConnection();
+    await connection.runMigrations();
     this.initControllers();
     this.initErrorHandlingMiddleware();
   }
@@ -48,7 +50,7 @@ export class App {
 
     // Init route for frontend application
     this.app.get('*', (req: Request, res: Response) => {
-      res.sendFile(this.getPublicPath('index.html'));
+      res.sendFile(this.getPublicPath('base/index.html'));
     });
   }
 

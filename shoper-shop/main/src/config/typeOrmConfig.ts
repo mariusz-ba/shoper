@@ -9,5 +9,6 @@ export const typeOrmConfig: ConnectionOptions = {
   database: 'shoper',
   synchronize: true,
   logging: false,
-  entities: [__dirname + '/../**/*Entity.{ts,js}']
+  migrations: [__dirname + '/../migrations/**/*.{ts,js}'],
+  entities: [__dirname + '/../entities/**/*.{ts,js}']
 };
