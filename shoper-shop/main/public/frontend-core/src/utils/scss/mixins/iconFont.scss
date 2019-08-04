@@ -4,6 +4,7 @@
   &::#{$selector} {
     content: map-get($icons, $name);
     font-family: 'iconfont';
+    display: inline-block;
     @content;
   }
 }

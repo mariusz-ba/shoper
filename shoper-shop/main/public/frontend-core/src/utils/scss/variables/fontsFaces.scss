@@ -12,6 +12,15 @@ $fontsPath: 'assets/fonts';
 @font-face {
   font-family: 'Helvetica Neue';
   font-style: normal;
+  font-weight: 500;
+  src: local('Helvetica Neue Medium'), local('Helvetica-Neue-Medium'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-medium.woff2') format('woff2'),
+       url('#{$fontsPath}/helveticaneue/helveticaneue-medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
   font-weight: 700;
   src: local('Helvetica Neue Bold'), local('Helvetica-Neue-Bold'),
        url('#{$fontsPath}/helveticaneue/helveticaneue-bold.woff2') format('woff2'),

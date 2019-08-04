@@ -18,4 +18,8 @@ export default {
 
 <style lang="scss">
 @import 'utils/scss/variables/global';
+
+.app {
+  padding-top: 7rem;
+}
 </style>

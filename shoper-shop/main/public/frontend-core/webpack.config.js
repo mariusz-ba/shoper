@@ -11,6 +11,7 @@ const paths = {
   htmlTemplateOutput: path.join(__dirname, '../assets/base', 'index.html'),
   cssFilename: 'main.css',
   assetsFonts: path.relative(__dirname, 'fonts'),
+  assetsImages: path.relative(__dirname, 'images') 
 }
 
 function createWebpackConfig(environment) {
@@ -30,7 +31,8 @@ function createWebpackConfig(environment) {
         vueLoaderRule(),
         babelLoaderRule(),
         styleLoaderRule(env),
-        fontsLoaderRule()
+        fontsLoaderRule(),
+        imagesLoaderRule()
       ]
     },
     resolve: {
@@ -89,6 +91,17 @@ function fontsLoaderRule() {
         }
       }
     ]
+  };
+}
+
+function imagesLoaderRule() {
+  return {
+    test: /\.(jpe?g|png|gif|svg)$/,
+    loader: 'file-loader',
+    options: {
+      outputPath: paths.assetsImages,
+      name: '[name].[hash].[ext]'
+    }
   };
 }
 

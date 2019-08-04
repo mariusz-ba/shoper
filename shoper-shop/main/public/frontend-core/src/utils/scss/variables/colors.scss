@@ -1,0 +1,32 @@
+
+$colorPalette: (
+  'white': #fff,
+  'black': #000,
+  'boulder': #757575,
+  'alabaster': #fafafa,
+  'silverChalice': #b2b2b2,
+  'squash': #cb5c0d
+);
+
+@function getColorPalette($name) {
+  @return map-get($colorPalette, $name);
+}
+
+$colorTheme: (
+  navbarPrimary: getColorPalette('black'),
+  navbarAccent: getColorPalette('squash'),
+  navbarShadow: getColorPalette('boulder'),
+  navbarBackground: getColorPalette('white'),
+  navbarFlyoutShadow: getColorPalette('silverChalice'),
+  navbarFlyoutBackground: getColorPalette('alabaster')
+);
+
+@function getColor($name) {
+  $color: map-get($colorTheme, $name);
+
+  @if $color {
+    @return $color;
+  } @else {
+    @return getColorPalette('black');
+  }
+}
