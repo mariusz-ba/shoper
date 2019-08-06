@@ -16,18 +16,26 @@
         </div>
 
         <ul class="main-header__menu">
-          <li class="main-header__menu-item">
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            class="main-header__menu-item"
+          >
             <router-link
               class="main-header__menu-link"
-              to="/products"
+              :to="`/cat/${category.id}`"
             >
-              Products
+              {{ category.name }}
             </router-link>
-            <div class="main-header__menu-flyout">
+            <div
+              v-if="category.children && category.children.length"
+              class="main-header__menu-flyout"
+            >
               <div class="main-header__menu-flyout-container">
-                <h3>Products link 1</h3>
-                <h3>Products link 2</h3>
-                <h3>Products link 3</h3>
+                <h3
+                  v-for="subCategory in category.children"
+                  :key="subCategory.id"
+                >{{ subCategory.name }}</h3>
               </div>
             </div>
           </li>
@@ -73,11 +81,24 @@ import brandImage from '../../assets/images/header/brand.svg';
 
 export default {
   name: 'main-header',
+  props: {
+    categoriesTree: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       brandImage,
       searchVisible: false
     };
+  },
+  computed: {
+    categories() {
+      return this.categoriesTree[0] && this.categoriesTree[0].children
+        ? this.categoriesTree[0].children
+        : [];
+    }
   },
   methods: {
     searchClickHandler() {
@@ -181,6 +202,10 @@ export default {
         max-height: 300px;
         z-index: 10;
       }
+
+      #{$root}__menu-flyout-container {
+        opacity: 1;
+      }
     }
   }
 
@@ -221,14 +246,17 @@ export default {
     width: 100%;
     background: getColor('navbarFlyoutBackground');
     box-shadow: 0 4px 4px getColor('navbarFlyoutShadow');
-    transition: max-height .3s ease-in;
+    transition: max-height 0s linear;
     transition-delay: .125s;
   }
 
   &__menu-flyout-container {
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 2rem;
     max-width: 1440px;
+    opacity: 0;
+    transition: opacity .3s ease-in;
+    transition-delay: .125s;
   }
 
   &__actions {

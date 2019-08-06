@@ -8,6 +8,8 @@ import path from 'path';
 import { typeOrmConfig } from './config/typeOrmConfig';
 import { HttpError } from './core/exceptions/HttpError';
 import { ProductsModule } from './modules/products/ProductsModule';
+import { CategoriesModule } from './modules/categories/CategoriesModule';
+import { GenericModule } from './modules/generic/GenericModule';
 
 export class App {
   private listenning: Boolean = false;
@@ -20,7 +22,12 @@ export class App {
     this.app.use('/assets', express.static(this.getPublicPath()));
     this.app.use(helmet());
     this.app.use(compression());
-    this.app.set('json spaces', 2);
+    this.app.set('view engine', 'pug');
+    this.app.set('views', path.join(__dirname, '../views'));
+
+    if (process.env.NODE_ENV !== 'production') {
+      this.app.set('json spaces', 2);
+    }
 
     this.init().then(() => {
       console.log('Connected to database.');
@@ -43,14 +50,14 @@ export class App {
   }
 
   initControllers() {
-    // Init rest api controllers
-    [ProductsModule.getInstance().productsController].forEach(controller => {
+    // Remember to initialize generic module controller at the end
+    // because it's binded to '*' route
+    [
+      ProductsModule.getInstance().productsController,
+      CategoriesModule.getInstance().categoriesController,
+      GenericModule.getInstance().genericController
+    ].forEach(controller => {
       this.app.use(controller.path, controller.router);
-    });
-
-    // Init route for frontend application
-    this.app.get('*', (req: Request, res: Response) => {
-      res.sendFile(this.getPublicPath('base/index.html'));
     });
   }
 
@@ -59,6 +66,10 @@ export class App {
       if (err instanceof HttpError) {
         res.status(err.code).json(err.toJson());
       } else {
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(err);
+        }
+        
         res.status(500).json({ message: 'Something bad happened' });
       }
     });

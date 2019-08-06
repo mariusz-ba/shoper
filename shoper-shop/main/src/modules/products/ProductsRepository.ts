@@ -1,17 +1,20 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { Product } from '../../entities/ProductEntity';
+import { GetProductsDto } from './dto/GetProductsDto';
 
 @EntityRepository(Product)
 export class ProductsRepository extends Repository<Product> {
-  async getProducts(): Promise<Product[]> {
-    const queryBuilder = this.createQueryBuilder('product');
+  async getProducts(filterDto: GetProductsDto): Promise<Product[]> {
+    const { category } = filterDto;
 
-    queryBuilder.leftJoinAndMapOne('product.category', 'product.category', 'category');
-    queryBuilder.leftJoinAndMapMany('product.variations', 'product.variations', 'product_variation');
-    queryBuilder.leftJoinAndMapMany('product.images', 'product.images', 'product_image');
+    const query: any = {
+      relations: ['category', 'variations', 'images']
+    }
 
-    const products = await queryBuilder.getMany();
+    if (category) {
+      query.where = { category: { id: category }};
+    }
 
-    return products;
+    return this.find(query);
   }
 }

@@ -5,7 +5,8 @@ $colorPalette: (
   'boulder': #757575,
   'alabaster': #fafafa,
   'silverChalice': #b2b2b2,
-  'squash': #cb5c0d
+  'squash': #cb5c0d,
+  'dustGray': #959595
 );
 
 @function getColorPalette($name) {
@@ -18,7 +19,11 @@ $colorTheme: (
   navbarShadow: getColorPalette('boulder'),
   navbarBackground: getColorPalette('white'),
   navbarFlyoutShadow: getColorPalette('silverChalice'),
-  navbarFlyoutBackground: getColorPalette('alabaster')
+  navbarFlyoutBackground: getColorPalette('alabaster'),
+  breadcrumbColor: getColorPalette('dustGray'),
+  breadcrumbColorHover: getColorPalette('black'),
+  productBoxShadow: getColorPalette('dustGray'),
+  productBoxLink: getColorPalette('black')
 );
 
 @function getColor($name) {

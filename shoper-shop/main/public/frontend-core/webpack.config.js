@@ -1,14 +1,11 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = {
   bundleEntry: path.join(__dirname, 'src/main.js'),
   bundleOutputPath: path.join(__dirname, '../assets/base'),
   bundleOutputFilename: 'main.js',
-  htmlTemplateEntry: path.join(__dirname, 'src/templates', 'index.html'),
-  htmlTemplateOutput: path.join(__dirname, '../assets/base', 'index.html'),
   cssFilename: 'main.css',
   assetsFonts: path.relative(__dirname, 'fonts'),
   assetsImages: path.relative(__dirname, 'images') 
@@ -41,7 +38,7 @@ function createWebpackConfig(environment) {
       },
       extensions: ['.js', '.vue', '.json']
     },
-    plugins: getPlugins(env)
+    plugins: getPlugins()
   };
 };
 
@@ -105,19 +102,13 @@ function imagesLoaderRule() {
   };
 }
 
-function getPlugins(env) {
+function getPlugins() {
   const vueLoaderPlugin = new VueLoaderPlugin();
   const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: paths.cssFilename
   });
-  const htmlWebpackPlugin = new HtmlWebpackPlugin({
-    filename: paths.htmlTemplateOutput,
-    template: paths.htmlTemplateEntry
-  });
 
-  return env === 'prod'
-    ? [vueLoaderPlugin, miniCssExtractPlugin, htmlWebpackPlugin]
-    : [vueLoaderPlugin, htmlWebpackPlugin];
+  return [vueLoaderPlugin, miniCssExtractPlugin];
 }
 
 module.exports = createWebpackConfig;

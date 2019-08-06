@@ -5,6 +5,7 @@ import { BadRequestException } from '../../core/exceptions/BadRequestException';
 import { ProductsService } from './ProductsService';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { CreateProductDto } from './dto/CreateProductDto';
+import { GetProductsDto } from './dto/GetProductsDto';
 
 const validator = new Validator();
 
@@ -19,7 +20,17 @@ export class ProductsController implements Controller {
   }
 
   async getProducts(req: Request, res: Response) {
-    const products = await this.productsService.getProducts();
+    const filterDto = new GetProductsDto();
+    filterDto.category = Number(req.query.category) || req.query.category;
+
+    const errors = await validator.validate(filterDto);
+
+    if (errors.length) {
+      throw new BadRequestException('Invalid arguments', errors);
+    }
+
+    const products = await this.productsService.getProducts(filterDto);
+
     res.json(products);
   }
 
