@@ -27,17 +27,10 @@
             >
               {{ category.name }}
             </router-link>
-            <div
+            <main-header-flyout
               v-if="category.children && category.children.length"
-              class="main-header__menu-flyout"
-            >
-              <div class="main-header__menu-flyout-container">
-                <h3
-                  v-for="subCategory in category.children"
-                  :key="subCategory.id"
-                >{{ subCategory.name }}</h3>
-              </div>
-            </div>
+              :categories="category.children"
+            />
           </li>
           <li class="main-header__menu-item">
             <router-link
@@ -46,13 +39,6 @@
             >
               About
             </router-link>
-            <div class="main-header__menu-flyout">
-              <div class="main-header__menu-flyout-container">
-                <h3>About link 1</h3>
-                <h3>About link 2</h3>
-                <h3>About link 3</h3>
-              </div>
-            </div>
           </li>
         </ul>
 
@@ -77,10 +63,14 @@
 </template>
 
 <script>
+import MainHeaderFlyout from './MainHeaderFlyout';
 import brandImage from '../../assets/images/header/brand.svg';
 
 export default {
   name: 'main-header',
+  components: {
+    MainHeaderFlyout
+  },
   props: {
     categoriesTree: {
       type: Array,
@@ -198,12 +188,12 @@ export default {
         }
       }
 
-      #{$root}__menu-flyout {
+      #{$root}-flyout {
         max-height: 300px;
         z-index: 10;
       }
 
-      #{$root}__menu-flyout-container {
+      #{$root}-flyout__container {
         opacity: 1;
       }
     }
@@ -235,28 +225,6 @@ export default {
       transform-origin: center center;
       transition: transform .3s linear;
     }
-  }
-
-  &__menu-flyout {
-    max-height: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 7rem;
-    left: 0;
-    width: 100%;
-    background: getColor('navbarFlyoutBackground');
-    box-shadow: 0 4px 4px getColor('navbarFlyoutShadow');
-    transition: max-height 0s linear;
-    transition-delay: .125s;
-  }
-
-  &__menu-flyout-container {
-    margin: 0 auto;
-    padding: 2rem;
-    max-width: 1440px;
-    opacity: 0;
-    transition: opacity .3s ease-in;
-    transition-delay: .125s;
   }
 
   &__actions {

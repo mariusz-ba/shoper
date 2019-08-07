@@ -9,10 +9,12 @@ export class Defaults1564774145128 implements MigrationInterface {
     await queryRunner.query('INSERT INTO category VALUES (4, "Shoes", "Shoes for men", 2)');
     await queryRunner.query('INSERT INTO category VALUES (5, "Shoes", "Shoes for women", 3)');
     await queryRunner.query('INSERT INTO category VALUES (6, "T-Shirts", "T-Shirts for men", 2)');
+    await queryRunner.query('INSERT INTO category VALUES (7, "Running shoes", "Running shoes", 4)');
+    await queryRunner.query('INSERT INTO category VALUES (8, "Basketball shoes", "Basketball shoes", 4)');
 
     // Insert default products to database
-    await queryRunner.query('INSERT INTO product VALUES (1, "Nike Air Max 97", 160.00, 4)');
-    await queryRunner.query('INSERT INTO product VALUES (2, "Nike Epic React", 125.00, 4)');
+    await queryRunner.query('INSERT INTO product VALUES (1, "Nike Air Max 97", 160.00, 6)');
+    await queryRunner.query('INSERT INTO product VALUES (2, "Nike Epic React", 125.00, 7)');
     await queryRunner.query('INSERT INTO product VALUES (3, "Nike T-Shirt", 74.99, 6)');
 
     // Insert default products variations to database
