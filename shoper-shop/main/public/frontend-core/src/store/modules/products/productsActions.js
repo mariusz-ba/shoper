@@ -9,9 +9,9 @@ export const ProductsActions = {
   [ProductsActionsTypes.FETCH_PRODUCTS]({ commit }, filter) {
     commit(ProductsMutationsTypes.FETCH_PRODUCTS_START);
 
-    return productsService().getProducts()
-      .then(products => {
-        commit(ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS, products);
+    return productsService().getProducts(filter)
+      .then(data => {
+        commit(ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS, data);
       });
   }
 }

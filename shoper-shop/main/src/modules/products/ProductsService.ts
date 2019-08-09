@@ -3,11 +3,22 @@ import { ProductsRepository } from './ProductsRepository';
 import { Product } from '../../entities/ProductEntity';
 import { CreateProductDto } from './dto/CreateProductDto';
 import { GetProductsDto } from './dto/GetProductsDto';
+import { CategoriesService } from '../categories/CategoriesService';
 
 export class ProductsService {
-  constructor(private readonly productsRepository: ProductsRepository) {}
+  constructor(
+    private readonly productsRepository: ProductsRepository,
+    private readonly categoriesService: CategoriesService
+  ) {}
 
   async getProducts(filterDto: GetProductsDto): Promise<Product[]> {
+    if (filterDto.category) {
+      const category = await this.categoriesService.getCategory(filterDto.category);
+      const childrenCategories = await this.categoriesService.getChildrenCategories(category);
+
+      filterDto.categories = childrenCategories.map(category => category.id);
+    }
+
     return this.productsRepository.getProducts(filterDto);
   }
 

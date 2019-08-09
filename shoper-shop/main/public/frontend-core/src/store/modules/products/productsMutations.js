@@ -9,8 +9,9 @@ export const ProductsMutations = {
   [ProductsMutationsTypes.FETCH_PRODUCTS_START](state) {
     state.isFetching = true;
   },
-  [ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS](state, products) {
-    state.products = mapKeys(products, 'id');
+  [ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS](state, payload) {
+    state.products = mapKeys(payload.products, 'id');
+    state.categoryPath = payload.categoryPath;
     state.isFetching = false;
   }
 };

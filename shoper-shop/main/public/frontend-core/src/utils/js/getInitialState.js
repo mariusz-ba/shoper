@@ -9,4 +9,3 @@ function getInitialState() {
 const initialState = getInitialState();
 
 export default initialState;
-export const categoriesTree = initialState.categoriesTree || [];

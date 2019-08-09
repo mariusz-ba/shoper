@@ -6,6 +6,7 @@ import { ProductsService } from './ProductsService';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { CreateProductDto } from './dto/CreateProductDto';
 import { GetProductsDto } from './dto/GetProductsDto';
+import { CategoriesService } from '../categories/CategoriesService';
 
 const validator = new Validator();
 
@@ -13,7 +14,10 @@ export class ProductsController implements Controller {
   public readonly path: string = '/api/products';
   public readonly router: Router = Router();
 
-  constructor(private readonly productsService: ProductsService) {
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly categoriesService: CategoriesService
+  ) {
     this.router.get('/', exceptionsCatcher(this.getProducts.bind(this)));
     this.router.get('/:id', exceptionsCatcher(this.getProduct.bind(this)));
     this.router.post('/', exceptionsCatcher(this.createProduct.bind(this)));
@@ -30,8 +34,9 @@ export class ProductsController implements Controller {
     }
 
     const products = await this.productsService.getProducts(filterDto);
+    const categoryPath = await this.categoriesService.getCategoryPath(filterDto.category);
 
-    res.json(products);
+    res.json({ products, categoryPath });
   }
 
   async getProduct(req: Request, res: Response) {

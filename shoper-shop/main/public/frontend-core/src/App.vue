@@ -7,7 +7,7 @@
 
 <script>
 import MainHeader from './components/MainHeader/MainHeader.vue';
-import { categoriesTree } from './utils/js/getInitialState';
+import initialState from './utils/js/getInitialState';
 
 export default {
   name: 'app',
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      categoriesTree
+      categoriesTree: initialState.categoriesTree
     };
   }
 };

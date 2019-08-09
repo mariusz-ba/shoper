@@ -1,7 +1,8 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinTable } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, TreeParent, TreeChildren, Tree, TreeLevelColumn, ViewColumn, JoinColumn } from "typeorm";
 import { Product } from "./ProductEntity";
 
 @Entity()
+@Tree('nested-set')
 export class Category extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,11 +13,10 @@ export class Category extends BaseEntity {
   @Column()
   description: string;
 
-  @ManyToOne(() => Category, category => category.children)
-  @JoinTable({ name: 'parentId' })
+  @TreeParent()
   parent: Category;
 
-  @OneToMany(() => Category, category => category.parent)
+  @TreeChildren({ cascade: true })
   children: Category[];
 
   @OneToMany(() => Product, product => product.category)

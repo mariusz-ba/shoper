@@ -20,26 +20,15 @@ export class CategoriesService {
   }
 
   async getCategoriesTree(): Promise<Category[]> {
-    const categories = await this.getCategories();
+    return this.categoriesRepository.getCategoriesTree();
+  }
 
-    const map: any = {};
-    const roots: Category[] = [];
+  async getCategoryPath(id: number): Promise<Category[]> {
+    const category = await this.getCategory(id);
+    return this.categoriesRepository.getCategoryPath(category);
+  }
 
-    for (let i = 0; i < categories.length; ++i) {
-      map[categories[i].id] = i;
-      categories[i].children = [];
-    }
-
-    for (let i = 0; i < categories.length; ++i) {
-      const node = categories[i];
-      
-      if (node.parent && node.parent.id && categories[map[node.parent.id]]) {
-        categories[map[node.parent.id]].children.push(node);
-      } else {
-        roots.push(node);
-      }
-    }
-
-    return roots;
+  async getChildrenCategories(category: Category): Promise<Category[]> {
+    return this.categoriesRepository.findDescendants(category);
   }
 }

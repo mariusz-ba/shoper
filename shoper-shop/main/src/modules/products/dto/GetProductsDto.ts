@@ -4,4 +4,7 @@ export class GetProductsDto {
   @IsOptional()
   @IsNumber()
   category: number;
+
+  @IsOptional()
+  categories: number[];
 }

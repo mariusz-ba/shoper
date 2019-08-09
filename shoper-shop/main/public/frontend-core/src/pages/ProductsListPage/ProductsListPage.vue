@@ -2,10 +2,18 @@
   <div class="products-list-page">
     <div class="products-list-page__column products-list-page__column--filters">Filters</div>
     <div class="products-list-page__column products-list-page__column--products">
-      <div class="products-list-page__breadcrumbs">
-        <span class="products-list-page__breadcrumb">All</span>
-        <span class="products-list-page__breadcrumb">Men</span>
-        <span class="products-list-page__breadcrumb">{{ $route.params.category }}</span>
+      <div
+        v-if="categoryPath.length"
+        class="products-list-page__breadcrumbs"
+      >
+        <router-link
+          v-for="category in categoryPath"
+          :key="category.id"
+          class="products-list-page__breadcrumb"
+          :to="`/cat/${category.id}`"
+        >
+          {{ category.name }}
+        </router-link>
       </div>
       <ul class="products-list-page__products">
         <li
@@ -31,16 +39,24 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 
 export default {
   name: 'products-list-page',
   computed: {
-    ...mapGetters('products', ['productsList'])
+    ...mapState('products', ['categoryPath']),
+    ...mapGetters('products', ['productsList']),
   },
-  mounted() {
-    this.fetchProducts({ category: this.$route.params.category });
+  watch: {
+    '$route': {
+      immediate: true,
+      handler(to, from) {
+        if (!from || to.params.category !== from.params.category) {
+          this.fetchProducts({ category: to.params.category });
+        }
+      }
+    }
   },
   methods: {
     ...mapActions('products', {
@@ -81,6 +97,7 @@ export default {
     margin-bottom: 2rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
+    text-decoration: none;
     color: getColor('breadcrumbColor');
     cursor: pointer;
 
@@ -109,7 +126,7 @@ export default {
     grid-template-columns: repeat(2, 1fr);
 
     @include media-tablet-up {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
 
