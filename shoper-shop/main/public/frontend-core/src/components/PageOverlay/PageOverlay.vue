@@ -1,10 +1,12 @@
 <template>
-  <div
-    class="page-overlay"
-    :class="{'page-overlay--visible': visible}"
-    @click="clickHandler"
-  >
-  </div>
+  <transition name="page-overlay__show">
+    <div
+      v-show="visible"
+      class="page-overlay"
+      @click="clickHandler"
+    >
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -38,7 +40,6 @@ export default {
 <style lang="scss">
 .page-overlay {
   z-index: 500;
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -46,8 +47,14 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, .7);
 
-  &--visible {
-    display: block;
+  &__show-enter-active,
+  &__show-leave-active {
+    transition: opacity .3s linear;
+  }
+
+  &__show-enter,
+  &__show-leave-to {
+    opacity: 0;
   }
 }
 </style>
