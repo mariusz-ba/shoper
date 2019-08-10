@@ -20,6 +20,8 @@
             v-for="category in categories"
             :key="category.id"
             class="main-header__menu-item"
+            @mouseenter="menuMouseEnterHandler"
+            @mouseleave="menuMouseLeaveHandler"
           >
             <router-link
               class="main-header__menu-link"
@@ -27,10 +29,9 @@
             >
               {{ category.name }}
             </router-link>
-            <main-header-flyout
-              v-if="category.children && category.children.length"
-              :categories="category.children"
-            />
+            <main-header-flyout v-if="category.children && category.children.length">
+              <main-header-flyout-categories :categories="category.children" />
+            </main-header-flyout>
           </li>
           <li class="main-header__menu-item">
             <router-link
@@ -53,8 +54,8 @@
       </nav>
 
       <div
+        v-show="searchVisible"
         class="main-header__search"
-        :class="{'main-header__search--visible': searchVisible}"
       >
         <h3 class="main-header__search-title">Search</h3>
       </div>
@@ -64,12 +65,15 @@
 
 <script>
 import MainHeaderFlyout from './MainHeaderFlyout';
+import MainHeaderFlyoutCategories from './MainHeaderFlyoutCategories';
 import brandImage from '../../assets/images/header/brand.svg';
+import eventBus from '../../services/eventBus';
 
 export default {
   name: 'main-header',
   components: {
-    MainHeaderFlyout
+    MainHeaderFlyout,
+    MainHeaderFlyoutCategories
   },
   props: {
     categoriesTree: {
@@ -90,9 +94,43 @@ export default {
         : [];
     }
   },
+  mounted() {
+    eventBus.on('page-overlay:click', this.pageOverlayClickHandler);
+  },
   methods: {
+    showSearchBar() {
+      this.searchVisible = true;
+      this.showPageOverlay();
+    },
+    hideSearchBar() {
+      this.searchVisible = false;
+      this.hidePageOverlay();
+    },
     searchClickHandler() {
-      this.searchVisible = !this.searchVisible;
+      if (this.searchVisible) {
+        this.hideSearchBar();
+      } else {
+        this.showSearchBar();
+      }
+    },
+    menuMouseEnterHandler() {
+      this.showPageOverlay();
+
+      if (this.searchVisible) {
+        this.searchVisible = false;
+      }
+    },
+    menuMouseLeaveHandler() {
+      this.hidePageOverlay();
+    },
+    showPageOverlay() {
+      eventBus.emit('page-overlay:show');
+    },
+    hidePageOverlay() {
+      eventBus.emit('page-overlay:hide');
+    },
+    pageOverlayClickHandler() {
+      this.hideSearchBar();
     }
   }
 };
@@ -108,6 +146,7 @@ export default {
   $root: &;
 
   &__navbar-wrapper {
+    z-index: 600;
     position: fixed;
     top: 0;
     left: 0;
@@ -128,16 +167,7 @@ export default {
   }
 
   &__search {
-    max-height: 0;
-    overflow: hidden;
     background: getColor('navbarFlyoutBackground');
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    transition: max-height .3s ease-in;
-
-    &--visible {
-      max-height: 7rem;
-    }
   }
 
   &__search-title {
@@ -211,7 +241,7 @@ export default {
     font-weight: $fontWeightMedium;
     color: getColor('navbarPrimary');
     transition: color .3s linear;
-    padding: 0 1rem;
+    padding: 0 2rem;
 
     &::after {
       content: '';
