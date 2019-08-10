@@ -22,7 +22,8 @@ $colorTheme: (
   breadcrumbColor: getColorPalette('dustGray'),
   breadcrumbColorHover: getColorPalette('black'),
   productBoxShadow: getColorPalette('dustGray'),
-  productBoxLink: getColorPalette('black')
+  productBoxLink: getColorPalette('black'),
+  burgerMenuBorder: getColorPalette('silverChalice')
 );
 
 @function getColor($name) {

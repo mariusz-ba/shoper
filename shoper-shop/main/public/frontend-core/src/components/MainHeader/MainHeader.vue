@@ -49,7 +49,11 @@
             class="main-header__action main-header__action--search"
             @click="searchClickHandler"
           ></button>
-          <button class="main-header__action main-header__action--menu"></button>
+          <button
+            class="main-header__action main-header__action--menu"
+            :class="{'main-header__action--menu_open': burgerMenuVisible}"
+            @click="burgerMenuTogglerClick"
+          ></button>
         </div>
       </nav>
 
@@ -60,10 +64,16 @@
         <h3 class="main-header__search-title">Search</h3>
       </div>
     </div>
+
+    <burger-menu
+      :visible="burgerMenuVisible"
+      :categories="categories"
+    />
   </div>
 </template>
 
 <script>
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import MainHeaderFlyout from './MainHeaderFlyout';
 import MainHeaderFlyoutCategories from './MainHeaderFlyoutCategories';
 import brandImage from '../../assets/images/header/brand.svg';
@@ -72,6 +82,7 @@ import eventBus from '../../services/eventBus';
 export default {
   name: 'main-header',
   components: {
+    BurgerMenu,
     MainHeaderFlyout,
     MainHeaderFlyoutCategories
   },
@@ -84,7 +95,8 @@ export default {
   data() {
     return {
       brandImage,
-      searchVisible: false
+      searchVisible: false,
+      burgerMenuVisible: false
     };
   },
   computed: {
@@ -99,6 +111,7 @@ export default {
   },
   methods: {
     showSearchBar() {
+      this.burgerMenuVisible = false;
       this.searchVisible = true;
       this.showPageOverlay();
     },
@@ -131,6 +144,23 @@ export default {
     },
     pageOverlayClickHandler() {
       this.hideSearchBar();
+      this.hideBurgerMenu();
+    },
+    showBurgerMenu() {
+      this.burgerMenuVisible = true;
+      this.searchVisible = false;
+      this.showPageOverlay();
+    },
+    hideBurgerMenu() {
+      this.burgerMenuVisible = false;
+      this.hidePageOverlay();
+    },
+    burgerMenuTogglerClick() {
+      if (this.burgerMenuVisible) {
+        this.hideBurgerMenu();
+      } else {
+        this.showBurgerMenu();
+      }
     }
   }
 };
