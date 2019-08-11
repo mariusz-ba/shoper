@@ -12,14 +12,13 @@ export class ProductsService {
   ) {}
 
   async getProducts(filterDto: GetProductsDto): Promise<Product[]> {
-    if (filterDto.category) {
-      const category = await this.categoriesService.getCategory(filterDto.category);
-      const childrenCategories = await this.categoriesService.getChildrenCategories(category);
+    const newFilterDto = await this.getProductsDtoWithCategories(filterDto);
+    return this.productsRepository.getProducts(newFilterDto);
+  }
 
-      filterDto.categories = childrenCategories.map(category => category.id);
-    }
-
-    return this.productsRepository.getProducts(filterDto);
+  async getProductsCount(filterDto: GetProductsDto): Promise<number> {
+    const newFilterDto = await this.getProductsDtoWithCategories(filterDto);
+    return this.productsRepository.getProductsCount(newFilterDto);
   }
 
   async getProduct(id: number): Promise<Product> {
@@ -39,5 +38,18 @@ export class ProductsService {
     await product.save();
     
     return product;
+  }
+
+  async getProductsDtoWithCategories(filterDto: GetProductsDto): Promise<GetProductsDto> {
+    const newFilterDto = { ...filterDto };
+
+    if (newFilterDto.category) {
+      const category = await this.categoriesService.getCategory(newFilterDto.category);
+      const childrenCategories = await this.categoriesService.getChildrenCategories(category);
+
+      newFilterDto.categories = childrenCategories.map(category => category.id);
+    }
+
+    return newFilterDto;
   }
 }

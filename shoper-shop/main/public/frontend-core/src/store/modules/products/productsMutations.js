@@ -11,6 +11,7 @@ export const ProductsMutations = {
   },
   [ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS](state, payload) {
     state.products = mapKeys(payload.products, 'id');
+    state.productsCount = payload.productsCount || payload.products.length;
     state.categoryPath = payload.categoryPath;
     state.isFetching = false;
   }

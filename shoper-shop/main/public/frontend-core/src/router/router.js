@@ -14,6 +14,7 @@ export const routes = [
     component: HomePage
   },
   {
+    name: 'products-list-page',
     path: '/cat/:category',
     component: ProductsListPage
   },
