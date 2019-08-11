@@ -26,6 +26,9 @@ export class ProductsController implements Controller {
   async getProducts(req: Request, res: Response) {
     const filterDto = new GetProductsDto();
     filterDto.category = Number(req.query.category) || req.query.category;
+    filterDto.limit = Number(req.query.limit) || req.query.limit;
+    filterDto.page = Number(req.query.page) || req.query.page;
+    filterDto.sorting = req.query.sorting || 'oldest';
 
     const errors = await validator.validate(filterDto);
 
@@ -34,9 +37,10 @@ export class ProductsController implements Controller {
     }
 
     const products = await this.productsService.getProducts(filterDto);
+    const productsCount = await this.productsService.getProductsCount(filterDto);
     const categoryPath = await this.categoriesService.getCategoryPath(filterDto.category);
 
-    res.json({ products, categoryPath });
+    res.json({ products, categoryPath, productsCount });
   }
 
   async getProduct(req: Request, res: Response) {
