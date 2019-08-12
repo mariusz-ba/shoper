@@ -6,7 +6,8 @@ $colorPalette: (
   'alabaster': #fafafa,
   'silverChalice': #b2b2b2,
   'squash': #cb5c0d,
-  'dustGray': #959595
+  'dustGray': #959595,
+  'gallery': #f0f0f0,
 );
 
 @function getColorPalette($name) {
@@ -23,7 +24,11 @@ $colorTheme: (
   breadcrumbColorHover: getColorPalette('black'),
   productBoxShadow: getColorPalette('dustGray'),
   productBoxLink: getColorPalette('black'),
-  burgerMenuBorder: getColorPalette('silverChalice')
+  burgerMenuBorder: getColorPalette('silverChalice'),
+  paginationBackground: getColorPalette('gallery'),
+  paginationBackgroundHover: getColorPalette('squash'),
+  paginationColor: getColorPalette('black'),
+  paginationColorHover: getColorPalette('white')
 );
 
 @function getColor($name) {

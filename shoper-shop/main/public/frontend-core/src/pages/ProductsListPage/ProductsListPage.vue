@@ -13,17 +13,14 @@
         <option value="priceAsc">Price ascending</option>
         <option value="priceDesc">Price descending</option>
       </select>
-      <select v-model="page">
-        <option
-          v-for="index in pagesLimit"
-          :key="index"
-          :value="index"
-        >
-          {{ index }}
-        </option>
-      </select>
       <h2>You are on page: {{ pageNumber }} out of {{ pagesLimit }}</h2>
       <products-list :products="productsList" />
+      <pagination
+        class="products-list-page__pagination"
+        :pages-count="pagesLimit"
+        :page-index="page"
+        @change="pageChangeHandler"
+      />
     </div>
   </div>
 </template>
@@ -33,12 +30,14 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
+import Pagination from '../../components/Pagination/Pagination';
 
 export default {
   name: 'products-list-page',
   components: {
     Breadcrumbs,
-    ProductsList
+    ProductsList,
+    Pagination
   },
   data() {
     return {
@@ -61,7 +60,7 @@ export default {
     '$route': {
       immediate: true,
       handler(to) {
-        this.page = to.query.page || 1;
+        this.page = Number(to.query.page) || 1;
         this.sorting = to.query.sorting || 'oldest';
 
         this.fetchProductsForPage(this.page);
@@ -95,6 +94,9 @@ export default {
           ...query
         }
       });
+    },
+    pageChangeHandler(index) {
+      this.page = index;
     }
   }
 };
@@ -122,6 +124,14 @@ export default {
 
   &__breadcrumbs {
     margin-bottom: 2rem;
+  }
+
+  &__pagination {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
