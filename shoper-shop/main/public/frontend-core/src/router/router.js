@@ -5,6 +5,7 @@ import AboutPage from '../pages/AboutPage/AboutPage.vue';
 import HomePage from '../pages/HomePage/HomePage.vue';
 import ProductsListPage from '../pages/ProductsListPage/ProductsListPage.vue';
 import ProductDetailsPage from '../pages/ProductDetailsPage/ProductDetailsPage.vue';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.vue';
 
 Vue.use(VueRouter);
 
@@ -23,8 +24,12 @@ export const routes = [
     component: AboutPage
   },
   {
-    path: '/product/:id/:slug',
+    path: '/product/:id',
     component: ProductDetailsPage
+  },
+  {
+    path: '/not-found',
+    component: NotFoundPage
   }
 ];
 

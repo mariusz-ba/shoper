@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     productUrl() {
-      return `/product/${this.product.id}/${this.product.name.toLowerCase().replace(/\s+/g, '-')}`
+      return `/product/${this.product.id}`
     }
   }
 };
