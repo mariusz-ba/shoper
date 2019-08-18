@@ -26,11 +26,31 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
+import { store } from '../../store/store';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
 import Pagination from '../../components/Pagination/Pagination';
+
+const routeUpdateHandler = (to, from, next) => {
+  const page = Number(to.query.page) || 1;
+  const sorting = to.query.sorting || 'oldest';
+
+  store.dispatch(`products/${ProductsActionsTypes.FETCH_PRODUCTS}`, {
+    page,
+    limit: 15,
+    sorting,
+    category: to.params.category
+  })
+    .then(() => {
+      next();
+      window.scrollTo(0, 0);
+    })
+    .catch(() => {
+      next('/not-found');
+    });
+}
 
 export default {
   name: 'products-list-page',
@@ -57,15 +77,6 @@ export default {
     }
   },
   watch: {
-    '$route': {
-      immediate: true,
-      handler(to) {
-        this.page = Number(to.query.page) || 1;
-        this.sorting = to.query.sorting || 'oldest';
-
-        this.fetchProductsForPage(this.page);
-      }
-    },
     sorting(value) {
       this.updateQueryParams({ sorting: value, page: 1 });
     },
@@ -73,18 +84,9 @@ export default {
       this.updateQueryParams({ page: value });
     }
   },
+  beforeRouteEnter: routeUpdateHandler,
+  beforeRouteUpdate: routeUpdateHandler,
   methods: {
-    ...mapActions('products', {
-      fetchProducts: ProductsActionsTypes.FETCH_PRODUCTS
-    }),
-    fetchProductsForPage(pageIndex) {
-      this.fetchProducts({
-        page: pageIndex,
-        limit: this.productsOnPage,
-        sorting: this.sorting,
-        category: this.$route.params.category
-      });
-    },
     updateQueryParams(query) {
       this.$router.push({
         name: 'products-list-page',

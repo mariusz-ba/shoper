@@ -2,7 +2,9 @@ import mapKeys from 'lodash/mapKeys';
 
 export const ProductsMutationsTypes = {
   FETCH_PRODUCTS_START: 'FETCH_PRODUCTS_START',
-  FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS'
+  FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
+  FETCH_PRODUCT_START: 'FETCH_PRODUCT_START',
+  FETCH_PRODUCT_SUCCESS: 'FETCH_PRODUCT_SUCCESS'
 };
 
 export const ProductsMutations = {
@@ -14,5 +16,15 @@ export const ProductsMutations = {
     state.productsCount = payload.productsCount || payload.products.length;
     state.categoryPath = payload.categoryPath;
     state.isFetching = false;
+  },
+  [ProductsMutationsTypes.FETCH_PRODUCT_START](state) {
+    state.isFetching = false;
+  },
+  [ProductsMutationsTypes.FETCH_PRODUCT_SUCCESS](state, payload) {
+    state.isFetching = false;
+    state.products = {
+      ...state.products,
+      [payload.id]: payload
+    }
   }
 };
