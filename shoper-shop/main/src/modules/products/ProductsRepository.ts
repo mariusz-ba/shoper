@@ -2,6 +2,7 @@ import { Repository, EntityRepository, In } from 'typeorm';
 import { Product } from '../../entities/ProductEntity';
 import { GetProductsDto } from './dto/GetProductsDto';
 import { ProductsSortingType } from './enum/ProductsSortingType';
+import { BasketProductDto } from '../basket/dto/BasketProductDto';
 
 @EntityRepository(Product)
 export class ProductsRepository extends Repository<Product> {
@@ -20,13 +21,13 @@ export class ProductsRepository extends Repository<Product> {
 
     switch (sorting) {
       case ProductsSortingType.NEWEST:
-        query = { ...query, order: { id: 'DESC' }};
+        query = { ...query, order: { id: 'DESC' } };
         break;
       case ProductsSortingType.PRICE_ASC:
-        query = { ...query, order: { price: 'ASC' }};
+        query = { ...query, order: { price: 'ASC' } };
         break;
       case ProductsSortingType.PRICE_DESC:
-        query = { ...query, order: { price: 'DESC' }};
+        query = { ...query, order: { price: 'DESC' } };
         break;
     }
 
@@ -55,5 +56,22 @@ export class ProductsRepository extends Repository<Product> {
     }
 
     return query;
+  }
+
+  async getBasketProducts(
+    basketProductDtoList: BasketProductDto[]
+  ): Promise<Product[]> {
+    const productsIds = basketProductDtoList.map(item => item.productId);
+
+    if (productsIds.length === 0) {
+      return [];
+    }
+
+    return this.find({
+      relations: ['category', 'variations', 'images'],
+      where: {
+        id: In(productsIds)
+      }
+    });
   }
 }

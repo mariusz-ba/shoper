@@ -44,7 +44,10 @@
         </ul>
 
         <div class="main-header__actions">
-          <button class="main-header__action main-header__action--basket"></button>
+          <router-link
+            class="main-header__action main-header__action--basket"
+            to="/basket"
+          ></router-link>
           <button
             class="main-header__action main-header__action--search"
             @click="searchClickHandler"
@@ -306,9 +309,11 @@ export default {
     outline: 0;
     padding: 0.5rem;
     font-size: 2.5rem;
+    text-decoration: none;
     transition: color .3s linear;
     background: transparent;
     margin-right: 0.5rem;
+    color: getColor('navbarPrimary');
     cursor: pointer;
 
     @include media-tablet-up {
