@@ -1,0 +1,79 @@
+<template>
+  <div class="basket-summary">
+    <div class="basket-summary__container">
+      <div class="basket-summary__row">
+        <span>Summary: </span>
+        <span>{{ summaryPrice }}</span>
+      </div>
+      <div class="basket-summary__row">
+        <span>Delivery: </span>
+        <span>{{ deliveryPrice }}</span>
+      </div>
+      <div class="basket-summary__row basket-summary__row--total">
+        <span>Total: </span>
+        <span>{{ totalPrice }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'basket-summary',
+  props: {
+    summaryPrice: {
+      type: Number,
+      required: true
+    },
+    deliveryPrice: {
+      type: Number,
+      required: true
+    },
+    totalPrice: {
+      type: Number,
+      required: true
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+@import '../../utils/scss/variables/fonts';
+@import '../../utils/scss/variables/colors';
+@import '../../utils/scss/mixins/media';
+
+.basket-summary {
+  display: flex;
+  justify-content: flex-end;
+
+  &__container {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    background: getColor('basketSummaryBackground');
+
+    @include media-tablet-up {
+      width: 300px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .5rem;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &--total {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      font-size: $fontSizeMedium;
+      font-weight: $fontWeightBold;
+      border-top: 1px solid getColor('basketSummaryLine');
+    }
+  }
+}
+</style>

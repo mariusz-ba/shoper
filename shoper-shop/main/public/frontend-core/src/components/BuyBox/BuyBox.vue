@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     addToCart() {
-      basketService().addProduct(this.productId, this.variations.id, 1);
+      basketService().addProduct(this.productId, this.variation.id, 1);
     }
   }
 }

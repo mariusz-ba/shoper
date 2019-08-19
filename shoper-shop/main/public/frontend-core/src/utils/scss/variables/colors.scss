@@ -38,7 +38,12 @@ $colorTheme: (
   buttonSuccessBackgroundHover: darken(getColorPalette('atlantis'), 5%),
   buttonDangerBackground: getColorPalette('monza'),
   buttonDangerBackgroundHover: darken(getColorPalette('monza'), 5%),
-  buttonDisabledBackground: getColorPalette('dustGray')
+  buttonDisabledBackground: getColorPalette('dustGray'),
+  basketLinkColor: getColorPalette('black'),
+  basketLinkColorHover: getColorPalette('squash'),
+  basketSummaryBackground: getColorPalette('alabaster'),
+  basketSummaryLine: getColorPalette('black'),
+  basketHeaderBorder: getColorPalette('gallery')
 );
 
 @function getColor($name) {

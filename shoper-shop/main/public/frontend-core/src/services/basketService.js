@@ -1,8 +1,16 @@
+import axios from 'axios';
+
 let service;
 
 class BasketService {
   addProduct(productId, variationId, amount) {
-    alert(`Adding product ${productId} to basket`);
+    return axios.post('/api/basket', { productId, variationId, amount })
+      .then(res => res.data);
+  }
+
+  getProducts() {
+    return axios.get('/api/basket')
+      .then(res => res.data);
   }
 }
 

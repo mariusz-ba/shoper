@@ -1,15 +1,18 @@
 import 'reflect-metadata';
 import express, { Application, Request, Response } from 'express';
+import expressSession from 'express-session';
 import { createConnection } from 'typeorm';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import path from 'path';
+import { config } from './config/config';
 import { typeOrmConfig } from './config/typeOrmConfig';
 import { HttpError } from './core/exceptions/HttpError';
 import { ProductsModule } from './modules/products/ProductsModule';
 import { CategoriesModule } from './modules/categories/CategoriesModule';
 import { GenericModule } from './modules/generic/GenericModule';
+import { BasketModule } from './modules/basket/BasketModule';
 
 export class App {
   private listenning: Boolean = false;
@@ -19,6 +22,7 @@ export class App {
   private constructor() {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(expressSession(config.expressSession));
     this.app.use('/assets', express.static(this.getPublicPath()));
     this.app.use(helmet());
     this.app.use(compression());
@@ -55,6 +59,7 @@ export class App {
     [
       ProductsModule.getInstance().productsController,
       CategoriesModule.getInstance().categoriesController,
+      BasketModule.getInstance().basketController,
       GenericModule.getInstance().genericController
     ].forEach(controller => {
       this.app.use(controller.path, controller.router);
