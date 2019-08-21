@@ -38,11 +38,11 @@ const routeUpdateHandler = (to, from, next) => {
   const sorting = to.query.sorting || 'oldest';
 
   store.dispatch(`products/${ProductsActionsTypes.FETCH_PRODUCTS}`, {
-    page,
-    limit: 15,
-    sorting,
-    category: to.params.category
-  })
+      page,
+      limit: 15,
+      sorting,
+      category: to.params.category
+    })
     .then(() => {
       next();
       window.scrollTo(0, 0);
@@ -50,7 +50,7 @@ const routeUpdateHandler = (to, from, next) => {
     .catch(() => {
       next('/not-found');
     });
-}
+};
 
 export default {
   name: 'products-list-page',

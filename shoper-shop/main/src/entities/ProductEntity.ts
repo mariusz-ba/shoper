@@ -1,4 +1,14 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, JoinColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import {
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  ManyToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany
+} from 'typeorm';
 import { Category } from './CategoryEntity';
 import { ProductVariation } from './ProductVariationEntity';
 import { ProductImage } from './ProductImageEntity';

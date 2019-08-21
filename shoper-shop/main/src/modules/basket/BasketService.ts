@@ -25,7 +25,10 @@ export class BasketService {
     return this.productsService.getBasketProducts(products);
   }
 
-  async addProduct(req: BasketRequest, productDto: BasketProductDto): Promise<BasketProduct[]> {
+  async addProduct(
+    req: BasketRequest,
+    productDto: BasketProductDto
+  ): Promise<BasketProduct[]> {
     const products = this.getProducts(req);
     const product = products.find(
       product =>

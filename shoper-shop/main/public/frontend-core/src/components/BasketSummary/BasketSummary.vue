@@ -61,7 +61,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 
     &:first-of-type {
       margin-top: 0;

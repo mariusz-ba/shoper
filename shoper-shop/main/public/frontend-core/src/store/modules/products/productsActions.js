@@ -10,7 +10,8 @@ export const ProductsActions = {
   [ProductsActionsTypes.FETCH_PRODUCTS]({ commit }, filter) {
     commit(ProductsMutationsTypes.FETCH_PRODUCTS_START);
 
-    return productsService().getProducts(filter)
+    return productsService()
+      .getProducts(filter)
       .then(data => {
         commit(ProductsMutationsTypes.FETCH_PRODUCTS_SUCCESS, data);
       });
@@ -18,9 +19,10 @@ export const ProductsActions = {
   [ProductsActionsTypes.FETCH_PRODUCT]({ commit }, id) {
     commit(ProductsMutationsTypes.FETCH_PRODUCT_START);
 
-    return productsService().getProduct(id)
+    return productsService()
+      .getProduct(id)
       .then(data => {
         commit(ProductsMutationsTypes.FETCH_PRODUCT_SUCCESS, data);
       });
   }
-}
+};

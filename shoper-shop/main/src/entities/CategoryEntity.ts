@@ -1,5 +1,14 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany, TreeParent, TreeChildren, Tree, TreeLevelColumn, ViewColumn, JoinColumn } from "typeorm";
-import { Product } from "./ProductEntity";
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  TreeParent,
+  TreeChildren,
+  Tree
+} from 'typeorm';
+import { Product } from './ProductEntity';
 
 @Entity()
 @Tree('nested-set')

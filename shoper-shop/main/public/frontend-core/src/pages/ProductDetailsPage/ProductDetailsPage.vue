@@ -25,7 +25,8 @@ import { ProductsActionsTypes } from '../../store/modules/products/productsActio
 import { store } from '../../store/store';
 
 const routeUpdateHandler = (to, from, next) => {
-  store.dispatch(`products/${ProductsActionsTypes.FETCH_PRODUCT}`, to.params.id)
+  store
+    .dispatch(`products/${ProductsActionsTypes.FETCH_PRODUCT}`, to.params.id)
     .then(() => {
       next();
       window.scrollTo(0, 0);
@@ -33,7 +34,7 @@ const routeUpdateHandler = (to, from, next) => {
     .catch(() => {
       next('/not-found');
     });
-}
+};
 
 export default {
   name: 'product-details-page',

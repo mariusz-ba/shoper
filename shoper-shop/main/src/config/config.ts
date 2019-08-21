@@ -7,4 +7,4 @@ export const config = {
       secure: process.env.NODE_ENV === 'production'
     }
   }
-}
+};

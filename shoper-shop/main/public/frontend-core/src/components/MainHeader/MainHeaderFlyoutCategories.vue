@@ -60,7 +60,7 @@ export default {
     color: getColor('navbarPrimary');
     display: inline-block;
     text-decoration: none;
-    transition: color .3s linear;
+    transition: color 0.3s linear;
 
     &:hover {
       color: getColor('navbarAccent');

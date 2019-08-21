@@ -21,7 +21,7 @@
         :total-price="product.totalPrice"
       />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -40,10 +40,12 @@ export default {
   },
   methods: {
     getProductVariationName(product) {
-      return product.productDetails.variations.find(variation => variation.id === product.variationId).name;
+      return product.productDetails.variations.find(
+        variation => variation.id === product.variationId
+      ).name;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -79,7 +81,7 @@ export default {
     &:not(:last-of-type) {
       margin-bottom: 1rem;
     }
-    
+
     @include media-tablet-up {
       &:not(:last-of-type) {
         margin-bottom: 0;
