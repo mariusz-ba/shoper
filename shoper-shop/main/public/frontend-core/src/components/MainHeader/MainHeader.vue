@@ -5,7 +5,7 @@
         <div class="main-header__brand">
           <router-link
             class="main-header__brand-link"
-            to="/"
+            :to="{ name: routesNames.homePage.name }"
           >
             <img
               class="main-header__brand-image"
@@ -24,7 +24,7 @@
           >
             <router-link
               class="main-header__menu-link"
-              :to="`/cat/${category.id}`"
+              :to="{ name: routesNames.productsListPage.name, params: { category: category.id } }"
             >
               {{ category.name }}
             </router-link>
@@ -35,7 +35,7 @@
           <li class="main-header__menu-item">
             <router-link
               class="main-header__menu-link"
-              to="/about"
+              :to="{ name: routesNames.aboutPage.name }"
             >
               About
             </router-link>
@@ -44,7 +44,7 @@
         <div class="main-header__actions">
           <router-link
             class="main-header__action main-header__action--basket"
-            to="/basket"
+            :to="{ name: routesNames.basketPage.name }"
           ></router-link>
           <button
             class="main-header__action main-header__action--search"
@@ -77,6 +77,7 @@ import MainHeaderFlyout from './MainHeaderFlyout';
 import MainHeaderFlyoutCategories from './MainHeaderFlyoutCategories';
 import brandImage from '../../assets/images/header/brand.svg';
 import eventBus from '../../services/eventBus';
+import { routesNames } from '../../router/routesNames';
 
 export default {
   name: 'main-header',
@@ -95,7 +96,8 @@ export default {
     return {
       brandImage,
       searchVisible: false,
-      burgerMenuVisible: false
+      burgerMenuVisible: false,
+      routesNames
     };
   },
   computed: {

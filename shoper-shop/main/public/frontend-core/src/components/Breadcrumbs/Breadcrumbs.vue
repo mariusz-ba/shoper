@@ -4,7 +4,7 @@
       v-for="category in categories"
       :key="category.id"
       class="breadcrumbs__item"
-      :to="`/cat/${category.id}`"
+      :to="getCategoryRoute(category.id)"
     >
       {{ category.name }}
     </router-link>
@@ -12,12 +12,24 @@
 </template>
 
 <script>
+import { routesNames } from '../../router/routesNames';
+
 export default {
   name: 'breadcrumbs',
   props: {
     categories: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    getCategoryRoute(categoryId) {
+      return {
+        name: routesNames.productsListPage.name,
+        params: {
+          category: categoryId
+        }
+      };
     }
   }
 };

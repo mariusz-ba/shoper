@@ -7,7 +7,7 @@
     >
       <router-link
         class="main-header-flyout-categories__category-link"
-        :to="`/cat/${category.id}`"
+        :to="getCategoryRoute(category.id)"
       >
         {{ category.name }}
       </router-link>
@@ -22,7 +22,7 @@
         >
           <router-link
             class="main-header-flyout-categories__subcategory-link"
-            :to="`/cat/${subCategory.id}`"
+            :to="getCategoryRoute(subCategory.id)"
           >
             {{ subCategory.name }}
           </router-link>
@@ -33,12 +33,24 @@
 </template>
 
 <script>
+import { routesNames } from '../../router/routesNames';
+
 export default {
   name: 'main-header-flyout-categories',
   props: {
     categories: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    getCategoryRoute(categoryId) {
+      return {
+        name: routesNames.productsListPage.name,
+        params: {
+          category: categoryId
+        }
+      };
     }
   }
 };

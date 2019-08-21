@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { routesNames } from '../../router/routesNames';
+
 export default {
   name: 'products-list-item',
   props: {
@@ -31,7 +33,12 @@ export default {
   },
   computed: {
     productUrl() {
-      return `/product/${this.product.id}`;
+      return {
+        name: routesNames.productDetailsPage.name,
+        params: {
+          id: this.product.id
+        }
+      };
     }
   }
 };

@@ -29,6 +29,7 @@
 import { mapState, mapGetters } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 import { store } from '../../store/store';
+import { routesNames } from '../../router/routesNames';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
 import Pagination from '../../components/Pagination/Pagination';
@@ -89,7 +90,7 @@ export default {
   methods: {
     updateQueryParams(query) {
       this.$router.push({
-        name: 'products-list-page',
+        name: routesNames.productsListPage.name,
         params: this.$route.params,
         query: {
           ...this.$route.query,

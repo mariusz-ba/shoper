@@ -12,7 +12,7 @@
         <div class="basket-product__mobile-details">
           <router-link
             class="basket-product__link"
-            :to="`/product/${productId}`"
+            :to="getProductRoute(productId)"
           >
             <h4 class="basket-product__name">{{ name }}</h4>
             <h5
@@ -43,7 +43,7 @@
       <div class="basket-product__column">
         <router-link
           class="basket-product__link"
-          :to="`/product/${productId}`"
+          :to="getProductRoute(productId)"
         >
           <h4 class="basket-product__name">{{ name }}</h4>
           <h5
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { routesNames } from '../../router/routesNames';
+
 export default {
   name: 'basket-product',
   props: {
@@ -92,6 +94,16 @@ export default {
     totalPrice: {
       type: Number,
       required: true
+    }
+  },
+  methods: {
+    getProductRoute(productId) {
+      return {
+        name: routesNames.productDetailsPage.name,
+        params: {
+          id: productId
+        }
+      };
     }
   }
 };

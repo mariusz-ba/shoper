@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import { routesNames } from '../../router/routesNames';
+
 export default {
   name: 'burger-menu-tree',
   props: {
@@ -78,7 +80,12 @@ export default {
       if (category.children && category.children.length && index !== -1) {
         this.visibleCategoryIndex = index;
       } else {
-        this.$router.push(`/cat/${category.id}`);
+        this.$router.push({
+          name: routesNames.productsListPage.name,
+          params: {
+            category: category.id
+          }
+        });
       }
     },
     goBackClickHandler() {

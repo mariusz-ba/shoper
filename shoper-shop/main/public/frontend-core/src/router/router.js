@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import { routesNames } from './routesNames';
+
 import AboutPage from '../pages/AboutPage/AboutPage.vue';
 import BasketPage from '../pages/BasketPage/BasketPage.vue';
 import HomePage from '../pages/HomePage/HomePage.vue';
@@ -12,28 +14,33 @@ Vue.use(VueRouter);
 
 export const routes = [
   {
-    path: '/',
+    path: routesNames.homePage.path,
+    name: routesNames.homePage.name,
     component: HomePage
   },
   {
-    name: 'products-list-page',
-    path: '/cat/:category',
+    path: routesNames.productsListPage.path,
+    name: routesNames.productsListPage.name,
     component: ProductsListPage
   },
   {
-    path: '/product/:id',
+    path: routesNames.productDetailsPage.path,
+    name: routesNames.productDetailsPage.name,
     component: ProductDetailsPage
   },
   {
-    path: '/basket',
+    path: routesNames.basketPage.path,
+    name: routesNames.basketPage.name,
     component: BasketPage
   },
   {
-    path: '/about',
+    path: routesNames.aboutPage.path,
+    name: routesNames.aboutPage.name,
     component: AboutPage
   },
   {
-    path: '/not-found',
+    path: routesNames.notFoundPage.path,
+    name: routesNames.notFoundPage.name,
     component: NotFoundPage
   }
 ];
