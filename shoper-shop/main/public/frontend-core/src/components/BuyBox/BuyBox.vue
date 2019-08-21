@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       variationId: ''
-    }
+    };
   },
   computed: {
     variation() {
@@ -88,7 +88,7 @@ export default {
       basketService().addProduct(this.productId, this.variation.id, 1);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

@@ -22,7 +22,9 @@
               {{ category }}
             </h5>
           </router-link>
-          <div class="basket-product__mobile-variation">Variation: {{ variation }}</div>
+          <div class="basket-product__mobile-variation">
+            Variation: {{ variation }}
+          </div>
         </div>
         <div class="basket-product__mobile-footer">
           <div>Amount: {{ amount }}</div>
@@ -192,7 +194,7 @@ export default {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightBold;
     color: getColor('basketLinkColor');
-    transition: color .3s linear;
+    transition: color 0.3s linear;
 
     &:hover {
       color: getColor('basketLinkColorHover');

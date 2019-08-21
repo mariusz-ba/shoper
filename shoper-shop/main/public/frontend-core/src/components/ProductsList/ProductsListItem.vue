@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     productUrl() {
-      return `/product/${this.product.id}`
+      return `/product/${this.product.id}`;
     }
   }
 };

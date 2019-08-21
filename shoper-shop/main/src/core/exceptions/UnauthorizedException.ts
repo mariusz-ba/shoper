@@ -4,10 +4,7 @@ export class UnauthorizedException extends HttpError {
   readonly name: string = 'Unauthorized';
   readonly code: number = 401;
 
-  constructor(
-    readonly message: string,
-    readonly data: any = null
-  ) {
+  constructor(readonly message: string, readonly data: any = null) {
     super();
   }
 

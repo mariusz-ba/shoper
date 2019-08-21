@@ -14,7 +14,6 @@
             />
           </router-link>
         </div>
-
         <ul class="main-header__menu">
           <li
             v-for="category in categories"
@@ -42,7 +41,6 @@
             </router-link>
           </li>
         </ul>
-
         <div class="main-header__actions">
           <router-link
             class="main-header__action main-header__action--basket"
@@ -59,7 +57,6 @@
           ></button>
         </div>
       </nav>
-
       <div
         v-show="searchVisible"
         class="main-header__search"
@@ -67,7 +64,6 @@
         <h3 class="main-header__search-title">Search</h3>
       </div>
     </div>
-
     <burger-menu
       :visible="burgerMenuVisible"
       :categories="categories"
@@ -273,7 +269,7 @@ export default {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightMedium;
     color: getColor('navbarPrimary');
-    transition: color .3s linear;
+    transition: color 0.3s linear;
     padding: 0 2rem;
 
     &::after {
@@ -286,7 +282,7 @@ export default {
       background: getColor('navbarAccent');
       transform: scaleX(0);
       transform-origin: center center;
-      transition: transform .3s linear;
+      transition: transform 0.3s linear;
     }
   }
 
@@ -310,7 +306,7 @@ export default {
     padding: 0.5rem;
     font-size: 2.5rem;
     text-decoration: none;
-    transition: color .3s linear;
+    transition: color 0.3s linear;
     background: transparent;
     margin-right: 0.5rem;
     color: getColor('navbarPrimary');

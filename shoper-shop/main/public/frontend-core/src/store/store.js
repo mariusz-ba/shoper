@@ -11,4 +11,4 @@ export const store = new Vuex.Store({
     basket: BasketModule,
     products: ProductsModule
   }
-})
+});

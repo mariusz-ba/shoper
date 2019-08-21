@@ -51,7 +51,7 @@ export default {
 
       if (this.pageIndex < middle) {
         const left = Math.ceil(this.pageIndex - this.groupSize / 2);
-  
+
         begin = Math.max(1, left);
         end = Math.min(begin + this.groupSize, this.pagesCount);
       } else {
@@ -65,7 +65,10 @@ export default {
     },
     pagesRange() {
       const itemsCount = Math.max(0, this.pagesGroup.end - this.pagesGroup.begin + 1);
-      return new Array(itemsCount).fill(1).map((value, index) => index + this.pagesGroup.begin);
+      
+      return new Array(itemsCount)
+        .fill(1)
+        .map((value, index) => index + this.pagesGroup.begin);
     }
   },
   methods: {
@@ -93,7 +96,7 @@ export default {
     font-weight: $fontWeightMedium;
     background: getColor('paginationBackground');
     color: getColor('paginationColor');
-    transition: background .3s linear;
+    transition: background 0.3s linear;
     cursor: pointer;
 
     &:hover {

@@ -29,7 +29,7 @@ export default {
     padding: 2rem;
     max-width: 1440px;
     opacity: 0;
-    transition: opacity .3s ease-in;
+    transition: opacity 0.3s ease-in;
   }
 }
 </style>

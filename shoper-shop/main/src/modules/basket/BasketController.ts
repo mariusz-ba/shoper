@@ -25,7 +25,7 @@ export class BasketController implements Controller {
   async addProduct(req: BasketRequest, res: Response) {
     const { productId, variationId, amount } = req.body;
 
-    const productDto = new BasketProductDto;
+    const productDto = new BasketProductDto();
     productDto.productId = Number(productId) || productId;
     productDto.variationId = Number(variationId) || variationId;
     productDto.amount = Number(amount) || amount;

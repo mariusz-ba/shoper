@@ -34,7 +34,7 @@ export default {
       eventBus.emit('page-overlay:click');
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -45,11 +45,11 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, 0.7);
 
   &__show-enter-active,
   &__show-leave-active {
-    transition: opacity .3s linear;
+    transition: opacity 0.3s linear;
   }
 
   &__show-enter,

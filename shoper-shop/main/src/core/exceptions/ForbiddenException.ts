@@ -4,10 +4,7 @@ export class ForbiddenException extends HttpError {
   readonly name: string = 'Forbidden';
   readonly code: number = 403;
 
-  constructor(
-    readonly message: string,
-    readonly data: any = null
-  ) {
+  constructor(readonly message: string, readonly data: any = null) {
     super();
   }
 

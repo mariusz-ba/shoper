@@ -9,7 +9,8 @@ export const BasketActions = {
   [BasketActionsTypes.FETCH_PRODUCTS]({ commit }) {
     commit(BasketMutationsTypes.FETCH_PRODUCTS_START);
 
-    basketService().getProducts()
+    basketService()
+      .getProducts()
       .then(data => {
         commit(BasketMutationsTypes.FETCH_PRODUCTS_SUCCESS, data);
       });

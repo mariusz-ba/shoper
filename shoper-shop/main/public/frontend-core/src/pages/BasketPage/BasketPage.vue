@@ -15,7 +15,7 @@
         :total-price="totalPrice"
       />
     </template>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -33,13 +33,11 @@ export default {
   },
   computed: {
     ...mapState('basket', ['products']),
-    ...mapGetters('basket', [
-      'totalPrice',
-      'totalAmount'
-    ])
+    ...mapGetters('basket', ['totalPrice', 'totalAmount'])
   },
   beforeRouteEnter(to, from, next) {
-    store.dispatch(`basket/${BasketActionsTypes.FETCH_PRODUCTS}`)
+    store
+      .dispatch(`basket/${BasketActionsTypes.FETCH_PRODUCTS}`)
       .then(() => {
         next();
       })

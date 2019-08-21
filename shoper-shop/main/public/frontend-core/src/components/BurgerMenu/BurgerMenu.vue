@@ -45,7 +45,7 @@ export default {
   width: calc(100% - 20px);
   max-width: 300px;
   height: 100%;
-  transition: transform .3s linear;
+  transition: transform 0.3s linear;
   background: getColor('navbarBackground');
 
   @include media-tablet-up {

@@ -25,6 +25,6 @@ export const ProductsMutations = {
     state.products = {
       ...state.products,
       [payload.id]: payload
-    }
+    };
   }
 };

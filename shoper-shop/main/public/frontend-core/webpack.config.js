@@ -8,8 +8,8 @@ const paths = {
   bundleOutputFilename: 'main.js',
   cssFilename: 'main.css',
   assetsFonts: path.relative(__dirname, 'fonts'),
-  assetsImages: path.relative(__dirname, 'images') 
-}
+  assetsImages: path.relative(__dirname, 'images')
+};
 
 function createWebpackConfig(environment) {
   const env = environment.dev ? 'dev' : 'prod';
@@ -24,7 +24,7 @@ function createWebpackConfig(environment) {
       publicPath: '/assets/base/'
     },
     module: {
-      rules:[
+      rules: [
         vueLoaderRule(),
         babelLoaderRule(),
         styleLoaderRule(env),
@@ -34,13 +34,13 @@ function createWebpackConfig(environment) {
     },
     resolve: {
       alias: {
-        'vue$': 'vue/dist/vue.esm.js'
+        vue$: 'vue/dist/vue.esm.js'
       },
       extensions: ['.js', '.vue', '.json']
     },
     plugins: getPlugins()
   };
-};
+}
 
 function getMode(env) {
   return env === 'prod' ? 'production' : 'development';

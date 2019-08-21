@@ -88,7 +88,7 @@ export default {
       this.visibleCategoryIndex = -1;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -108,7 +108,7 @@ export default {
     left: 100%;
     width: 100%;
     height: 100%;
-    transition: transform .3s linear;
+    transition: transform 0.3s linear;
   }
 
   &--subcategory_visible {

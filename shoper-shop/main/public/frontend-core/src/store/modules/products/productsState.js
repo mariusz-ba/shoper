@@ -3,4 +3,4 @@ export const ProductsState = {
   productsCount: 0,
   categoryPath: [],
   isFetching: false
-}
+};

@@ -13,15 +13,15 @@ webfont({
   fontStyle: 'normal',
   fontWeight: '400'
 })
-  .then(result => {    
+  .then(result => {
     console.log('Removing iconfont directory...');
     rimraf.sync(fontsOutputPath);
-    
+
     console.log('Creating fonts...');
     const variables = generateVariables(result.svg);
     const icons = variables.map(icon => `\t${icon.name}: "${icon.unicode}"`);
     const iconsScss = `$icons: (\n${icons.join(',\n')}\n)`;
-    
+
     fs.mkdirSync(fontsOutputPath, { recursive: true });
     fs.writeFileSync(path.join(fontsOutputPath, 'iconfont.ttf'), result.ttf);
     fs.writeFileSync(path.join(fontsOutputPath, 'iconfont.eot'), result.eot);
@@ -30,7 +30,7 @@ webfont({
 
     console.log('Removing icons.scss file...');
     rimraf.sync(scssOutputFilePath);
-    
+
     console.log('Creating new icons.scss file...');
     if (!fs.existsSync(scssOutputPath)) {
       fs.mkdirSync(scssOutputPath);
@@ -50,7 +50,10 @@ function generateVariables(svgContent) {
   let match = regex.exec(svgContent);
 
   while (match) {
-    variables.push({ name: match[1], unicode: match[2].replace('&#x', '\\').replace(';', '') });
+    variables.push({
+      name: match[1],
+      unicode: match[2].replace('&#x', '\\').replace(';', '')
+    });
     match = regex.exec(svgContent);
   }
 

@@ -74,7 +74,7 @@ export class App {
         if (process.env.NODE_ENV !== 'production') {
           console.log(err);
         }
-        
+
         res.status(500).json({ message: 'Something bad happened' });
       }
     });

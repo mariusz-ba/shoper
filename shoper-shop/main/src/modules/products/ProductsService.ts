@@ -23,19 +23,27 @@ export class ProductsService {
     return this.productsRepository.getProductsCount(newFilterDto);
   }
 
-  async getBasketProducts(basketProductDtoList: BasketProductDto[]): Promise<BasketProduct[]> {
+  async getBasketProducts(
+    basketProductDtoList: BasketProductDto[]
+  ): Promise<BasketProduct[]> {
     const products = await this.productsRepository.getBasketProducts(basketProductDtoList);
-    const basketProducts: BasketProduct[] = basketProductDtoList.map(product => {
-      const productDetails = products.find(item => item.id === product.productId);
+    const basketProducts: BasketProduct[] = basketProductDtoList.map(
+      product => {
+        const productDetails = products.find(
+          item => item.id === product.productId
+        );
 
-      const basketProduct = new BasketProduct();
-      basketProduct.productId = product.productId;
-      basketProduct.variationId = product.variationId;
-      basketProduct.amount = product.amount;
-      basketProduct.productDetails = productDetails;
-      basketProduct.totalPrice = productDetails ? productDetails.price * product.amount : 0;
-      return basketProduct;
-    });
+        const basketProduct = new BasketProduct();
+        basketProduct.productId = product.productId;
+        basketProduct.variationId = product.variationId;
+        basketProduct.amount = product.amount;
+        basketProduct.productDetails = productDetails;
+        basketProduct.totalPrice = productDetails
+          ? productDetails.price * product.amount
+          : 0;
+        return basketProduct;
+      }
+    );
 
     return basketProducts;
   }
@@ -58,11 +66,13 @@ export class ProductsService {
     product.name = createProductDto.name;
     product.price = createProductDto.price;
     await product.save();
-    
+
     return product;
   }
 
-  async getProductsDtoWithCategories(filterDto: GetProductsDto): Promise<GetProductsDto> {
+  async getProductsDtoWithCategories(
+    filterDto: GetProductsDto
+  ): Promise<GetProductsDto> {
     const newFilterDto = { ...filterDto };
 
     if (newFilterDto.category) {

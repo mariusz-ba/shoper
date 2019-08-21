@@ -9,7 +9,7 @@
     v-on="$listeners"
   >
     <slot />
-  </button>  
+  </button>
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
   font-weight: $fontWeightBold;
   background: getColor('buttonBackground');
   color: getColor('buttonColor');
-  transition: background .3s linear;
+  transition: background 0.3s linear;
 
   &[disabled] {
     background: getColor('buttonDisabledBackground') !important;

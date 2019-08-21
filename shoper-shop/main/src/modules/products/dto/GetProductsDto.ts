@@ -1,5 +1,5 @@
-import { IsNumber, IsOptional, IsIn } from "class-validator";
-import { ProductsSortingType } from "../enum/ProductsSortingType";
+import { IsNumber, IsOptional, IsIn } from 'class-validator';
+import { ProductsSortingType } from '../enum/ProductsSortingType';
 
 export class GetProductsDto {
   @IsOptional()
@@ -22,7 +22,7 @@ export class GetProductsDto {
     ProductsSortingType.NEWEST,
     ProductsSortingType.OLDEST,
     ProductsSortingType.PRICE_ASC,
-    ProductsSortingType.PRICE_DESC,
+    ProductsSortingType.PRICE_DESC
   ])
   sorting: ProductsSortingType;
 }
