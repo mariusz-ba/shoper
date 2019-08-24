@@ -13,12 +13,15 @@
         :key="`${product.productId}-${product.variationId}`"
         class="basket-products-list__product"
         :product-id="product.productId"
+        :variation-id="product.variationId"
         :name="product.productDetails.name"
         :image="product.productDetails.images[0]"
         :amount="product.amount"
         :category="product.productDetails.category.description"
-        :variation="getProductVariationName(product)"
+        :stocks="product.productDetails.stocks"
         :total-price="product.totalPrice"
+        @amount-change="productAmountChangeHandler"
+        @remove="productRemoveHandler"
       />
     </div>
   </div>
@@ -39,10 +42,11 @@ export default {
     }
   },
   methods: {
-    getProductVariationName(product) {
-      return product.productDetails.variations.find(
-        variation => variation.id === product.variationId
-      ).name;
+    productAmountChangeHandler(data) {
+      this.$emit('amount-change', data);
+    },
+    productRemoveHandler(data) {
+      this.$emit('remove', data);
     }
   }
 };

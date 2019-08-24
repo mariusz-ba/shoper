@@ -5,13 +5,12 @@ import {
   Entity,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
-  OneToMany
+  OneToMany,
+  JoinTable
 } from 'typeorm';
 import { Category } from './CategoryEntity';
-import { ProductVariation } from './ProductVariationEntity';
 import { ProductImage } from './ProductImageEntity';
+import { Stock } from './StockEntity';
 
 @Entity()
 export class Product extends BaseEntity {
@@ -28,9 +27,9 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'categoryId' })
   category: Category;
 
-  @ManyToMany(() => ProductVariation)
+  @OneToMany(() => Stock, stock => stock.product)
   @JoinTable()
-  variations: ProductVariation[];
+  stocks: Stock[];
 
   @OneToMany(() => ProductImage, productImage => productImage.product)
   images: ProductImage[];

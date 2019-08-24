@@ -10,6 +10,10 @@
       </div>
       <div class="basket-product__mobile-column basket-product__mobile-column--content">
         <div class="basket-product__mobile-details">
+          <button
+            class="basket-product__remove-button"
+            @click="removeProductClickHandler"
+          ></button>
           <router-link
             class="basket-product__link"
             :to="getProductRoute(productId)"
@@ -23,11 +27,22 @@
             </h5>
           </router-link>
           <div class="basket-product__mobile-variation">
-            Variation: {{ variation }}
+            Variation: {{ variationName }}
           </div>
         </div>
         <div class="basket-product__mobile-footer">
-          <div>Amount: {{ amount }}</div>
+          <div>
+            Amount:
+            <select v-model="productAmount">
+              <option
+                v-for="item in variationAmount"
+                :key="item"
+                :value="item"
+              >
+                {{ item }}
+              </option>
+            </select>
+          </div>
           <div class="basket-product__mobile-price">{{ totalPrice }}</div>
         </div>
       </div>
@@ -40,7 +55,7 @@
           :alt="image.type"
         />
       </div>
-      <div class="basket-product__column">
+      <div class="basket-product__column basket-product__column--details">
         <router-link
           class="basket-product__link"
           :to="getProductRoute(productId)"
@@ -53,9 +68,20 @@
             {{ category }}
           </h5>
         </router-link>
+        <button @click="removeProductClickHandler">Remove</button>
       </div>
-      <div class="basket-product__column basket-product__column--variation">{{ variation }}</div>
-      <div class="basket-product__column basket-product__column--amount">{{ amount }}</div>
+      <div class="basket-product__column basket-product__column--variation">{{ variationName }}</div>
+      <div class="basket-product__column basket-product__column--amount">
+        <select v-model="productAmount">
+          <option
+            v-for="item in variationAmount"
+            :key="item"
+            :value="item"
+          >
+            {{ item }}
+          </option>
+        </select>
+      </div>
       <div class="basket-product__column basket-product__column--price">{{ totalPrice }}</div>
     </div>
   </div>
@@ -71,6 +97,10 @@ export default {
       type: Number,
       required: true
     },
+    variationId: {
+      type: Number,
+      required: true
+    },
     image: {
       type: Object,
       required: true
@@ -83,10 +113,6 @@ export default {
       type: String,
       default: ''
     },
-    variation: {
-      type: String,
-      default: ''
-    },
     amount: {
       type: Number,
       required: true
@@ -94,6 +120,37 @@ export default {
     totalPrice: {
       type: Number,
       required: true
+    },
+    stocks: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      productAmount: this.amount
+    };
+  },
+  computed: {
+    variationStock() {
+      return this.stocks.find(
+        stock => stock.variation.id === this.variationId
+      );
+    },
+    variationName() {
+      return this.variationStock.variation.name;
+    },
+    variationAmount() {
+      return this.variationStock.amount;
+    }
+  },
+  watch: {
+    productAmount(value) {
+      this.$emit('amount-change', {
+        productId: this.productId,
+        variationId: this.variationId,
+        amount: value
+      });
     }
   },
   methods: {
@@ -104,6 +161,12 @@ export default {
           id: productId
         }
       };
+    },
+    removeProductClickHandler() {
+      this.$emit('remove', {
+        productId: this.productId,
+        variationId: this.variationId
+      });
     }
   }
 };
@@ -113,6 +176,7 @@ export default {
 @import '../../utils/scss/variables/fonts';
 @import '../../utils/scss/variables/colors';
 @import '../../utils/scss/mixins/media';
+@import '../../utils/scss/mixins/iconFont';
 
 .basket-product {
   &__mobile {
@@ -137,6 +201,10 @@ export default {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  &__mobile-details {
+    position: relative;
   }
 
   &__mobile-variation {
@@ -170,6 +238,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    &--details {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     &--variation,
@@ -217,6 +292,16 @@ export default {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
     color: getColor('basketLinkColor');
+  }
+
+  &__remove-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @include iconFont('icon-trash') {
+      font-size: 2rem;
+    }
   }
 }
 </style>

@@ -10,7 +10,7 @@
       </div>
     </div>
     <div
-      v-if="variations && variations.length"
+      v-if="stocks && stocks.length"
       class="buy-box__size-picker"
     >
       <p class="buy-box__size-picker-title">Pick your size</p>
@@ -22,11 +22,12 @@
           Select your size
         </option>
         <option
-          v-for="variation in variations"
-          :key="variation.id"
-          :value="variation.id"
+          v-for="stock in stocks"
+          :key="stock.id"
+          :value="stock.variation.id"
+          :disabled="!stock.amount"
         >
-          {{ variation.name }}
+          {{ stock.variation.name }}
         </option>
       </select>
     </div>
@@ -66,7 +67,7 @@ export default {
       type: String,
       required: true
     },
-    variations: {
+    stocks: {
       type: Array,
       default: () => []
     }
@@ -78,9 +79,8 @@ export default {
   },
   computed: {
     variation() {
-      return this.variations
-        ? this.variations.find(variation => variation.id === this.variationId)
-        : {};
+      const variationStock = this.stocks.find(stock => stock.variation.id === this.variationId);
+      return variationStock ? variationStock.variation : {};
     }
   },
   methods: {

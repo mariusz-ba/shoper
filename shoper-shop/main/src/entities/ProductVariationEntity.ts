@@ -1,4 +1,11 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany
+} from 'typeorm';
+import { Stock } from './StockEntity';
 
 export enum ProductVariationType {
   SIZE = 'SIZE',
@@ -15,4 +22,7 @@ export class ProductVariation extends BaseEntity {
 
   @Column()
   type: ProductVariationType;
+
+  @OneToMany(() => Stock, stock => stock.variation)
+  stocks: Stock[];
 }

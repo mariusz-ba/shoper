@@ -1,6 +1,7 @@
 export const BasketMutationsTypes = {
   FETCH_PRODUCTS_START: 'FETCH_PRODUCTS_START',
-  FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS'
+  FETCH_PRODUCTS_SUCCESS: 'FETCH_PRODUCTS_SUCCESS',
+  FETCH_PRODUCTS_ERROR: 'FETCH_PRODUCTS_ERROR'
 };
 
 export const BasketMutations = {
@@ -8,7 +9,11 @@ export const BasketMutations = {
     state.isFetching = true;
   },
   [BasketMutationsTypes.FETCH_PRODUCTS_SUCCESS](state, data) {
-    state.products = data;
     state.isFetching = false;
+    state.products = data;
+  },
+  [BasketMutationsTypes.FETCH_PRODUCTS_ERROR](state, error) {
+    state.isFetching = false;
+    state.error = error;
   }
 };

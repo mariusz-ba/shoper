@@ -10,7 +10,7 @@
           :product-name="product.name"
           :category-name="product.category.description"
           :price="product.price"
-          :variations="product.variations"
+          :stocks="product.stocks"
         />
       </div>
     </div>

@@ -43,7 +43,7 @@ export class ProductsRepository extends Repository<Product> {
     const { categories } = filterDto;
 
     let query: any = {
-      relations: ['category', 'variations', 'images']
+      relations: ['category', 'images', 'stocks', 'stocks.variation']
     };
 
     if (categories) {
@@ -68,7 +68,7 @@ export class ProductsRepository extends Repository<Product> {
     }
 
     return this.find({
-      relations: ['category', 'variations', 'images'],
+      relations: ['category', 'images', 'stocks', 'stocks.variation'],
       where: {
         id: In(productsIds)
       }

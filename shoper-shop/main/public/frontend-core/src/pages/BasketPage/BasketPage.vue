@@ -8,7 +8,11 @@
     </h3>
     <template v-else>
       <h3 class="basket-page__title">Your basket ({{ totalAmount }})</h3>
-      <basket-products-list :products="products" />
+      <basket-products-list
+        :products="products"
+        @amount-change="productAmountChangeHandler"
+        @remove="productRemoveHandler"
+      />
       <basket-summary
         :summary-price="totalPrice"
         :delivery-price="0"
@@ -19,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import { BasketActionsTypes } from '../../store/modules/basket/basketActions';
 import { store } from '../../store/store';
 import BasketProductsList from '../../components/BasketProductsList/BasketProductsList';
@@ -44,6 +48,18 @@ export default {
       .catch(() => {
         next();
       });
+  },
+  methods: {
+    ...mapActions('basket', {
+      updateProduct: BasketActionsTypes.UPDATE_PRODUCT,
+      removeProduct: BasketActionsTypes.REMOVE_PRODUCT
+    }),
+    productAmountChangeHandler(data) {
+      this.updateProduct(data);
+    },
+    productRemoveHandler(data) {
+      this.removeProduct(data)
+    }
   }
 };
 </script>
