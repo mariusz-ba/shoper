@@ -8,7 +8,11 @@
         class="modal__overlay"
         @click="close"  
       ></div>
-      <div class="modal__container">
+      <div
+        ref="content"
+        class="modal__container"
+        :style="`transform: translate(-50%, -${verticalOffset}px);`"
+      >
         <slot />
       </div>
     </div>
@@ -22,6 +26,25 @@ export default {
     visible: {
       type: Boolean,
       required: true
+    }
+  },
+  data() {
+    return {
+      verticalOffset: 0
+    };
+  },
+  watch: {
+    visible: {
+      immediate: true,
+      handler(value) {
+        if (value) {
+          this.$nextTick(() => {
+            const half = this.$refs.content.offsetHeight / 2;
+            const halfWindow = window.innerHeight / 2;
+            this.verticalOffset = Math.min(half, halfWindow);
+          })
+        }
+      }
     }
   },
   methods: {
@@ -44,9 +67,10 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 1000;
+  overflow: auto;
 
   &__overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -55,12 +79,11 @@ export default {
   }
 
   &__container {
+    margin: 2rem 0;
     position: absolute;
     top: 50%;
     left: 50%;
     max-width: calc(100% - 4rem);
-    max-height: calc(100% - 4rem);
-    transform: translate(-50%, -50%);
     background: getColor('modalBackground');
     border-radius: 3px;
   }
