@@ -44,7 +44,7 @@ export class BasketService {
 
     if (!productAmountValidation.valid) {
       throw new BadRequestException(
-        'Given amount of products is not available',
+        'Product is no longer available',
         {
           amount: productAmountValidation.limit
         }

@@ -8,6 +8,7 @@ $colorPalette: (
   'squash': #cb5c0d,
   'dustGray': #959595,
   'gallery': #f0f0f0,
+  'alto': #dfdfdf,
   'atlantis': #a4c639,
   'monza': #d8000c
 );
@@ -31,19 +32,29 @@ $colorTheme: (
   paginationBackgroundHover: getColorPalette('squash'),
   paginationColor: getColorPalette('black'),
   paginationColorHover: getColorPalette('white'),
-  buttonBackground: getColorPalette('squash'),
-  buttonBackgroundHover: darken(getColorPalette('squash'), 5%),
-  buttonColor: getColorPalette('white'),
+  buttonText: getColorPalette('black'),
+  buttonBorder: getColorPalette('dustGray'),
+  buttonBackground: getColorPalette('alabaster'),
+  buttonBackgroundHover: darken(getColorPalette('alabaster'), 10%),
+  buttonTextAlt: getColorPalette('white'),
+  buttonPrimaryBackground: getColorPalette('squash'),
+  buttonPrimaryBackgroundHover: darken(getColorPalette('squash'), 5%),
+  buttonPrimaryBorder: darken(getColorPalette('squash'), 10%),
   buttonSuccessBackground: getColorPalette('atlantis'),
   buttonSuccessBackgroundHover: darken(getColorPalette('atlantis'), 5%),
+  buttonSuccessBorder: darken(getColorPalette('atlantis'), 10%),
   buttonDangerBackground: getColorPalette('monza'),
   buttonDangerBackgroundHover: darken(getColorPalette('monza'), 5%),
+  buttonDangerBorder: darken(getColorPalette('monza'), 10%),
   buttonDisabledBackground: getColorPalette('dustGray'),
   basketLinkColor: getColorPalette('black'),
   basketLinkColorHover: getColorPalette('squash'),
   basketSummaryBackground: getColorPalette('alabaster'),
   basketSummaryLine: getColorPalette('black'),
-  basketHeaderBorder: getColorPalette('gallery')
+  basketHeaderBorder: getColorPalette('gallery'),
+  modalBackground: getColorPalette('white'),
+  modalOverlayBackground: rgba(0, 0, 0, .6),
+  modalSectionBorder: getColorPalette('alto')
 );
 
 @function getColor($name) {

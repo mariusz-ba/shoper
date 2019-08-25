@@ -2,6 +2,7 @@
   <button
     class="base-button"
     :class="{
+      'base-button--primary': type === 'primary',
       'base-button--success': type === 'success',
       'base-button--danger': type === 'danger'
     }"
@@ -35,9 +36,10 @@ export default {
   padding: 1rem 1.5rem;
   font-family: $fontFamily;
   font-size: $fontSizeRegular;
-  font-weight: $fontWeightBold;
+  font-weight: $fontWeightMedium;
+  color: getColor('buttonText');
   background: getColor('buttonBackground');
-  color: getColor('buttonColor');
+  border: 1px solid getColor('buttonBorder');
   transition: background 0.3s linear;
 
   &[disabled] {
@@ -49,8 +51,24 @@ export default {
     background: getColor('buttonBackgroundHover');
   }
 
+  &--primary,
+  &--success,
+  &--danger {
+    color: getColor('buttonTextAlt');
+  }
+
+  &--primary {
+    background: getColor('buttonPrimaryBackground');
+    border-color: getColor('buttonPrimaryBorder');
+
+    &:hover {
+      background: getColor('buttonPrimaryBackgroundHover');
+    }
+  }
+
   &--success {
     background: getColor('buttonSuccessBackground');
+    border-color: getColor('buttonSuccessBorder');
 
     &:hover {
       background: getColor('buttonSuccessBackgroundHover');
@@ -59,6 +77,7 @@ export default {
 
   &--danger {
     background: getColor('buttonDangerBackground');
+    border-color: getColor('buttonDangerBorder');
 
     &:hover {
       background: getColor('buttonDangerBackgroundHover');

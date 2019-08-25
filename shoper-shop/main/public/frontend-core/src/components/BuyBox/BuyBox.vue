@@ -33,22 +33,35 @@
     </div>
     <base-button
       class="buy-box__button"
-      :disabled="!variation"
+      :disabled="!variation.id"
+      type="primary"
       @click="addToCart"
     >
       Add to cart
     </base-button>
+    <buy-box-modal
+      :visible="showModalSuccess"
+      :product-details="productDetails"
+      @close="showModalSuccess = false"
+    />
+    <buy-box-modal-error
+      :visible="showModalError"
+      :message="errorMessage"
+      @close="showModalError = false"
+    />
   </div>
 </template>
 
 <script>
-import BaseButton from '../../components/BaseButton/BaseButton';
+import BuyBoxModal from './BuyBoxModal';
+import BuyBoxModalError from './BuyBoxModalError';
 import basketService from '../../services/basketService';
 
 export default {
   name: 'buy-box',
   components: {
-    BaseButton
+    BuyBoxModal,
+    BuyBoxModalError
   },
   props: {
     productId: {
@@ -74,18 +87,35 @@ export default {
   },
   data() {
     return {
-      variationId: ''
+      variationId: '',
+      showModalSuccess: false,
+      showModalError: false,
+      errorMessage: ''
     };
   },
   computed: {
     variation() {
       const variationStock = this.stocks.find(stock => stock.variation.id === this.variationId);
       return variationStock ? variationStock.variation : {};
+    },
+    productDetails() {
+      return {
+        name: this.productName,
+        category: this.categoryName,
+        variation: this.variation
+      };
     }
   },
   methods: {
     addToCart() {
-      basketService().addProduct(this.productId, this.variation.id, 1);
+      basketService().addProduct(this.productId, this.variation.id, 1)
+        .then(() => {
+          this.showModalSuccess = true;
+        })
+        .catch(error => {
+          this.errorMessage = error.response.data.message;
+          this.showModalError = true;
+        })
     }
   }
 };
