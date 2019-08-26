@@ -4,15 +4,15 @@
     :visible="visible"
     @close="close"
   >
-    <div class="buy-box-modal__header">
-      <h3 class="buy-box-modal__header-title">An error occured</h3>
-    </div>
-    <div class="buy-box-modal__content">
-      <p>{{ message }}</p>
-    </div>
-    <div class="buy-box-modal__footer">
-      <base-button @click="close">Close</base-button>
-    </div>
+    <template v-slot:header>
+      <h3 class="buy-box-modal-error__title">An error occured</h3>
+    </template>
+    <div class="buy-box-modal-error__content">{{ message }}</div>
+    <template v-slot:footer>
+      <div class="buy-box-modal-error__footer">
+        <base-button @click="close">Close</base-button>
+      </div>
+    </template>
   </modal>
 </template>
 
@@ -56,20 +56,13 @@ export default {
     }
   }
 
-  &__header,
-  &__content,
-  &__footer {
-    padding: 2rem;
-  }
-
   &__header-title {
     font-size: $fontSizeMedium;
     font-weight: $fontWeightBold;
   }
 
   &__content {
-    border-top: 1px solid getColor('modalSectionBorder');
-    border-bottom: 1px solid getColor('modalSectionBorder');
+    padding: 2rem;
     line-height: 1.5;
   }
 

@@ -9,11 +9,25 @@
         @click="close"  
       ></div>
       <div
-        ref="content"
+        ref="container"
         class="modal__container"
         :style="`transform: translate(-50%, -${verticalOffset}px);`"
       >
-        <slot />
+        <div
+          v-if="$slots.header"
+          class="modal__header"
+        >
+          <slot name="header" />
+        </div>
+        <div class="modal__content">
+          <slot />
+        </div>
+        <div
+          v-if="$slots.footer"
+          class="modal__footer"
+        >
+          <slot name="footer" />
+        </div>
       </div>
     </div>
   </transition>
@@ -39,7 +53,7 @@ export default {
       handler(value) {
         if (value) {
           this.$nextTick(() => {
-            const half = this.$refs.content.offsetHeight / 2;
+            const half = this.$refs.container.offsetHeight / 2;
             const halfWindow = window.innerHeight / 2;
             this.verticalOffset = Math.min(half, halfWindow);
           })
@@ -121,6 +135,19 @@ export default {
     #{$root}__container {
       opacity: 0;
     }
+  }
+
+  &__header,
+  &__footer {
+    padding: 2rem;
+  }
+
+  &__header {
+    border-bottom: 1px solid getColor('modalSectionBorder');
+  }
+
+  &__footer {
+    border-top: 1px solid getColor('modalSectionBorder');
   }
 }
 </style>

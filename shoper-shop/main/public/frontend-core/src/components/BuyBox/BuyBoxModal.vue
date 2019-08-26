@@ -4,29 +4,31 @@
     :visible="visible"
     @close="close"
   >
-    <div class="buy-box-modal__header">
-      <h3 class="buy-box-modal__header-title">Product was added to basket</h3>
-    </div>
+    <template v-slot:header>
+      <h3 class="buy-box-modal__title">Product was added to basket</h3>
+    </template>
     <div class="buy-box-modal__content">
       <p class="buy-box-modal__content-text buy-box-modal__content-text--name">{{ productDetails.name }}</p>
       <p class="buy-box-modal__content-text">{{ productDetails.category }}</p>
       <p class="buy-box-modal__content-text">Vartiation: {{ productDetails.variation.name }}</p>
     </div>
-    <div class="buy-box-modal__footer">
-      <base-button
-        class="buy-box-modal__footer-button"
-        @click="close"
-      >
-        Close
-      </base-button>
-      <base-button
-        class="buy-box-modal__footer-button"
-        type="success"
-        @click="basketClickHandler"
-      >
-        Go to basket
-      </base-button>
-    </div>
+    <template v-slot:footer>
+      <div class="buy-box-modal__buttons">
+        <base-button
+          class="buy-box-modal__button"
+          @click="close"
+        >
+          Close
+        </base-button>
+        <base-button
+          class="buy-box-modal__button"
+          type="success"
+          @click="basketClickHandler"
+        >
+          Go to basket
+        </base-button>
+      </div>
+    </template>
   </modal>
 </template>
 
@@ -81,20 +83,13 @@ export default {
     }
   }
 
-  &__header,
-  &__content,
-  &__footer {
-    padding: 2rem;
-  }
-
-  &__header-title {
+  &__title {
     font-size: $fontSizeMedium;
     font-weight: $fontWeightBold;
   }
 
   &__content {
-    border-top: 1px solid getColor('modalSectionBorder');
-    border-bottom: 1px solid getColor('modalSectionBorder');
+    padding: 2rem;
     line-height: 1.5;
   }
 
@@ -104,13 +99,13 @@ export default {
     }
   }
 
-  &__footer {
+  &__buttons {
     display: flex;
     align-items: center;
     justify-content: flex-end;
   }
 
-  &__footer-button {
+  &__button {
     &:not(:last-of-type) {
       margin-right: 1rem;
     }
