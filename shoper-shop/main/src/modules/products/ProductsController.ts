@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Validator } from 'class-validator';
 import { Controller } from '../../core/controllers/ControllerInterface';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
+import { UnauthorizedException } from '../../core/exceptions/UnauthorizedException';
 import { ProductsService } from './ProductsService';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { CreateProductDto } from './dto/CreateProductDto';
@@ -71,6 +72,9 @@ export class ProductsController implements Controller {
   }
 
   async createProduct(req: Request, res: Response) {
+    // Throw exception until authorization is implemented
+    throw new UnauthorizedException('You are not authorized');
+
     const createProductDto = new CreateProductDto();
     createProductDto.name = req.body.name;
     createProductDto.price = Number(req.body.price) || req.body.price;
