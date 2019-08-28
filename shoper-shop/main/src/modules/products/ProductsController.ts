@@ -7,6 +7,7 @@ import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { CreateProductDto } from './dto/CreateProductDto';
 import { GetProductsDto } from './dto/GetProductsDto';
 import { CategoriesService } from '../categories/CategoriesService';
+import { calculatePrice } from '../../core/price/calculatePrice';
 
 const validator = new Validator();
 
@@ -40,7 +41,18 @@ export class ProductsController implements Controller {
     const productsCount = await this.productsService.getProductsCount(filterDto);
     const categoryPath = await this.categoriesService.getCategoryPath(filterDto.category);
 
-    res.json({ products, categoryPath, productsCount });
+    const productsMapped = products.map(
+      product => ({
+        ...product,
+        price: calculatePrice(product.price)
+      })
+    );
+
+    res.json({
+      products: productsMapped,
+      categoryPath,
+      productsCount
+    });
   }
 
   async getProduct(req: Request, res: Response) {
@@ -51,7 +63,11 @@ export class ProductsController implements Controller {
     }
 
     const product = await this.productsService.getProduct(id);
-    res.json(product);
+    
+    res.json({
+      ...product,
+      price: calculatePrice(product.price)
+    });
   }
 
   async createProduct(req: Request, res: Response) {

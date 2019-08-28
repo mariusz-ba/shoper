@@ -4,7 +4,8 @@ import { Controller } from '../../core/controllers/ControllerInterface';
 import { BasketProductDto } from './dto/BasketProductDto';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
-import { BasketService, BasketRequest } from './BasketService';
+import { BasketService } from './BasketService';
+import { BasketRequest } from './interfaces/BasketRequest';
 
 const validator = new Validator();
 

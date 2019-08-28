@@ -10,7 +10,8 @@ export const BasketMutations = {
   },
   [BasketMutationsTypes.FETCH_PRODUCTS_SUCCESS](state, data) {
     state.isFetching = false;
-    state.products = data;
+    state.products = data.products;
+    state.summary = data.summary;
   },
   [BasketMutationsTypes.FETCH_PRODUCTS_ERROR](state, error) {
     state.isFetching = false;

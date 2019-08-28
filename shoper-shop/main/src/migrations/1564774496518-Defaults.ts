@@ -16,7 +16,7 @@ export class Defaults1564774145128 implements MigrationInterface {
     await queryRunner.query('INSERT INTO category (id, name, description, parentId, nsleft, nsright) VALUES (11, "Clothes", "Clothes", 10, 19, 22)');
     await queryRunner.query('INSERT INTO category (id, name, description, parentId, nsleft, nsright) VALUES (12, "T-Shirts", "Clothes", 11, 20, 21)');
 
-    const prices = [39.99, 99.00, 150, 199.00];
+    const prices = [3999, 9900, 15000, 19900]; // Price in cents
     const categories = [4, 5, 6, 8, 9, 12];
 
     for (let i = 0; i < 300; ++i) {
