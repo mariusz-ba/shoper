@@ -14,9 +14,9 @@
         @remove="productRemoveHandler"
       />
       <basket-summary
-        :summary-price="totalPrice"
-        :delivery-price="0"
-        :total-price="totalPrice"
+        :summary-price="summary.summaryPrice"
+        :delivery-price="summary.deliveryPrice"
+        :total-price="summary.totalPrice"
       />
     </template>
   </div>
@@ -36,8 +36,8 @@ export default {
     BasketSummary
   },
   computed: {
-    ...mapState('basket', ['products']),
-    ...mapGetters('basket', ['totalPrice', 'totalAmount'])
+    ...mapState('basket', ['products', 'summary']),
+    ...mapGetters('basket', ['totalAmount'])
   },
   beforeRouteEnter(to, from, next) {
     store

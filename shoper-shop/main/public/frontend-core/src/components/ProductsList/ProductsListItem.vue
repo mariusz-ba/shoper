@@ -27,7 +27,7 @@ export default {
         id: '',
         name: '',
         images: [],
-        price: ''
+        price: 0
       })
     }
   },

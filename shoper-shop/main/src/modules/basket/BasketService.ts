@@ -1,13 +1,10 @@
-import { Request } from 'express';
 import { ProductsService } from '../products/ProductsService';
 import { BasketProductDto } from './dto/BasketProductDto';
 import { NotFoundException } from '../../core/exceptions/NotFoundException';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
-import { BasketProduct } from './BasketProduct';
-
-export interface BasketRequest extends Request {
-  session: Express.Session;
-}
+import { calculatePrice } from '../../core/price/calculatePrice';
+import { BasketRequest } from './interfaces/BasketRequest';
+import { BasketResponse } from './interfaces/BasketResponse';
 
 export class BasketService {
   constructor(private readonly productsService: ProductsService) {}
@@ -20,15 +17,33 @@ export class BasketService {
     return req.session.basket;
   }
 
-  async getProductsDetails(req: BasketRequest): Promise<BasketProduct[]> {
+  async getProductsDetails(req: BasketRequest): Promise<BasketResponse> {
     const products = this.getProducts(req);
-    return this.productsService.getBasketProducts(products);
+    const basketProducts = await this.productsService.getBasketProducts(products);
+
+    const summaryPrice = basketProducts.reduce((total, item) => total + item.totalPrice, 0);
+    const deliveryPrice = 0;
+    const totalPrice = summaryPrice + deliveryPrice;
+
+    return {
+      products: basketProducts.map(
+        product => ({
+          ...product,
+          totalPrice: calculatePrice(product.totalPrice)
+        })
+      ),
+      summary: {
+        summaryPrice: calculatePrice(summaryPrice),
+        deliveryPrice: calculatePrice(deliveryPrice),
+        totalPrice: calculatePrice(totalPrice)
+      }
+    };
   }
 
   async addProduct(
     req: BasketRequest,
     productDto: BasketProductDto
-  ): Promise<BasketProduct[]> {
+  ): Promise<BasketResponse> {
     const products = this.getProducts(req);
     const product = products.find(
       product =>
@@ -64,7 +79,7 @@ export class BasketService {
     req: BasketRequest,
     productId: number,
     variationId: number
-  ): Promise<BasketProduct[]> {
+  ): Promise<BasketResponse> {
     const productIndex = req.session.basket.findIndex(
       (product: BasketProductDto) =>
         product.productId === productId &&
@@ -83,7 +98,7 @@ export class BasketService {
   async updateProduct(
     req: BasketRequest,
     productDto: BasketProductDto
-  ): Promise<BasketProduct[]> {
+  ): Promise<BasketResponse> {
     const products = this.getProducts(req);
     const product = products.find(
       product =>
