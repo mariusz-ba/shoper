@@ -1,6 +1,13 @@
 <template>
   <div class="products-list-page">
-    <div class="products-list-page__column products-list-page__column--filters">Filters</div>
+    <div class="products-list-page__column products-list-page__column--filters">
+      <filters
+        class="products-list-page__filters"
+        :variations="variations"
+        :initial-filters="selectedFilters"
+        @change="filtersChangeHandler"
+      />
+    </div>
     <div class="products-list-page__column products-list-page__column--products">
       <breadcrumbs
         v-if="categoryPath.length"
@@ -26,6 +33,9 @@
 </template>
 
 <script>
+import pick from 'lodash/pick';
+import pickBy from 'lodash/pickBy';
+import omit from 'lodash/omit';
 import { mapState, mapGetters } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 import { store } from '../../store/store';
@@ -33,24 +43,27 @@ import { routesNames } from '../../router/routesNames';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
 import Pagination from '../../components/Pagination/Pagination';
+import Filters from '../../components/Filters/Filters';
 
 const routeUpdateHandler = (to, from, next) => {
   const page = Number(to.query.page) || 1;
   const sorting = to.query.sorting || 'oldest';
+  const filters = omit(to.query, ['page', 'sorting']);
 
   store.dispatch(`products/${ProductsActionsTypes.FETCH_PRODUCTS}`, {
-      page,
-      limit: 15,
-      sorting,
-      category: to.params.category
-    })
-    .then(() => {
-      next();
-      window.scrollTo(0, 0);
-    })
-    .catch(() => {
-      next('/not-found');
-    });
+    page,
+    limit: 15,
+    sorting,
+    category: to.params.category,
+    filters
+  })
+  .then(() => {
+    next();
+    window.scrollTo(0, 0);
+  })
+  .catch(() => {
+    next('/not-found');
+  });
 };
 
 export default {
@@ -58,7 +71,8 @@ export default {
   components: {
     Breadcrumbs,
     ProductsList,
-    Pagination
+    Pagination,
+    Filters
   },
   data() {
     return {
@@ -68,13 +82,30 @@ export default {
     };
   },
   computed: {
-    ...mapState('products', ['categoryPath', 'productsCount']),
+    ...mapState('products', [
+      'categoryPath',
+      'productsCount',
+      'variations'
+    ]),
     ...mapGetters('products', ['productsList']),
     pageNumber() {
       return this.$route.query.page || 1;
     },
     pagesLimit() {
       return Math.ceil(this.productsCount / this.productsOnPage);
+    },
+    selectedFilters() {
+      const filters = pick(this.$route.query, ['priceFrom', 'priceTo', 'variations']);
+
+      if (filters.variations) {
+        if (Array.isArray(filters.variations)) {
+          filters.variations = filters.variations.map(variation => Number(variation));
+        } else {
+          filters.variations = [Number(filters.variations)];
+        }
+      }
+
+      return filters;
     }
   },
   watch: {
@@ -92,14 +123,24 @@ export default {
       this.$router.push({
         name: routesNames.productsListPage.name,
         params: this.$route.params,
-        query: {
-          ...this.$route.query,
-          ...query
-        }
+        query: pickBy(
+          {
+            ...this.$route.query,
+            ...query
+          },
+          (value) => (
+            value !== undefined &&
+            value !== null &&
+            value !== ''
+          )
+        )
       });
     },
     pageChangeHandler(index) {
       this.page = index;
+    },
+    filtersChangeHandler(filters) {
+      this.updateQueryParams(filters);
     }
   }
 };
@@ -114,14 +155,18 @@ export default {
   max-width: 1440px;
 
   @include media-tablet-up {
-    display: flex;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-column-gap: 2rem;
   }
 
-  &__column {
-    flex: 1;
+  &__filters {
+    margin-bottom: 2rem;
 
-    &--filters {
-      flex: 0 0 260px;
+    @include media-tablet-up {
+      margin-bottom: 0;
+      position: sticky;
+      top: 9rem;
     }
   }
 
