@@ -6,6 +6,7 @@ import { GetProductsDto } from './dto/GetProductsDto';
 import { CategoriesService } from '../categories/CategoriesService';
 import { BasketProductDto } from '../basket/dto/BasketProductDto';
 import { BasketProduct } from '../basket/BasketProduct';
+import { ProductVariation } from '../../entities/ProductVariationEntity';
 
 export class ProductsService {
   constructor(
@@ -21,6 +22,11 @@ export class ProductsService {
   async getProductsCount(filterDto: GetProductsDto): Promise<number> {
     const newFilterDto = await this.getProductsDtoWithCategories(filterDto);
     return this.productsRepository.getProductsCount(newFilterDto);
+  }
+
+  async getProductsVariations(filterDto: GetProductsDto): Promise<ProductVariation[]> {
+    const newFilterDto = await this.getProductsDtoWithCategories(filterDto);
+    return this.productsRepository.getProductsVariations(newFilterDto);
   }
 
   async getBasketProducts(

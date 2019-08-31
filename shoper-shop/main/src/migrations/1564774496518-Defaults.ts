@@ -54,7 +54,7 @@ export class Defaults1564774145128 implements MigrationInterface {
         await queryRunner.query(
           'INSERT INTO stock (amount, productId, variationId) VALUES (?, ?, ?)',
           [
-            j * (i + 1),
+            (i % 4) * (i + 1),
             i + 1,
             j + 1
           ]

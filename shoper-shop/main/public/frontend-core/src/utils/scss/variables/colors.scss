@@ -4,6 +4,7 @@ $colorPalette: (
   'black': #000,
   'boulder': #757575,
   'alabaster': #fafafa,
+  'alabasterLight': #fcfcfc,
   'silverChalice': #b2b2b2,
   'squash': #cb5c0d,
   'dustGray': #959595,
@@ -54,7 +55,10 @@ $colorTheme: (
   basketHeaderBorder: getColorPalette('gallery'),
   modalBackground: getColorPalette('white'),
   modalOverlayBackground: rgba(0, 0, 0, .6),
-  modalSectionBorder: getColorPalette('alto')
+  modalSectionBorder: getColorPalette('alto'),
+  filtersBorder: getColorPalette('alto'),
+  filtersBackground: getColorPalette('alabaster'),
+  filtersBackgroundLight: getColorPalette('alabasterLight')
 );
 
 @function getColor($name) {

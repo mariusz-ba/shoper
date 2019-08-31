@@ -6,7 +6,7 @@ import { UnauthorizedException } from '../../core/exceptions/UnauthorizedExcepti
 import { ProductsService } from './ProductsService';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { CreateProductDto } from './dto/CreateProductDto';
-import { GetProductsDto } from './dto/GetProductsDto';
+import { GetProductsDto, ProductFilter } from './dto/GetProductsDto';
 import { CategoriesService } from '../categories/CategoriesService';
 import { calculatePrice } from '../../core/price/calculatePrice';
 
@@ -26,11 +26,36 @@ export class ProductsController implements Controller {
   }
 
   async getProducts(req: Request, res: Response) {
+    let queryFilters: any = {};
+
+    try {
+      queryFilters = req.query.filters ? JSON.parse(req.query.filters) : {}
+    } catch (e) {
+      throw new BadRequestException('Invalid filter argument');
+    }
+
     const filterDto = new GetProductsDto();
     filterDto.category = Number(req.query.category) || req.query.category;
     filterDto.limit = Number(req.query.limit) || req.query.limit;
     filterDto.page = Number(req.query.page) || req.query.page;
     filterDto.sorting = req.query.sorting || 'oldest';
+    filterDto.filter = new ProductFilter();
+
+    if (queryFilters.priceFrom) {
+      filterDto.filter.priceFrom = Number(queryFilters.priceFrom) || queryFilters.priceFrom;
+    }
+
+    if (queryFilters.priceTo) {
+      filterDto.filter.priceTo = Number(queryFilters.priceTo) || queryFilters.priceTo;
+    }
+
+    if (queryFilters.variations) {
+      if (Array.isArray(queryFilters.variations)) {
+        filterDto.filter.variations = queryFilters.variations;
+      } else {
+        filterDto.filter.variations = [Number(queryFilters.variations)];
+      }
+    }
 
     const errors = await validator.validate(filterDto);
 
@@ -41,6 +66,7 @@ export class ProductsController implements Controller {
     const products = await this.productsService.getProducts(filterDto);
     const productsCount = await this.productsService.getProductsCount(filterDto);
     const categoryPath = await this.categoriesService.getCategoryPath(filterDto.category);
+    const variations = await this.productsService.getProductsVariations(filterDto);
 
     const productsMapped = products.map(
       product => ({
@@ -52,7 +78,8 @@ export class ProductsController implements Controller {
     res.json({
       products: productsMapped,
       categoryPath,
-      productsCount
+      productsCount,
+      variations
     });
   }
 
