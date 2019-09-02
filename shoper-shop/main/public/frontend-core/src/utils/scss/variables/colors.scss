@@ -58,7 +58,9 @@ $colorTheme: (
   modalSectionBorder: getColorPalette('alto'),
   filtersBorder: getColorPalette('alto'),
   filtersBackground: getColorPalette('alabaster'),
-  filtersBackgroundLight: getColorPalette('alabasterLight')
+  filtersBackgroundLight: getColorPalette('alabasterLight'),
+  productBadgeBackground: getColorPalette('gallery'),
+  productBadgeBorder: getColorPalette('boulder')
 );
 
 @function getColor($name) {
