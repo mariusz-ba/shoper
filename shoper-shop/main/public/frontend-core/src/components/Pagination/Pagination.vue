@@ -94,19 +94,19 @@ export default {
     font-family: $fontFamily;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightMedium;
-    background: getColor('paginationBackground');
-    color: getColor('paginationColor');
+    background: $colorGallery;
+    color: $colorBlack;
     transition: background 0.3s linear;
     cursor: pointer;
 
     &:hover {
-      background: getColor('paginationBackgroundHover');
-      color: getColor('paginationColorHover');
+      background: $colorSquash;
+      color: $colorWhite;
     }
 
     &--active {
-      background: getColor('paginationBackgroundHover');
-      color: getColor('paginationColorHover');
+      background: $colorSquash;
+      color: $colorWhite;
     }
 
     &--side {

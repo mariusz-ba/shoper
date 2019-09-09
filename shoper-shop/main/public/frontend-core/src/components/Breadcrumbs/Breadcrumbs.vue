@@ -47,14 +47,14 @@ export default {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
     text-decoration: none;
-    color: getColor('breadcrumbColor');
+    color: $colorDustGray;
     cursor: pointer;
 
     &:hover {
-      color: getColor('breadcrumbColorHover');
+      color: $colorBlack;
 
       &::after {
-        color: getColor('breadcrumbColor');
+        color: $colorDustGray;
       }
     }
 

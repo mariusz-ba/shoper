@@ -63,7 +63,7 @@ export default {
     @include media-tablet-up {
       display: grid;
       grid-template-columns: 10rem 1fr 10rem 10rem 10rem;
-      border-bottom: 1px solid getColor('basketHeaderBorder');
+      border-bottom: 1px solid $colorGallery;
     }
   }
 
@@ -92,7 +92,7 @@ export default {
       }
 
       &:nth-of-type(2n-1) {
-        background: getColor('basketSummaryBackground');
+        background: $colorAlabaster;
       }
     }
   }

@@ -46,7 +46,7 @@ export default {
   &__title,
   &__content {
     padding: 1rem;
-    border-bottom: 1px solid getColor('filtersBorder');
+    border-bottom: 1px solid $colorAlto;
   }
 
   &__title {
@@ -55,7 +55,7 @@ export default {
     justify-content: space-between;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightMedium;
-    background: getColor('filtersBackground');
+    background: $colorAlabaster;
     cursor: pointer;
 
     @include iconFont('icon-arrow-left', after) {
@@ -71,7 +71,7 @@ export default {
   }
 
   &__content {
-    background: getColor('filtersBackgroundLight');
+    background: $colorAlabasterLight;
   }
 }
 </style>

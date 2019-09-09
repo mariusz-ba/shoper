@@ -182,8 +182,8 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    background: getColor('navbarBackground');
-    box-shadow: 0 1px 12px getColor('navbarShadow');
+    background: $colorWhite;
+    box-shadow: 0 1px 12px $colorBoulder;
   }
 
   &__navbar {
@@ -198,7 +198,7 @@ export default {
   }
 
   &__search {
-    background: getColor('navbarFlyoutBackground');
+    background: $colorAlabaster;
   }
 
   &__search-title {
@@ -206,7 +206,7 @@ export default {
     text-align: center;
     font-size: 2rem;
     font-weight: $fontWeightMedium;
-    color: getColor('navbarShadow');
+    color: $colorBoulder;
   }
 
   &__menu,
@@ -242,7 +242,7 @@ export default {
 
     &:hover {
       #{$root}__menu-link {
-        color: getColor('navbarAccent');
+        color: $colorSquash;
 
         &::after {
           transform: scaleX(1);
@@ -270,7 +270,7 @@ export default {
     text-transform: uppercase;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightMedium;
-    color: getColor('navbarPrimary');
+    color: $colorBlack;
     transition: color 0.3s linear;
     padding: 0 2rem;
 
@@ -281,7 +281,7 @@ export default {
       left: 0;
       width: 100%;
       height: 2px;
-      background: getColor('navbarAccent');
+      background: $colorSquash;
       transform: scaleX(0);
       transform-origin: center center;
       transition: transform 0.3s linear;
@@ -311,7 +311,7 @@ export default {
     transition: color 0.3s linear;
     background: transparent;
     margin-right: 0.5rem;
-    color: getColor('navbarPrimary');
+    color: $colorBlack;
     cursor: pointer;
 
     @include media-tablet-up {
@@ -319,7 +319,7 @@ export default {
     }
 
     &:hover {
-      color: getColor('navbarAccent');
+      color: $colorSquash;
     }
 
     &--basket {

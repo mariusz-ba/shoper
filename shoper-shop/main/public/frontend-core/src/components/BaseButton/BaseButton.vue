@@ -37,50 +37,50 @@ export default {
   font-family: $fontFamily;
   font-size: $fontSizeRegular;
   font-weight: $fontWeightMedium;
-  color: getColor('buttonText');
-  background: getColor('buttonBackground');
-  border: 1px solid getColor('buttonBorder');
+  color: $colorBlack;
+  background: $colorAlabaster;
+  border: 1px solid $colorDustGray;
   transition: background 0.3s linear;
 
   &[disabled] {
-    background: getColor('buttonDisabledBackground') !important;
+    background: $colorDustGray !important;
     cursor: default !important;
   }
 
   &:hover {
-    background: getColor('buttonBackgroundHover');
+    background: darken($colorAlabaster, 10%);
   }
 
   &--primary,
   &--success,
   &--danger {
-    color: getColor('buttonTextAlt');
+    color: $colorWhite;
   }
 
   &--primary {
-    background: getColor('buttonPrimaryBackground');
-    border-color: getColor('buttonPrimaryBorder');
+    background: $colorSquash;
+    border-color: darken($colorSquash, 10%);
 
     &:hover {
-      background: getColor('buttonPrimaryBackgroundHover');
+      background: darken($colorSquash, 5%);
     }
   }
 
   &--success {
-    background: getColor('buttonSuccessBackground');
-    border-color: getColor('buttonSuccessBorder');
+    background: $colorAtlantis;
+    border-color: darken($colorAtlantis, 10%);
 
     &:hover {
-      background: getColor('buttonSuccessBackgroundHover');
+      background: darken($colorAtlantis, 5%);
     }
   }
 
   &--danger {
-    background: getColor('buttonDangerBackground');
-    border-color: getColor('buttonDangerBorder');
+    background: $colorMonza;
+    border-color: darken($colorMonza, 10%);
 
     &:hover {
-      background: getColor('buttonDangerBackgroundHover');
+      background: darken($colorMonza, 5%);
     }
   }
 }

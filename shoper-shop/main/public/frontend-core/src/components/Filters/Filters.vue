@@ -96,7 +96,7 @@ export default {
 @import '../../utils/scss/variables/colors';
 
 .filters {
-  border: 1px solid getColor('filtersBorder');
+  border: 1px solid $colorAlto;
   border-radius: 3px;
 
   &__submit {

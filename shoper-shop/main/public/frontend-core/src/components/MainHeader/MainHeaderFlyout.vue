@@ -22,7 +22,7 @@ export default {
   top: 7rem;
   left: 0;
   width: 100%;
-  background: getColor('navbarFlyoutBackground');
+  background: $colorAlabaster;
 
   &__container {
     margin: 0 auto;

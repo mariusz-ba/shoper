@@ -280,18 +280,18 @@ export default {
   &__name {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightBold;
-    color: getColor('basketLinkColor');
+    color: $colorBlack;
     transition: color 0.3s linear;
 
     &:hover {
-      color: getColor('basketLinkColorHover');
+      color: $colorSquash;
     }
   }
 
   &__category {
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
-    color: getColor('basketLinkColor');
+    color: $colorBlack;
   }
 
   &__remove-button {

@@ -50,7 +50,7 @@ export default {
     width: 100%;
     padding: 1rem;
     margin-top: 2rem;
-    background: getColor('basketSummaryBackground');
+    background: $colorAlabaster;
 
     @include media-tablet-up {
       width: 300px;
@@ -72,7 +72,7 @@ export default {
       padding-top: 1rem;
       font-size: $fontSizeMedium;
       font-weight: $fontWeightBold;
-      border-top: 1px solid getColor('basketSummaryLine');
+      border-top: 1px solid $colorBlack;
     }
   }
 }

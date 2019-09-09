@@ -88,7 +88,7 @@ export default {
   &__link {
     cursor: pointer;
     text-decoration: none;
-    color: getColor('productBoxLink');
+    color: $colorBlack;
   }
 
   &__image-wrapper {
@@ -109,8 +109,8 @@ export default {
     font-size: $fontSizeXSmall;
     font-weight: $fontWeightRegular;
     padding: .3rem;
-    background: getColor('productBadgeBackground');
-    border: 1px solid getColor('productBadgeBorder');
+    background: $colorGallery;
+    border: 1px solid $colorBoulder;
   }
 
   &__details {
@@ -148,7 +148,7 @@ export default {
     padding: .2rem .5rem;
     font-size: $fontSizeSmall;
     font-weight: $fontWeightMedium;
-    border: 1px solid getColor('productBadgeBorder');
+    border: 1px solid $colorBoulder;
 
     &:not(:last-of-type) {
       margin-right: 1rem;

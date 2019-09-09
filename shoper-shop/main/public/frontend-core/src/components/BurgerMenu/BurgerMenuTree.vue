@@ -106,7 +106,7 @@ export default {
 .burger-menu-tree {
   padding-top: 2rem;
   list-style-type: none;
-  background: getColor('navbarBackground');
+  background: $colorWhite;
 
   &--subcategory {
     padding-top: 0;
@@ -129,7 +129,7 @@ export default {
 
     &--back {
       height: 66px;
-      border-bottom: 1px solid getColor('burgerMenuBorder');
+      border-bottom: 1px solid $colorSilverChalice;
       font-size: $fontSizeMedium;
       font-weight: $fontWeightMedium;
       letter-spacing: 1px;
@@ -143,7 +143,7 @@ export default {
       justify-content: center;
       width: 48px;
       height: 100%;
-      border-right: 1px solid getColor('burgerMenuBorder');
+      border-right: 1px solid $colorSilverChalice;
 
       @include iconFont('icon-arrow-left') {
         font-size: $fontSizeMedium;

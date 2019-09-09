@@ -1,74 +1,12 @@
-
-$colorPalette: (
-  'white': #fff,
-  'black': #000,
-  'boulder': #757575,
-  'alabaster': #fafafa,
-  'alabasterLight': #fcfcfc,
-  'silverChalice': #b2b2b2,
-  'squash': #cb5c0d,
-  'dustGray': #959595,
-  'gallery': #f0f0f0,
-  'alto': #dfdfdf,
-  'atlantis': #a4c639,
-  'monza': #d8000c
-);
-
-@function getColorPalette($name) {
-  @return map-get($colorPalette, $name);
-}
-
-$colorTheme: (
-  navbarPrimary: getColorPalette('black'),
-  navbarAccent: getColorPalette('squash'),
-  navbarShadow: getColorPalette('boulder'),
-  navbarBackground: getColorPalette('white'),
-  navbarFlyoutBackground: getColorPalette('alabaster'),
-  breadcrumbColor: getColorPalette('dustGray'),
-  breadcrumbColorHover: getColorPalette('black'),
-  productBoxShadow: getColorPalette('dustGray'),
-  productBoxLink: getColorPalette('black'),
-  burgerMenuBorder: getColorPalette('silverChalice'),
-  paginationBackground: getColorPalette('gallery'),
-  paginationBackgroundHover: getColorPalette('squash'),
-  paginationColor: getColorPalette('black'),
-  paginationColorHover: getColorPalette('white'),
-  buttonText: getColorPalette('black'),
-  buttonBorder: getColorPalette('dustGray'),
-  buttonBackground: getColorPalette('alabaster'),
-  buttonBackgroundHover: darken(getColorPalette('alabaster'), 10%),
-  buttonTextAlt: getColorPalette('white'),
-  buttonPrimaryBackground: getColorPalette('squash'),
-  buttonPrimaryBackgroundHover: darken(getColorPalette('squash'), 5%),
-  buttonPrimaryBorder: darken(getColorPalette('squash'), 10%),
-  buttonSuccessBackground: getColorPalette('atlantis'),
-  buttonSuccessBackgroundHover: darken(getColorPalette('atlantis'), 5%),
-  buttonSuccessBorder: darken(getColorPalette('atlantis'), 10%),
-  buttonDangerBackground: getColorPalette('monza'),
-  buttonDangerBackgroundHover: darken(getColorPalette('monza'), 5%),
-  buttonDangerBorder: darken(getColorPalette('monza'), 10%),
-  buttonDisabledBackground: getColorPalette('dustGray'),
-  basketLinkColor: getColorPalette('black'),
-  basketLinkColorHover: getColorPalette('squash'),
-  basketSummaryBackground: getColorPalette('alabaster'),
-  basketSummaryLine: getColorPalette('black'),
-  basketHeaderBorder: getColorPalette('gallery'),
-  modalBackground: getColorPalette('white'),
-  modalOverlayBackground: rgba(0, 0, 0, .6),
-  modalSectionBorder: getColorPalette('alto'),
-  filtersBorder: getColorPalette('alto'),
-  filtersBackground: getColorPalette('alabaster'),
-  filtersBackgroundLight: getColorPalette('alabasterLight'),
-  productBadgeBackground: getColorPalette('gallery'),
-  productBadgeBorder: getColorPalette('boulder')
-);
-
-@function getColor($name) {
-  $color: map-get($colorTheme, $name);
-
-  @if $color {
-    @return $color;
-  } @else {
-    @return getColorPalette('black');
-  }
-}
+$colorWhite: #fff;
+$colorBlack: #000;
+$colorBoulder: #757575;
+$colorAlabaster: #fafafa;
+$colorAlabasterLight: #fcfcfc;
+$colorSilverChalice: #b2b2b2;
+$colorSquash: #cb5c0d;
+$colorDustGray: #959595;
+$colorGallery: #f0f0f0;
+$colorAlto: #dfdfdf;
+$colorAtlantis: #a4c639;
+$colorMonza: #d8000c;

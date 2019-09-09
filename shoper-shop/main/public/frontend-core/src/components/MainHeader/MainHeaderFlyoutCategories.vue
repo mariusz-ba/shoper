@@ -69,13 +69,13 @@ export default {
 
   &__category-link,
   &__subcategory-link {
-    color: getColor('navbarPrimary');
+    color: $colorBlack;
     display: inline-block;
     text-decoration: none;
     transition: color 0.3s linear;
 
     &:hover {
-      color: getColor('navbarAccent');
+      color: $colorSquash;
     }
   }
 

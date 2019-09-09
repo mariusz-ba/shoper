@@ -42,7 +42,7 @@ export default {
 
   &__item {
     &:hover {
-      box-shadow: 0 0 5px getColor('productBoxShadow');
+      box-shadow: 0 0 5px $colorDustGray;
     }
   }
 }

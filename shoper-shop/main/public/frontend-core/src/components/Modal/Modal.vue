@@ -89,7 +89,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: getColor('modalOverlayBackground');
+    background: rgba(0, 0, 0, .6);
   }
 
   &__container {
@@ -98,7 +98,7 @@ export default {
     top: 50%;
     left: 50%;
     max-width: calc(100% - 4rem);
-    background: getColor('modalBackground');
+    background: $colorWhite;
     border-radius: 3px;
   }
 
@@ -143,11 +143,11 @@ export default {
   }
 
   &__header {
-    border-bottom: 1px solid getColor('modalSectionBorder');
+    border-bottom: 1px solid $colorAlto;
   }
 
   &__footer {
-    border-top: 1px solid getColor('modalSectionBorder');
+    border-top: 1px solid $colorAlto;
   }
 }
 </style>

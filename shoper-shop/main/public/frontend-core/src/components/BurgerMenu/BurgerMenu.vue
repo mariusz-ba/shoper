@@ -46,7 +46,7 @@ export default {
   max-width: 300px;
   height: 100%;
   transition: transform 0.3s linear;
-  background: getColor('navbarBackground');
+  background: $colorWhite;
 
   @include media-tablet-up {
     display: none;
