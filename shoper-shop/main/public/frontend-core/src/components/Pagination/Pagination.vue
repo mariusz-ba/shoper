@@ -5,7 +5,7 @@
       class="pagination__button pagination__button--side"
       @click="pageClickHandler(pagesGroup.begin - 1)"
     >
-      Previous
+      {{ $t('pagination.previous') }}
     </button>
     <button
       v-for="item in pagesRange"
@@ -21,7 +21,7 @@
       class="pagination__button pagination__button--side"
       @click="pageClickHandler(pagesGroup.end + 1)"
     >
-      Next
+      {{ $t('pagination.next') }}
     </button>
   </div>
 </template>

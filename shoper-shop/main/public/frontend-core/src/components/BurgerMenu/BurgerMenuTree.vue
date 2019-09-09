@@ -19,7 +19,7 @@
           class="burger-menu-tree__item-title"
           @click="categoryClickHandler(parent, -1)"
         >
-          Overview
+          {{ $t('burger-menu-tree.overview') }}
         </span>
       </li>
     </template>

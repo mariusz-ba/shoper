@@ -37,7 +37,7 @@
               class="main-header__menu-link"
               :to="{ name: routesNames.aboutPage.name }"
             >
-              About
+              {{ $t('main-header.about') }}
             </router-link>
           </li>
         </ul>
@@ -61,7 +61,7 @@
         v-show="searchVisible"
         class="main-header__search"
       >
-        <h3 class="main-header__search-title">Search</h3>
+        <h3 class="main-header__search-title">{{ $t('main-header.search') }}</h3>
       </div>
     </div>
     <burger-menu

@@ -4,10 +4,12 @@
       v-if="products.length === 0"
       class="basket-page__empty"
     >
-      Your basket is empty
+      {{ $t('basket-page.empty') }}
     </h3>
     <template v-else>
-      <h3 class="basket-page__title">Your basket ({{ totalAmount }})</h3>
+      <h3 class="basket-page__title">
+        {{ $t('basket-page.title', { amount: totalAmount }) }}
+      </h3>
       <basket-products-list
         :products="products"
         @amount-change="productAmountChangeHandler"

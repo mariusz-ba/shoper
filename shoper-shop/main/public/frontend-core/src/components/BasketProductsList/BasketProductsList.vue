@@ -1,11 +1,11 @@
 <template>
   <div class="basket-products-list">
     <div class="basket-products-list__header">
-      <div class="basket-products-list__header-cell">Product</div>
+      <div class="basket-products-list__header-cell">{{ $t('basket-products-list.product') }}</div>
       <div class="basket-products-list__header-cell"></div>
-      <div class="basket-products-list__header-cell basket-products-list__header-cell--variation">Variation</div>
-      <div class="basket-products-list__header-cell basket-products-list__header-cell--amount">Amount</div>
-      <div class="basket-products-list__header-cell basket-products-list__header-cell--price">Price</div>
+      <div class="basket-products-list__header-cell basket-products-list__header-cell--variation">{{ $t('basket-products-list.variation') }}</div>
+      <div class="basket-products-list__header-cell basket-products-list__header-cell--amount">{{ $t('basket-products-list.amount') }}</div>
+      <div class="basket-products-list__header-cell basket-products-list__header-cell--price">{{ $t('basket-products-list.price') }}</div>
     </div>
     <div class="basket-products-list__products">
       <basket-product

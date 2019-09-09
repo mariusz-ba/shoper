@@ -1,6 +1,6 @@
 <template>
   <div class="not-found-page">
-    <h1>This page does not exist</h1>
+    <h1>{{ $t('not-found-page.title') }}</h1>
   </div>
 </template>
 

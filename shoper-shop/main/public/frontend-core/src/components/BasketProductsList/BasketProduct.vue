@@ -27,12 +27,12 @@
             </h5>
           </router-link>
           <div class="basket-product__mobile-variation">
-            Variation: {{ variationName }}
+            {{ $t('basket-product.variation') }}: {{ variationName }}
           </div>
         </div>
         <div class="basket-product__mobile-footer">
           <div>
-            Amount:
+            {{ $t('basket-product.amount') }}:
             <select v-model="productAmount">
               <option
                 v-for="item in variationAmount"
@@ -68,7 +68,7 @@
             {{ category }}
           </h5>
         </router-link>
-        <button @click="removeProductClickHandler">Remove</button>
+        <button @click="removeProductClickHandler">{{ $t('basket-product.remove') }}</button>
       </div>
       <div class="basket-product__column basket-product__column--variation">{{ variationName }}</div>
       <div class="basket-product__column basket-product__column--amount">

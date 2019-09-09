@@ -5,12 +5,12 @@
     @close="close"
   >
     <template v-slot:header>
-      <h3 class="buy-box-modal__title">Product was added to basket</h3>
+      <h3 class="buy-box-modal__title">{{ $t('buy-box-modal.title') }}</h3>
     </template>
     <div class="buy-box-modal__content">
       <p class="buy-box-modal__content-text buy-box-modal__content-text--name">{{ productDetails.name }}</p>
       <p class="buy-box-modal__content-text">{{ productDetails.category }}</p>
-      <p class="buy-box-modal__content-text">Vartiation: {{ productDetails.variation.name }}</p>
+      <p class="buy-box-modal__content-text">{{ $t('buy-box-modal.variation') }}: {{ productDetails.variation.name }}</p>
     </div>
     <template v-slot:footer>
       <div class="buy-box-modal__buttons">
@@ -18,14 +18,14 @@
           class="buy-box-modal__button"
           @click="close"
         >
-          Close
+          {{ $t('buy-box-modal.close') }}
         </base-button>
         <base-button
           class="buy-box-modal__button"
           type="success"
           @click="basketClickHandler"
         >
-          Go to basket
+          {{ $t('buy-box-modal.basket') }}
         </base-button>
       </div>
     </template>

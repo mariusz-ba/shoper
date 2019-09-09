@@ -5,12 +5,16 @@
     @close="close"
   >
     <template v-slot:header>
-      <h3 class="buy-box-modal-error__title">An error occured</h3>
+      <h3 class="buy-box-modal-error__title">
+        {{ $t('buy-box-modal-error.title') }}
+      </h3>
     </template>
     <div class="buy-box-modal-error__content">{{ message }}</div>
     <template v-slot:footer>
       <div class="buy-box-modal-error__footer">
-        <base-button @click="close">Close</base-button>
+        <base-button @click="close">
+          {{ $t('buy-box-modal-error.close') }}
+        </base-button>
       </div>
     </template>
   </modal>

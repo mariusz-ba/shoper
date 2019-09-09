@@ -8,6 +8,4 @@ function getInitialState() {
   return window.__INITIAL_STATE__;
 }
 
-const initialState = getInitialState();
-
-export default initialState;
+export const initialState = getInitialState();

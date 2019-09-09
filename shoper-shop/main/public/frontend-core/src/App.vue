@@ -9,7 +9,7 @@
 <script>
 import MainHeader from './components/MainHeader/MainHeader.vue';
 import PageOverlay from './components/PageOverlay/PageOverlay.vue';
-import initialState from './utils/js/getInitialState';
+import { initialState } from './utils/js/initialState';
 
 export default {
   name: 'app',

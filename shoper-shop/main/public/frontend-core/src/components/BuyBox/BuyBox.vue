@@ -13,13 +13,13 @@
       v-if="stocks && stocks.length"
       class="buy-box__size-picker"
     >
-      <p class="buy-box__size-picker-title">Pick your size</p>
+      <p class="buy-box__size-picker-title">{{ $t('buy-box.title') }}</p>
       <select v-model="variationId">
         <option
           value=""
           disabled
         >
-          Select your size
+          {{ $t('buy-box.title') }}
         </option>
         <option
           v-for="stock in stocks"
@@ -37,7 +37,7 @@
       type="primary"
       @click="addToCart"
     >
-      Add to cart
+      {{ $t('buy-box.addToCart') }}
     </base-button>
     <buy-box-modal
       :visible="showModalSuccess"

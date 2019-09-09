@@ -14,7 +14,7 @@
           v-if="!available"
           class="products-list-item__image-badge"
         >
-          Out of stock
+          {{ $t('products-list-item.outOfStock') }}
         </span>
       </div>
       <div class="products-list-item__details">

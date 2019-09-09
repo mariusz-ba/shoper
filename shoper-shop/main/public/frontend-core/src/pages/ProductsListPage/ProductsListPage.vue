@@ -15,12 +15,14 @@
         :categories="categoryPath"
       />
       <select v-model="sorting">
-        <option value="oldest">Oldest</option>
-        <option value="newest">Newest</option>
-        <option value="priceAsc">Price ascending</option>
-        <option value="priceDesc">Price descending</option>
+        <option value="oldest">{{ $t('products-list-page.oldest') }}</option>
+        <option value="newest">{{ $t('products-list-page.newest') }}</option>
+        <option value="priceAsc">{{ $t('products-list-page.priceAsc') }}</option>
+        <option value="priceDesc">{{ $t('products-list-page.priceDesc') }}</option>
       </select>
-      <h2>You are on page: {{ pageNumber }} out of {{ pagesLimit }}</h2>
+      <h2 class="products-list-page__title">
+        {{ $t('products-list-page.title', { page: pageNumber, total: pagesLimit }) }}
+      </h2>
       <products-list :products="productsList" />
       <pagination
         class="products-list-page__pagination"
@@ -171,6 +173,10 @@ export default {
   }
 
   &__breadcrumbs {
+    margin-bottom: 2rem;
+  }
+
+  &__title {
     margin-bottom: 2rem;
   }
 

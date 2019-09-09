@@ -1,11 +1,11 @@
 <template>
   <div class="filters">
     <filter-group
-      title="Price"
+      :title="$t('filters.price')"
       :initially-expanded="priceFrom !== null || priceTo !== null"
     >
       <div class="filter__input-group">
-        <label for="priceFrom">From</label>
+        <label for="priceFrom">{{ $t('filters.priceFrom') }}</label>
         <input
           v-model="priceFrom"
           id="priceFrom"
@@ -14,7 +14,7 @@
         />
       </div>
       <div class="filter__input-group">
-        <label for="priceTo">To</label>
+        <label for="priceTo">{{ $t('filters.priceTo') }}</label>
         <input
           v-model="priceTo"
           id="priceTo"
@@ -25,7 +25,7 @@
     </filter-group>
     <filter-group
       v-if="variations.length"
-      title="Variations"
+      :title="$t('filters.variations')"
       :initially-expanded="selectedVariations.length > 0"
     >
       <div
@@ -47,7 +47,7 @@
       class="filters__submit"
       @click="submitHandler"
     >
-      Filter
+      {{ $t('filters.submit') }}
     </base-button>
   </div>
 </template>
