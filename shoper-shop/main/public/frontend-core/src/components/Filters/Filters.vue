@@ -4,44 +4,37 @@
       :title="$t('filters.price')"
       :initially-expanded="priceFrom !== null || priceTo !== null"
     >
-      <div class="filter__input-group">
-        <label for="priceFrom">{{ $t('filters.priceFrom') }}</label>
-        <input
-          v-model="priceFrom"
-          id="priceFrom"
-          name="priceFrom"
-          type="number"
-        />
-      </div>
-      <div class="filter__input-group">
-        <label for="priceTo">{{ $t('filters.priceTo') }}</label>
-        <input
-          v-model="priceTo"
-          id="priceTo"
-          name="priceTo"
-          type="number"
-        />
-      </div>
+      <base-input
+        v-model="priceFrom"
+        id="priceFrom"
+        class="filters__price-input"
+        name="priceFrom"
+        type="number"
+        :label="$t('filters.priceFrom')"
+      />
+      <base-input
+        v-model="priceTo"
+        id="priceTo"
+        class="filters__price-input"
+        name="priceTo"
+        type="number"
+        :label="$t('filters.priceTo')"
+      />
     </filter-group>
     <filter-group
       v-if="variations.length"
       :title="$t('filters.variations')"
       :initially-expanded="selectedVariations.length > 0"
     >
-      <div
-        class="filter__input-group"
+      <base-checkbox
         v-for="variation in variations"
         :key="variation.id"
-      >
-        <label :for="`variation-${variation.id}`">{{ variation.name }}</label>
-        <input
-          v-model="selectedVariations"
-          :id="`variation-${variation.id}`"
-          name="variation"
-          type="checkbox"
-          :value="variation.id"
-        />
-      </div>
+        :id="`variation-${variation.id}`"
+        :val="variation.id"
+        :label="variation.name"
+        name="variation"
+        v-model="selectedVariations"
+      />
     </filter-group>
     <base-button
       class="filters__submit"
@@ -98,6 +91,12 @@ export default {
 .filters {
   border: 1px solid $colorAlto;
   border-radius: 3px;
+
+  &__price-input {
+    &:not(:last-of-type) {
+      margin-bottom: 1.5rem;
+    }
+  }
 
   &__submit {
     width: 100%;

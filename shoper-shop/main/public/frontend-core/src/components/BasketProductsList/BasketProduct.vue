@@ -32,16 +32,13 @@
         </div>
         <div class="basket-product__mobile-footer">
           <div>
-            {{ $t('basket-product.amount') }}:
-            <select v-model="productAmount">
-              <option
-                v-for="item in variationAmount"
-                :key="item"
-                :value="item"
-              >
-                {{ item }}
-              </option>
-            </select>
+            <base-select
+              id="amount-mobile"
+              class="basket-product__amount-select"
+              :label="$t('basket-product.amount')"
+              :options="amountOptions"
+              v-model="productAmount"
+            />
           </div>
           <div class="basket-product__mobile-price">{{ totalPrice }}</div>
         </div>
@@ -72,15 +69,12 @@
       </div>
       <div class="basket-product__column basket-product__column--variation">{{ variationName }}</div>
       <div class="basket-product__column basket-product__column--amount">
-        <select v-model="productAmount">
-          <option
-            v-for="item in variationAmount"
-            :key="item"
-            :value="item"
-          >
-            {{ item }}
-          </option>
-        </select>
+        <base-select
+          id="amount-desktop"
+          class="basket-product__amount-select"
+          :options="amountOptions"
+          v-model="productAmount"
+        />
       </div>
       <div class="basket-product__column basket-product__column--price">{{ totalPrice }}</div>
     </div>
@@ -142,6 +136,18 @@ export default {
     },
     variationAmount() {
       return this.variationStock.amount;
+    },
+    amountOptions() {
+      const options = [];
+
+      for (let i = 0; i < this.variationAmount; ++i) {
+        options.push({
+          value: i + 1,
+          label: `${i + 1}`
+        });
+      }
+
+      return options;
     }
   },
   watch: {
@@ -226,7 +232,7 @@ export default {
 
     @include media-tablet-up {
       display: grid;
-      grid-template-columns: 10rem 1fr 10rem 10rem 10rem;
+      grid-template-columns: 10rem 1fr 10rem 12rem 10rem;
       grid-template-rows: 10rem;
     }
   }
@@ -302,6 +308,10 @@ export default {
     @include iconFont('icon-trash') {
       font-size: 2rem;
     }
+  }
+
+  &__amount-select {
+    width: 10rem;
   }
 }
 </style>
