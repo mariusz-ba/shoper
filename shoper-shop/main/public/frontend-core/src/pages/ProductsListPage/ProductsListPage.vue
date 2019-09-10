@@ -14,15 +14,23 @@
         class="products-list-page__breadcrumbs"
         :categories="categoryPath"
       />
-      <select v-model="sorting">
-        <option value="oldest">{{ $t('products-list-page.oldest') }}</option>
-        <option value="newest">{{ $t('products-list-page.newest') }}</option>
-        <option value="priceAsc">{{ $t('products-list-page.priceAsc') }}</option>
-        <option value="priceDesc">{{ $t('products-list-page.priceDesc') }}</option>
-      </select>
-      <h2 class="products-list-page__title">
-        {{ $t('products-list-page.title', { page: pageNumber, total: pagesLimit }) }}
-      </h2>
+      <div class="products-list-page__header">
+        <h2 class="products-list-page__title">
+          {{ $t('products-list-page.title', { page: pageNumber, total: pagesLimit }) }}
+        </h2>
+        <base-select
+          id="sorting"
+          class="products-list-page__sorting"
+          v-model="sorting"
+          :label="$t('products-list-page.sorting')"
+          :options="[
+            { value: 'oldest', label: $t('products-list-page.oldest') },
+            { value: 'newest', label: $t('products-list-page.newest') },
+            { value: 'priceAsc', label: $t('products-list-page.priceAsc') },
+            { value: 'priceDesc', label: $t('products-list-page.priceDesc') }
+          ]"
+        />
+      </div>
       <products-list :products="productsList" />
       <pagination
         class="products-list-page__pagination"
@@ -130,11 +138,7 @@ export default {
             ...this.$route.query,
             ...query
           },
-          (value) => (
-            value !== undefined &&
-            value !== null &&
-            value !== ''
-          )
+          (value) => [undefined, null, ''].includes(value) === false
         )
       });
     },
@@ -176,8 +180,31 @@ export default {
     margin-bottom: 2rem;
   }
 
+  &__header {
+    @include media-tablet-up {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+  }
+
   &__title {
     margin-bottom: 2rem;
+
+    @include media-tablet-up {
+      margin-bottom: 0;
+    }
+  }
+
+  &__sorting {
+    margin-bottom: 2rem;
+    width: 100%;
+
+    @include media-tablet-up {
+      margin-bottom: 0;
+      width: 200px;
+    }
   }
 
   &__pagination {

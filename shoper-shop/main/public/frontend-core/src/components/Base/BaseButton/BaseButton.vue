@@ -6,7 +6,6 @@
       'base-button--success': type === 'success',
       'base-button--danger': type === 'danger'
     }"
-    v-bind="$attrs"
     v-on="$listeners"
   >
     <slot />
@@ -26,8 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../utils/scss/variables/colors';
-@import '../../utils/scss/variables/fonts';
+@import '../../../utils/scss/variables/colors';
+@import '../../../utils/scss/variables/fonts';
 
 .base-button {
   cursor: pointer;

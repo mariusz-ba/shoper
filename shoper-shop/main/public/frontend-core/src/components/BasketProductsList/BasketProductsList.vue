@@ -62,7 +62,7 @@ export default {
 
     @include media-tablet-up {
       display: grid;
-      grid-template-columns: 10rem 1fr 10rem 10rem 10rem;
+      grid-template-columns: 10rem 1fr 10rem 12rem 10rem;
       border-bottom: 1px solid $colorGallery;
     }
   }
