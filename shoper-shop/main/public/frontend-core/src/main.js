@@ -6,24 +6,44 @@ import { router } from './router/router';
 import { store } from './store/store';
 import { translations } from './utils/js/translations';
 
-// Register base components globally
-import BaseInput from './components/Base/BaseInput/BaseInput';
-import BaseRadio from './components/Base/BaseRadio/BaseRadio';
-import BaseButton from './components/Base/BaseButton/BaseButton';
-import BaseSelect from './components/Base/BaseSelect/BaseSelect';
-import BaseTextarea from './components/Base/BaseTextarea/BaseTextarea';
-import BaseCheckbox from './components/Base/BaseCheckbox/BaseCheckbox';
+import {
+  ValidationObserver,
+  ValidationProvider,
+  configure,
+  extend
+} from 'vee-validate';
 
-Vue.component('base-input', BaseInput);
-Vue.component('base-radio', BaseRadio);
-Vue.component('base-button', BaseButton);
-Vue.component('base-select', BaseSelect);
-Vue.component('base-textarea', BaseTextarea);
-Vue.component('base-checkbox', BaseCheckbox);
+import {
+  required,
+  confirmed,
+  email,
+  min
+} from 'vee-validate/dist/rules';
+
+Vue.component('validation-observer', ValidationObserver);
+Vue.component('validation-provider', ValidationProvider);
 
 Vue.use(VueI18n);
 
 const i18n = new VueI18n(translations);
+
+configure({
+  defaultMessage: (name, values) => {
+    const rule = values._rule_;
+    const validations = i18n.messages[i18n.locale].validations;
+
+    const path = name === '{field}'
+      ? `validations.${rule}${validations[rule].unnamed ? '.unnamed' : ''}`
+      : `validations.${rule}${validations[rule].named ? '.named' : ''}`;
+
+    return i18n.t(path, values);
+  }
+});
+
+extend('required', required);
+extend('password', confirmed);
+extend('email', email);
+extend('min', min);
 
 new Vue({
   el: '#app',

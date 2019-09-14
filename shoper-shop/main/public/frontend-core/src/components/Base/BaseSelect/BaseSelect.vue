@@ -172,12 +172,11 @@ export default {
     outline: 0;
     position: relative;
     width: 100%;
-    height: 4rem;
+    height: 4.5rem;
     padding: .5rem 1rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
     border: 1px solid $colorBoulder;
-    border-radius: 3px;
     background: $colorWhite;
     display: flex;
     align-items: center;
@@ -185,8 +184,6 @@ export default {
 
     &:focus,
     &--opened {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
       border-color: $colorElectricViolet;
       box-shadow: 0 0 0 1px $colorElectricViolet;
     }
@@ -210,7 +207,7 @@ export default {
 
     &--floated {
       top: 0;
-      transform: translateY(-50%) scale(0.8);
+      transform: translateY(-50%) scale(0.85);
     }
 
     &--required {
@@ -254,8 +251,6 @@ export default {
     right: -1px;
     max-height: 200px;
     border: 1px solid $colorElectricViolet;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     border-top: none;
     box-shadow: 0 -2px 0 -1px $colorMercury, 0 0 0 1px $colorElectricViolet;
     background: $colorWhite;

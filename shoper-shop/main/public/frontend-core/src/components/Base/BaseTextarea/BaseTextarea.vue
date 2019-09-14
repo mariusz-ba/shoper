@@ -102,12 +102,11 @@ export default {
     resize: vertical;
     outline: 0;
     width: 100%;
-    min-height: 4rem;
+    min-height: 4.5rem;
     padding: 1rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
     border: 1px solid $colorBoulder;
-    border-radius: 3px;
     background: $colorWhite;
 
     &--error {
@@ -126,7 +125,7 @@ export default {
 
   &__textarea:focus + &__label {
     top: 0;
-    transform: translateY(-50%) scale(0.8);
+    transform: translateY(-50%) scale(0.85);
   }
 
   &__label {
@@ -143,7 +142,7 @@ export default {
 
     &--floated {
       top: 0;
-      transform: translateY(-50%) scale(0.8);
+      transform: translateY(-50%) scale(0.85);
     }
 
     &--required {

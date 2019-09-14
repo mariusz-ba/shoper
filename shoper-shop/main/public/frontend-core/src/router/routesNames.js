@@ -22,5 +22,9 @@ export const routesNames = {
   notFoundPage: {
     path: '/not-found',
     name: 'notFoundPage'
+  },
+  loginPage: {
+    path: '/login',
+    name: 'loginPage'
   }
 };

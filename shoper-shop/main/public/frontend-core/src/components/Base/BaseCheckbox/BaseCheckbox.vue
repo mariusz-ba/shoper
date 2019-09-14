@@ -23,13 +23,19 @@
         :class="{'base-checkbox__rect--disabled': disabled}"
       ></div>
       <span
-        v-if="label"
+        v-if="$slots.default"
         class="base-checkbox__text"
         :class="{'base-checkbox__text--required': required}"
       >
-        {{ label }}
+        <slot></slot>
       </span>
     </label>
+    <p
+      v-if="error"
+      class="base-checkbox__error"
+    >
+      {{ error }}
+    </p>
   </div>
 </template>
 
@@ -40,7 +46,6 @@ export default {
     id: String,
     val: [String, Number],
     name: String,
-    label: String,
     value: [Boolean, String, Array],
     error: String,
     disabled: {
@@ -115,11 +120,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: 1.6rem;
+    height: 1.6rem;
     color: $colorWhite;
     border: 1px solid $colorBoulder;
-    border-radius: 3px;
     font-size: $fontSizeSmall;
 
     &--disabled {
@@ -137,6 +141,13 @@ export default {
         content: '*';
       }
     }
+  }
+
+  &__error {
+    margin-top: .4rem;
+    font-size: $fontSizeRegular;
+    font-weight: $fontWeightRegular;
+    color: $colorShiraz;
   }
 }
 </style>

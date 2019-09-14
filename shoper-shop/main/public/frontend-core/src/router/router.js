@@ -9,6 +9,7 @@ import HomePage from '../pages/HomePage/HomePage.vue';
 import ProductsListPage from '../pages/ProductsListPage/ProductsListPage.vue';
 import ProductDetailsPage from '../pages/ProductDetailsPage/ProductDetailsPage.vue';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.vue';
+import LoginPage from '../pages/LoginPage/LoginPage.vue';
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ export const routes = [
     path: routesNames.notFoundPage.path,
     name: routesNames.notFoundPage.name,
     component: NotFoundPage
+  },
+  {
+    path: routesNames.loginPage.path,
+    name: routesNames.loginPage.name,
+    component: LoginPage
   }
 ];
 

@@ -21,11 +21,13 @@
 </template>
 
 <script>
+import BaseButton from '../Base/BaseButton/BaseButton';
 import Modal from '../Modal/Modal';
 
 export default {
   name: 'buy-box-modal-error',
   components: {
+    BaseButton,
     Modal
   },
   props: {

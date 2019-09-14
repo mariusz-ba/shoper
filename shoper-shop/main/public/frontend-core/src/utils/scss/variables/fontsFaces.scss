@@ -1,30 +1,27 @@
 $fontsPath: 'assets/fonts';
 
 @font-face {
-  font-family: 'Helvetica Neue';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Helvetica Neue Light'), local('Helvetica-Neue-Light'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-light.woff2') format('woff2'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-light.woff') format('woff');
+  font-display: swap;
+  src: url('#{$fontsPath}/roboto/Roboto-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'Helvetica Neue';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local('Helvetica Neue Medium'), local('Helvetica-Neue-Medium'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-medium.woff2') format('woff2'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-medium.woff') format('woff');
+  font-display: swap;
+  src: url('#{$fontsPath}/roboto/Roboto-Medium.ttf');
 }
 
 @font-face {
-  font-family: 'Helvetica Neue';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: local('Helvetica Neue Bold'), local('Helvetica-Neue-Bold'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-bold.woff2') format('woff2'),
-       url('#{$fontsPath}/helveticaneue/helveticaneue-bold.woff') format('woff');
+  font-display: swap;
+  src: url('#{$fontsPath}/roboto/Roboto-Bold.ttf');
 }
 
 @font-face {

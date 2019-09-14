@@ -2,8 +2,18 @@ mixin translations
   script.
     window.__TRANSLATIONS__ = {
       locale: 'en',
+      fallbackLocale: 'en',
       messages: {
         en: {
+          'validations': {
+            required: {
+              unnamed: 'This field is required',
+              named: '{_field_} is required'
+            },
+            password: 'Password does not match',
+            email: 'Invalid email address',
+            min: 'This field must have at least {length} characters'
+          },
           'filters': {
             price: 'Price',
             priceFrom: 'From',
@@ -69,6 +79,27 @@ mixin translations
             newest: 'Newest',
             priceAsc: 'Price ascending',
             priceDesc: 'Price descending'
+          },
+          'login-page': {
+            loginHeadline: 'I already have an account',
+            registerHeadline: 'I don\'t have account',
+            registerSubline: 'Enjoy the advantages of your personal customer account and shop quickly and easily in the future.',
+            registerExpand: 'Create an account'
+          },
+          'login-form': {
+            submitButton: 'Sign in',
+            emailLabel: 'E-Mail',
+            passwordLabel: 'Password'
+          },
+          'register-form': {
+            submitButton: 'Register',
+            privacyPolicy: 'I agree to the privacy policy',
+            firstName: 'First name',
+            lastName: 'Last name',
+            email: 'E-Mail',
+            password: 'Password',
+            passwordConfirm: 'Confirm password',
+            passwordConfirmName: 'Password confirmation'
           }
         }
       }

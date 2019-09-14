@@ -27,7 +27,7 @@ export default {
   &__container {
     margin: 0 auto;
     padding: 2rem;
-    max-width: 1440px;
+    max-width: 1200px;
     opacity: 0;
     transition: opacity 0.3s ease-in;
   }

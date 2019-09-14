@@ -31,26 +31,31 @@
         :key="variation.id"
         :id="`variation-${variation.id}`"
         :val="variation.id"
-        :label="variation.name"
         name="variation"
         v-model="selectedVariations"
-      />
+      >
+        {{ variation.name }}
+      </base-checkbox>
     </filter-group>
-    <base-button
+    <button
       class="filters__submit"
       @click="submitHandler"
     >
       {{ $t('filters.submit') }}
-    </base-button>
+    </button>
   </div>
 </template>
 
 <script>
+import BaseInput from '../Base/BaseInput/BaseInput';
+import BaseCheckbox from '../Base/BaseCheckbox/BaseCheckbox';
 import FilterGroup from './FilterGroup';
 
 export default {
   name: 'filters',
   components: {
+    BaseInput,
+    BaseCheckbox,
     FilterGroup
   },
   props: {
@@ -87,6 +92,7 @@ export default {
 
 <style lang="scss">
 @import '../../utils/scss/variables/colors';
+@import '../../utils/scss/variables/fonts';
 
 .filters {
   border: 1px solid $colorAlto;
@@ -103,6 +109,18 @@ export default {
     border: none !important;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    padding: 1rem 1.5rem;
+    font-family: $fontFamily;
+    font-size: $fontSizeRegular;
+    font-weight: $fontWeightMedium;
+    color: $colorBlack;
+    background: $colorAlabasterLight;
+    cursor: pointer;
+    transition: background 0.3s linear;
+
+    &:hover {
+      background: darken($colorAlabasterLight, 5%);
+    }
   }
 }
 </style>

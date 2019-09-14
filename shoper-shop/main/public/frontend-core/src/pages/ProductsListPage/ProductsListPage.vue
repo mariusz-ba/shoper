@@ -50,6 +50,7 @@ import { mapState, mapGetters } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 import { store } from '../../store/store';
 import { routesNames } from '../../router/routesNames';
+import BaseSelect from '../../components/Base/BaseSelect/BaseSelect';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
 import Pagination from '../../components/Pagination/Pagination';
@@ -79,6 +80,7 @@ const routeUpdateHandler = (to, from, next) => {
 export default {
   name: 'products-list-page',
   components: {
+    BaseSelect,
     Breadcrumbs,
     ProductsList,
     Pagination,
@@ -158,7 +160,7 @@ export default {
 .products-list-page {
   margin: 0 auto;
   padding: 2rem;
-  max-width: 1440px;
+  max-width: 1200px;
 
   @include media-tablet-up {
     display: grid;
