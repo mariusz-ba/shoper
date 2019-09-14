@@ -3,10 +3,22 @@
     class="burger-menu"
     :class="{'burger-menu--visible': visible}"
   >
-    <burger-menu-tree
-      :root="true"
-      :categories="categories"
-    />
+    <header class="burger-menu__header">
+      <span class="burger-menu__header-title">{{ $t('burger-menu.title') }}</span>
+      <button
+        class="burger-menu__close-button"
+        :title="$t('burger-menu.closeButton')"
+        @click="closeButtonClickHandler"
+      >
+      </button>
+    </header>
+    <div class="burger-menu__tree">
+      <burger-menu-tree
+        :root="true"
+        :categories="categories"
+        @close="closeButtonClickHandler"
+      />
+    </div>
   </aside>
 </template>
 
@@ -27,25 +39,34 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  methods: {
+    closeButtonClickHandler() {
+      this.$emit('close');
+    }
   }
 };
 </script>
 
 <style lang="scss">
 @import '../../utils/scss/variables/colors';
+@import '../../utils/scss/variables/fonts';
 @import '../../utils/scss/mixins/media';
+@import '../../utils/scss/mixins/iconFont';
 
 .burger-menu {
+  overflow: hidden;
   position: relative;
-  z-index: 590;
-  display: block;
+  z-index: 700;
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  top: 7rem;
-  left: 100%;
-  width: calc(100% - 20px);
-  max-width: 300px;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  max-width: 375px;
   height: 100%;
-  transition: transform 0.3s linear;
+  transition: transform 0.2s ease-in-out;
   background: $colorWhite;
 
   @include media-tablet-up {
@@ -53,7 +74,38 @@ export default {
   }
 
   &--visible {
-    transform: translateX(-100%);
+    transform: translateX(100%);
+  }
+
+  &__header {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    background: $colorGallery;
+    border-bottom: 1px solid $colorMercury;
+  }
+
+  &__header-title {
+    font-size: $fontSizeMedium;
+    font-weight: $fontWeightMedium;
+  }
+
+  &__close-button {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    cursor: pointer;
+
+    @include iconFont('icon-close') {
+      font-size: $fontSizeMedium;
+    }
+  }
+
+  &__tree {
+    position: relative;
+    flex: 1;
   }
 }
 </style>

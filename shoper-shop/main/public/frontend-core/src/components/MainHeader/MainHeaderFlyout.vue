@@ -19,7 +19,7 @@ export default {
   max-height: 0;
   overflow: hidden;
   position: absolute;
-  top: 7rem;
+  top: 100%;
   left: 0;
   width: 100%;
   background: $colorAlabaster;

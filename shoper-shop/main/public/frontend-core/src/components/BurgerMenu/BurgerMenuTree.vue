@@ -11,12 +11,20 @@
         class="burger-menu-tree__item burger-menu-tree__item--back"
         @click="goBackClickHandler"
       >
-        <span class="burger-menu-tree__item--back_arrow"></span>
-        <span class="burger-menu-tree__item-title">{{ parent.name }}</span>
+        <div class="burger-menu-tree__item--back_arrow"></div>
+        <div class="burger-menu-tree__item-title">
+          <span
+            v-if="grandParent"
+            class="burger-menu-tree__item-title-grandparent"
+          >
+            {{ grandParent.name }}
+          </span>
+          <span class="burger-menu-tree__item-title-parent">{{ parent.name }}</span>
+        </div>
       </li>
       <li class="burger-menu-tree__item">
         <span
-          class="burger-menu-tree__item-title"
+          class="burger-menu-tree__item-title burger-menu-tree__item-title--overview"
           @click="categoryClickHandler(parent, -1)"
         >
           {{ $t('burger-menu-tree.overview') }}
@@ -39,8 +47,10 @@
         <burger-menu-tree
           :visible="visibleCategoryIndex === index"
           :categories="category.children"
+          :grand-parent="parent"
           :parent="category"
           @back="goBackHandler"
+          @close="closeBurgerMenu"
         />
       </template>
     </li>
@@ -56,6 +66,10 @@ export default {
     root: {
       type: Boolean,
       default: false
+    },
+    grandParent: {
+      type: Object,
+      default: () => {}
     },
     parent: {
       type: Object,
@@ -86,6 +100,7 @@ export default {
             category: category.id
           }
         });
+        this.closeBurgerMenu();
       }
     },
     goBackClickHandler() {
@@ -93,6 +108,9 @@ export default {
     },
     goBackHandler() {
       this.visibleCategoryIndex = -1;
+    },
+    closeBurgerMenu() {
+      this.$emit('close');
     }
   }
 };
@@ -104,7 +122,6 @@ export default {
 @import '../../utils/scss/mixins/iconFont';
 
 .burger-menu-tree {
-  padding-top: 2rem;
   list-style-type: none;
   background: $colorWhite;
 
@@ -115,7 +132,7 @@ export default {
     left: 100%;
     width: 100%;
     height: 100%;
-    transition: transform 0.3s linear;
+    transition: transform 0.2s ease-in-out;
   }
 
   &--subcategory_visible {
@@ -126,15 +143,16 @@ export default {
     height: 48px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid $colorMercury;
+    cursor: pointer;
 
     &--back {
       height: 66px;
-      border-bottom: 1px solid $colorSilverChalice;
+      border-bottom: 1px solid $colorMercury;
       font-size: $fontSizeMedium;
       font-weight: $fontWeightMedium;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
     }
 
     &--back_arrow {
@@ -143,7 +161,7 @@ export default {
       justify-content: center;
       width: 48px;
       height: 100%;
-      border-right: 1px solid $colorSilverChalice;
+      border-right: 1px solid $colorMercury;
 
       @include iconFont('icon-arrow-left') {
         font-size: $fontSizeMedium;
@@ -155,6 +173,21 @@ export default {
     flex: 1;
     display: block;
     padding: 1.5rem 1.6rem;
+
+    &--overview {
+      font-weight: $fontWeightMedium;
+    }
+  }
+
+  &__item-title-grandparent,
+  &__item-title-parent {
+    display: block;
+  }
+
+  &__item-title-grandparent {
+    font-size: $fontSizeRegular;
+    font-weight: $fontWeightRegular;
+    line-height: 1.375;
   }
 
   &__item-arrow {

@@ -309,7 +309,7 @@ export default {
     top: 0;
     right: 0;
 
-    @include iconFont('icon-trash') {
+    @include iconFont('icon-garbage') {
       font-size: 2rem;
     }
   }
