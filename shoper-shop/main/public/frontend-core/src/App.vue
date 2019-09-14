@@ -27,8 +27,13 @@ export default {
 
 <style lang="scss">
 @import 'utils/scss/variables/global';
+@import 'utils/scss/mixins/media';
 
 .app {
   padding-top: 7rem;
+
+  @include media-tablet-up {
+    padding-top: 11.6rem;
+  }
 }
 </style>

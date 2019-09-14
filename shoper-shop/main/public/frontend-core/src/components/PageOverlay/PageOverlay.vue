@@ -1,8 +1,12 @@
 <template>
-  <transition name="page-overlay__show">
+  <transition
+    name="page-overlay__show"
+    @after-leave="afterLeave"
+  >
     <div
       v-show="visible"
       class="page-overlay"
+      :style="styles"
       @click="clickHandler"
     >
     </div>
@@ -16,7 +20,8 @@ export default {
   name: 'page-overlay',
   data() {
     return {
-      visible: false
+      visible: false,
+      styles: {}
     };
   },
   mounted() {
@@ -24,11 +29,15 @@ export default {
     eventBus.on('page-overlay:hide', this.hide);
   },
   methods: {
-    show() {
+    show(data) {
+      this.styles = data;
       this.visible = true;
     },
     hide() {
       this.visible = false;
+    },
+    afterLeave() {
+      this.styles = {};
     },
     clickHandler() {
       eventBus.emit('page-overlay:click');

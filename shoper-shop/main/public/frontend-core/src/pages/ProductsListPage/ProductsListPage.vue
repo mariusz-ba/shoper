@@ -174,7 +174,7 @@ export default {
     @include media-tablet-up {
       margin-bottom: 0;
       position: sticky;
-      top: 9rem;
+      top: 13.6rem;
     }
   }
 
