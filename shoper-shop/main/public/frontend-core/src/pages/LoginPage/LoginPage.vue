@@ -5,7 +5,10 @@
         <h3 class="login-page__headline">{{ $t('login-page.loginHeadline') }}</h3>
         <login-form @submit="loginSubmitHandler" />
       </div>
-      <div class="login-page__column">
+      <div
+        ref="registerColumn"
+        class="login-page__column"
+      >
         <h3 class="login-page__headline">{{ $t('login-page.registerHeadline') }}</h3>
         <p class="login-page__subline">{{ $t('login-page.registerSubline') }}</p>
         <base-button
@@ -14,7 +17,7 @@
           type="button"
           version="primary"
           reversed
-          @click="registerOpened = true"
+          @click="expandButtonClickHandler"
         >
           {{ $t('login-page.registerExpand') }}
         </base-button>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import { scrollToElement } from '../../utils/js/scrollToElement';
 import BaseButton from '../../components/Base/BaseButton/BaseButton';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
@@ -50,6 +54,13 @@ export default {
     },
     registerSubmitHandler(data) {
       console.log('Registering new user', data);
+    },
+    expandButtonClickHandler() {
+      this.registerOpened = true;
+
+      this.$nextTick(() => {
+        scrollToElement(this.$refs.registerColumn);
+      })
     }
   }
 };
