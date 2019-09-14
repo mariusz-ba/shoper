@@ -22,7 +22,7 @@
         </base-button>
         <base-button
           class="buy-box-modal__button"
-          type="success"
+          version="success"
           @click="basketClickHandler"
         >
           {{ $t('buy-box-modal.basket') }}
@@ -34,11 +34,13 @@
 
 <script>
 import { routesNames } from '../../router/routesNames';
+import BaseButton from '../Base/BaseButton/BaseButton';
 import Modal from '../Modal/Modal';
 
 export default {
   name: 'buy-box-modal',
   components: {
+    BaseButton,
     Modal
   },
   props: {

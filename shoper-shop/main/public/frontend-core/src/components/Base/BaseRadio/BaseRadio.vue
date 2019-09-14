@@ -124,8 +124,8 @@ export default {
 
   &__circle {
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: 1.6rem;
+    height: 1.6rem;
     border: 1px solid $colorBoulder;
     border-radius: 50%;
 

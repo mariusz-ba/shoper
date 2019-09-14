@@ -2,9 +2,10 @@
   <button
     class="base-button"
     :class="{
-      'base-button--primary': type === 'primary',
-      'base-button--success': type === 'success',
-      'base-button--danger': type === 'danger'
+      'base-button--primary': version === 'primary',
+      'base-button--success': version === 'success',
+      'base-button--danger': version === 'danger',
+      'base-button--reversed': reversed
     }"
     v-on="$listeners"
   >
@@ -16,9 +17,13 @@
 export default {
   name: 'base-button',
   props: {
-    type: {
+    version: {
       type: String,
       default: ''
+    },
+    reversed: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -29,25 +34,45 @@ export default {
 @import '../../../utils/scss/variables/fonts';
 
 .base-button {
+  $root: &;
+
   cursor: pointer;
   border: 0;
   outline: 0;
   padding: 1rem 1.5rem;
   font-family: $fontFamily;
   font-size: $fontSizeRegular;
-  font-weight: $fontWeightMedium;
+  font-weight: $fontWeightBold;
   color: $colorBlack;
-  background: $colorAlabaster;
-  border: 1px solid $colorDustGray;
-  transition: background 0.3s linear;
+  background: transparent;
+  border: 2px solid $colorBlack;
+  transition: background 0.3s linear, color 0.3s linear;
 
   &[disabled] {
-    background: $colorDustGray !important;
-    cursor: default !important;
+    color: $colorBoulder !important;
+    background: transparent !important;
+    border-color: $colorDustGray !important;
+    cursor: not-allowed;
+
+    &:hover {
+      color: $colorBoulder !important;
+      background: transparent !important;
+    }
   }
 
   &:hover {
-    background: darken($colorAlabaster, 10%);
+    background: $colorBlack;
+    color: $colorWhite;
+  }
+
+  &--reversed {
+    color: $colorWhite;
+    background: $colorBlack;
+
+    &:hover {
+      color: $colorBlack;
+      background: transparent;
+    }
   }
 
   &--primary,
@@ -57,29 +82,65 @@ export default {
   }
 
   &--primary {
-    background: $colorSquash;
-    border-color: darken($colorSquash, 10%);
+    color: $colorSquash;
+    border-color: $colorSquash;
 
     &:hover {
-      background: darken($colorSquash, 5%);
+      color: $colorWhite;
+      background: $colorSquash;
+    }
+
+    &#{$root}--reversed {
+      color: $colorWhite;
+      background: $colorSquash;
+      border-color: $colorSquash;
+
+      &:hover {
+        color: $colorSquash;
+        background: transparent;
+      }
     }
   }
 
   &--success {
-    background: $colorAtlantis;
-    border-color: darken($colorAtlantis, 10%);
+    color: $colorMalachite;
+    border-color: $colorMalachite;
 
     &:hover {
-      background: darken($colorAtlantis, 5%);
+      color: $colorWhite;
+      background: $colorMalachite;
+    }
+
+    &#{$root}--reversed {
+      color: $colorWhite;
+      background: $colorMalachite;
+      border-color: $colorMalachite;
+
+      &:hover {
+        color: $colorMalachite;
+        background: transparent;
+      }
     }
   }
 
   &--danger {
-    background: $colorMonza;
-    border-color: darken($colorMonza, 10%);
+    color: $colorMonza;
+    border-color: $colorMonza;
 
     &:hover {
-      background: darken($colorMonza, 5%);
+      color: $colorWhite;
+      background: $colorMonza;
+    }
+
+    &#{$root}--reversed {
+      color: $colorWhite;
+      background: $colorMonza;
+      border-color: $colorMonza;
+
+      &:hover {
+        color: $colorMonza;
+        background: transparent;
+      }
     }
   }
 }

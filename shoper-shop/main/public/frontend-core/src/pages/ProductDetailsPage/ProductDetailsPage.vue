@@ -8,7 +8,7 @@
         <buy-box
           :product-id="product.id"
           :product-name="product.name"
-          :category-name="product.category.description"
+          :category-name="product.category ? product.category.description : ''"
           :price="product.price"
           :stocks="product.stocks"
         />
@@ -57,6 +57,8 @@ export default {
 
 .product-details-page {
   padding: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
 
   @include media-tablet-up {
     padding-top: 6rem;

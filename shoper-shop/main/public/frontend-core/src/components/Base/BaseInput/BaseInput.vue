@@ -143,12 +143,11 @@ export default {
   &__input {
     outline: 0;
     width: 100%;
-    height: 4rem;
+    height: 4.5rem;
     padding: .5rem 1rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
     border: 1px solid $colorBoulder;
-    border-radius: 3px;
     background: $colorWhite;
 
     &--error {
@@ -167,7 +166,7 @@ export default {
 
   &__input:focus + &__label {
     top: 0;
-    transform: translateY(-50%) scale(0.8);
+    transform: translateY(-50%) scale(0.85);
   }
 
   &__label {
@@ -185,7 +184,7 @@ export default {
 
     &--floated {
       top: 0;
-      transform: translateY(-50%) scale(0.8);
+      transform: translateY(-50%) scale(0.85);
     }
 
     &--required {

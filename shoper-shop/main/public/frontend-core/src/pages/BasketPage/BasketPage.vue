@@ -73,7 +73,7 @@ export default {
 .basket-page {
   margin: 0 auto;
   padding: 2rem;
-  max-width: 1440px;
+  max-width: 1200px;
 
   @include media-tablet-up {
     padding: 3rem 2rem 2rem;

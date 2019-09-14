@@ -1,9 +1,16 @@
 $breakpoints: (
-  tablet: 768px
+  tablet: 768px,
+  laptop: 1024px
 );
 
 @mixin media-tablet-up {
   @media screen and (min-width: map-get($breakpoints, 'tablet')) {
+    @content;
+  }
+}
+
+@mixin media-laptop-up {
+  @media screen and (min-width: map-get($breakpoints, 'laptop')) {
     @content;
   }
 }

@@ -191,7 +191,7 @@ export default {
     padding: 0 2rem;
     width: 100%;
     height: 7rem;
-    max-width: 1440px;
+    max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -269,7 +269,7 @@ export default {
     text-decoration: none;
     text-transform: uppercase;
     font-size: $fontSizeRegular;
-    font-weight: $fontWeightMedium;
+    font-weight: $fontWeightBold;
     color: $colorBlack;
     transition: color 0.3s linear;
     padding: 0 2rem;

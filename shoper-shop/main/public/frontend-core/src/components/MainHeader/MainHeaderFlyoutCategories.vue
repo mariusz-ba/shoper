@@ -61,9 +61,11 @@ export default {
 @import '../../utils/scss/variables/colors';
 
 .main-header-flyout-categories {
+  display: flex;
+
   &__category {
     &:not(:last-of-type) {
-      margin-bottom: 1rem;
+      margin-right: 2rem;
     }
   }
 

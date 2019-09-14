@@ -34,7 +34,8 @@
     <base-button
       class="buy-box__button"
       :disabled="!variation.id"
-      type="primary"
+      version="primary"
+      reversed
       @click="addToCart"
     >
       {{ $t('buy-box.addToCart') }}
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import BaseButton from '../Base/BaseButton/BaseButton';
 import BuyBoxModal from './BuyBoxModal';
 import BuyBoxModalError from './BuyBoxModalError';
 import basketService from '../../services/basketService';
@@ -60,6 +62,7 @@ import basketService from '../../services/basketService';
 export default {
   name: 'buy-box',
   components: {
+    BaseButton,
     BuyBoxModal,
     BuyBoxModalError
   },
@@ -167,6 +170,7 @@ export default {
   &__button {
     height: 5rem;
     width: 100%;
+    font-size: $fontSizeMedium;
 
     @include media-tablet-up {
       height: 6rem;

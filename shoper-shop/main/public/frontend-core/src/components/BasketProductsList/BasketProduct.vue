@@ -83,9 +83,13 @@
 
 <script>
 import { routesNames } from '../../router/routesNames';
+import BaseSelect from '../Base/BaseSelect/BaseSelect';
 
 export default {
   name: 'basket-product',
+  components: {
+    BaseSelect
+  },
   props: {
     productId: {
       type: Number,
