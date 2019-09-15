@@ -49,7 +49,6 @@ import omit from 'lodash/omit';
 import { mapState, mapGetters } from 'vuex';
 import { ProductsActionsTypes } from '../../store/modules/products/productsActions';
 import { store } from '../../store/store';
-import { routesNames } from '../../router/routesNames';
 import BaseSelect from '../../components/Base/BaseSelect/BaseSelect';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductsList from '../../components/ProductsList/ProductsList';
@@ -133,7 +132,7 @@ export default {
   methods: {
     updateQueryParams(query) {
       this.$router.push({
-        name: routesNames.productsListPage.name,
+        name: this.$store.state.routesNames.productsListPage.name,
         params: this.$route.params,
         query: pickBy(
           {

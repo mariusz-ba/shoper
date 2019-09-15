@@ -10,7 +10,7 @@
     </button>
     <router-link
       class="main-header-actions__action main-header-actions__action--basket"
-      :to="{ name: routesNames.basketPage.name }"
+      :to="{ name: $store.state.routesNames.basketPage.name }"
     >
       <span class="main-header-actions__badge">{{ totalAmount }}</span>
       <span class="main-header-actions__action-name">
@@ -19,7 +19,7 @@
     </router-link>
     <router-link
       class="main-header-actions__action main-header-actions__action--account"
-      :to="{ name: routesNames.loginPage.name }"
+      :to="{ name: $store.state.routesNames.loginPage.name }"
     >
       <span class="main-header-actions__action-name">
         {{ $t('main-header-actions.account') }}
@@ -30,15 +30,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { routesNames } from '../../router/routesNames';
 
 export default {
   name: 'main-header-actions',
-  data() {
-    return {
-      routesNames
-    };
-  },
   computed: {
     ...mapGetters('basket', ['totalAmount'])
   },

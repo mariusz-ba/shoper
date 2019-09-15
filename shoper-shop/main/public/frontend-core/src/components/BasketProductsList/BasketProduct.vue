@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { routesNames } from '../../router/routesNames';
 import BaseSelect from '../Base/BaseSelect/BaseSelect';
 
 export default {
@@ -166,7 +165,7 @@ export default {
   methods: {
     getProductRoute(productId) {
       return {
-        name: routesNames.productDetailsPage.name,
+        name: this.$store.state.routesNames.productDetailsPage.name,
         params: {
           id: productId
         }

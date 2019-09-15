@@ -64,7 +64,7 @@ export default {
   top: 0;
   right: 100%;
   width: 100%;
-  max-width: 375px;
+  max-width: 320px;
   height: 100%;
   transition: transform 0.2s ease-in-out;
   background: $colorWhite;

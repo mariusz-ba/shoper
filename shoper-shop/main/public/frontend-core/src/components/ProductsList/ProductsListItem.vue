@@ -43,8 +43,6 @@
 </template>
 
 <script>
-import { routesNames } from '../../router/routesNames';
-
 export default {
   name: 'products-list-item',
   props: {
@@ -61,7 +59,7 @@ export default {
   computed: {
     productUrl() {
       return {
-        name: routesNames.productDetailsPage.name,
+        name: this.$store.state.routesNames.productDetailsPage.name,
         params: {
           id: this.product.id
         }

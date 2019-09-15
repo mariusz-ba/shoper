@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import { routesNames } from '../../router/routesNames';
-
 export default {
   name: 'main-header-flyout-categories',
   props: {
@@ -46,7 +44,7 @@ export default {
   methods: {
     getCategoryRoute(categoryId) {
       return {
-        name: routesNames.productsListPage.name,
+        name: this.$store.state.routesNames.productsListPage.name,
         params: {
           category: categoryId
         }

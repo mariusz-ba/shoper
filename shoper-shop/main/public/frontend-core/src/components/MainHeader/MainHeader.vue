@@ -9,7 +9,7 @@
           ></button>
           <router-link
             class="main-header__brand-link"
-            :to="{ name: routesNames.homePage.name }"
+            :to="{ name: $store.state.routesNames.homePage.name }"
           >
             <img
               class="main-header__brand-image"
@@ -33,7 +33,7 @@
             <router-link
               class="main-header__menu-link"
               :class="{'main-header__menu-link--with_icon': category.children && category.children.length}"
-              :to="{ name: routesNames.productsListPage.name, params: { category: category.id } }"
+              :to="{ name: $store.state.routesNames.productsListPage.name, params: { category: category.id } }"
             >
               {{ category.name }}
             </router-link>
@@ -46,7 +46,7 @@
           <span class="main-header__menu-link-wrapper">
             <router-link
               class="main-header__menu-link"
-              :to="{ name: routesNames.aboutPage.name }"
+              :to="{ name: $store.state.routesNames.aboutPage.name }"
             >
               {{ $t('main-header.about') }}
             </router-link>
@@ -76,7 +76,6 @@ import MainHeaderFlyoutCategories from './MainHeaderFlyoutCategories';
 import MainHeaderSearch from './MainHeaderSearch';
 import brandImage from '../../assets/images/header/brand.svg';
 import eventBus from '../../services/eventBus';
-import { routesNames } from '../../router/routesNames';
 
 export default {
   name: 'main-header',
@@ -96,7 +95,6 @@ export default {
   data() {
     return {
       brandImage,
-      routesNames,
       searchVisible: false,
       burgerMenuVisible: false
     };
@@ -248,8 +246,6 @@ export default {
   }
 
   &__menu-item {
-    cursor: pointer;
-
     &:last-child {
       #{$root}__menu-link {
         border-right: 1px solid $colorMercury;
@@ -285,6 +281,7 @@ export default {
     height: 100%;
     padding: 1.5rem 0;
     position: relative;
+    cursor: pointer;
 
     &::after {
       content: '';

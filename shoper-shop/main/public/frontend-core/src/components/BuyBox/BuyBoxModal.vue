@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { routesNames } from '../../router/routesNames';
 import BaseButton from '../Base/BaseButton/BaseButton';
 import Modal from '../Modal/Modal';
 
@@ -65,7 +64,7 @@ export default {
     },
     basketClickHandler() {
       this.close();
-      this.$router.push({ name: routesNames.basketPage.name });
+      this.$router.push({ name: this.$store.state.routesNames.basketPage.name });
     }
   }
 };
