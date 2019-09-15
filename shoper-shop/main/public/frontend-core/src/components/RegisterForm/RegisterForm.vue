@@ -1,11 +1,20 @@
 <template>
   <validation-observer
+    ref="observer"
     tag="form"
     class="register-form"
     v-slot="{ valid }"
     @submit.prevent="submitHandler"
   >
+    <validation-provider rules="required" v-slot="{ errors }" slim>
+      <div class="register-form__gender-picker">
+        <base-radio id="register-gender-male" val="MALE" label="Male" v-model="gender" />
+        <base-radio id="register-gender-female" val="FEMALE" label="Female" v-model="gender" />
+        <p v-if="errors">{{ errors[0] }}</p>
+      </div>
+    </validation-provider>
     <validated-input
+      validation-id="firstName"
       validation-rules="required"
       :validation-name="$t('register-form.firstName')"
       v-model="firstName"
@@ -16,6 +25,7 @@
       required
     />
     <validated-input
+      validation-id="lastName"
       validation-rules="required"
       :validation-name="$t('register-form.lastName')"
       v-model="lastName"
@@ -26,6 +36,7 @@
       required
     />
     <validated-input
+      validation-id="email"
       validation-rules="required|email"
       :validation-name="$t('register-form.email')"
       v-model="email"
@@ -36,9 +47,9 @@
       required
     />
     <validated-input
+      validation-id="password"
       validation-rules="required|min:6"
       :validation-name="$t('register-form.password')"
-      validation-id="password"
       v-model="password"
       id="register-password"
       class="register-form__input"
@@ -85,6 +96,7 @@
 <script>
 import BaseButton from '../Base/BaseButton/BaseButton';
 import BaseCheckbox from '../Base/BaseCheckbox/BaseCheckbox';
+import BaseRadio from '../Base/BaseRadio/BaseRadio';
 import ValidatedInput from '../ValidatedInput/ValidatedInput';
 
 export default {
@@ -92,6 +104,7 @@ export default {
   components: {
     BaseButton,
     BaseCheckbox,
+    BaseRadio,
     ValidatedInput
   },
   data() {
@@ -101,7 +114,8 @@ export default {
       lastName: '',
       password: '',
       confirm: '',
-      agree: false
+      agree: false,
+      gender: ''
     }
   },
   methods: {
@@ -112,8 +126,12 @@ export default {
         lastName: this.lastName,
         password: this.password,
         confirm: this.confirm,
-        agree: this.agree
+        agree: this.agree,
+        gender: this.gender
       });
+    },
+    setErrors(errors) {
+      this.$refs.observer.setErrors(errors);
     }
   }
 }
@@ -121,6 +139,10 @@ export default {
 
 <style lang="scss">
 .register-form {
+  &__gender-picker {
+    margin-bottom: 2rem;
+  }
+
   &__input {
     &:not(:last-of-type) {
       margin-bottom: 2rem;

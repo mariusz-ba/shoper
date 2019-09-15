@@ -246,6 +246,8 @@ export default {
   }
 
   &__menu-item {
+    flex: 1;
+    
     &:last-child {
       #{$root}__menu-link {
         border-right: 1px solid $colorMercury;

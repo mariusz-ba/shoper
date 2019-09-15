@@ -13,6 +13,7 @@ import { ProductsModule } from './modules/products/ProductsModule';
 import { CategoriesModule } from './modules/categories/CategoriesModule';
 import { GenericModule } from './modules/generic/GenericModule';
 import { BasketModule } from './modules/basket/BasketModule';
+import { AuthModule } from './modules/auth/AuthModule';
 
 export class App {
   private listenning: Boolean = false;
@@ -57,6 +58,7 @@ export class App {
     // Remember to initialize generic module controller at the end
     // because it's binded to '*' route
     [
+      AuthModule.getInstance().authController,
       ProductsModule.getInstance().productsController,
       CategoriesModule.getInstance().categoriesController,
       BasketModule.getInstance().basketController,

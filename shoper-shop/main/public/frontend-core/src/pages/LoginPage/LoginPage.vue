@@ -3,7 +3,10 @@
     <div class="login-page__columns">
       <div class="login-page__column">
         <h3 class="login-page__headline">{{ $t('login-page.loginHeadline') }}</h3>
-        <login-form @submit="loginSubmitHandler" />
+        <login-form
+          ref="loginForm"
+          @submit="loginSubmitHandler"
+        />
       </div>
       <div
         ref="registerColumn"
@@ -22,7 +25,8 @@
           {{ $t('login-page.registerExpand') }}
         </base-button>
         <register-form
-          v-if="registerOpened"
+          v-else
+          ref="registerForm"
           @submit="registerSubmitHandler"
         />
       </div>
@@ -31,10 +35,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { scrollToElement } from '../../utils/js/scrollToElement';
 import BaseButton from '../../components/Base/BaseButton/BaseButton';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import { AuthActionsTypes } from '../../store/modules/auth/authActions';
 
 export default {
   name: 'login-page',
@@ -49,11 +55,32 @@ export default {
     };
   },
   methods: {
+    ...mapActions('auth', {
+      signIn: AuthActionsTypes.SIGN_IN,
+      signUp: AuthActionsTypes.SIGN_UP
+    }),
     loginSubmitHandler(data) {
-      console.log('Signing in', data);
+      this.signIn(data)
+        .catch(err => {
+          const messages = [err.response.data.message];
+
+          this.$refs.loginForm.setErrors({
+            email: messages,
+            password: messages
+          });
+        });
     },
     registerSubmitHandler(data) {
-      console.log('Registering new user', data);
+      this.signUp(data)
+        .catch(err => {
+          const messages = err.response.data.data;
+
+          if (messages) {
+            const messagesArrays = Object.entries(messages).map(([key, value]) => [key, [value]]);
+            const messagesParsed = Object.fromEntries(messagesArrays);
+            this.$refs.registerForm.setErrors(messagesParsed);
+          }
+        });
     },
     expandButtonClickHandler() {
       this.registerOpened = true;
@@ -138,6 +165,16 @@ export default {
     @include media-tablet-up {
       line-height: 1.5;
     }
+  }
+
+  &__error {
+    background: $colorShiraz;
+    color: $colorWhite;
+    margin-bottom: 2rem;
+    padding: 1.5rem 1rem;
+    font-size: $fontSizeRegular;
+    font-weight: $fontWeightRegular;
+    line-height: 1.5;
   }
 
   &__expand-button {

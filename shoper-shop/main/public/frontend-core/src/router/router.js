@@ -10,6 +10,7 @@ import ProductsListPage from '../pages/ProductsListPage/ProductsListPage.vue';
 import ProductDetailsPage from '../pages/ProductDetailsPage/ProductDetailsPage.vue';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.vue';
 import LoginPage from '../pages/LoginPage/LoginPage.vue';
+import AccountPage from '../pages/AccountPage/AccountPage.vue';
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ export const routes = [
     path: routesNames.loginPage.path,
     name: routesNames.loginPage.name,
     component: LoginPage
+  },
+  {
+    path: routesNames.accountPage.path,
+    name: routesNames.accountPage.name,
+    component: AccountPage
   }
 ];
 

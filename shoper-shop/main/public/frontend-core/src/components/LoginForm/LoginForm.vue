@@ -1,11 +1,13 @@
 <template>
   <validation-observer
+    ref="observer"
     tag="form"
     class="login-form"
     v-slot="{ valid }"
     @submit.prevent="submitHandler"
   >
     <validated-input
+      validation-id="email"
       validation-rules="required|email"
       :validation-name="$t('login-form.emailLabel')"
       v-model="email"
@@ -16,6 +18,7 @@
       required
     />
     <validated-input
+      validation-id="password"
       validation-rules="required"
       :validation-name="$t('login-form.passwordLabel')"
       v-model="password"
@@ -58,6 +61,9 @@ export default {
         email: this.email,
         password: this.password
       });
+    },
+    setErrors(errors) {
+      this.$refs.observer.setErrors(errors);
     }
   }
 };
