@@ -12,6 +12,7 @@
       class="main-header-actions__action main-header-actions__action--basket"
       :to="{ name: routesNames.basketPage.name }"
     >
+      <span class="main-header-actions__badge">{{ totalAmount }}</span>
       <span class="main-header-actions__action-name">
         {{ $t('main-header-actions.basket') }}
       </span>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { routesNames } from '../../router/routesNames';
 
 export default {
@@ -36,6 +38,9 @@ export default {
     return {
       routesNames
     };
+  },
+  computed: {
+    ...mapGetters('basket', ['totalAmount'])
   },
   methods: {
     searchClickHandler() {
@@ -57,6 +62,7 @@ export default {
   justify-content: flex-end;
 
   &__action {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -96,6 +102,22 @@ export default {
         display: none;
       }
     }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -0.6rem;
+    right: -0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    color: $colorBlack;
+    background: $colorMercury;
+    border-radius: 50%;
+    font-size: $fontSizeXSmall;
+    font-weight: $fontWeightRegular;
   }
 
   &__action-name {

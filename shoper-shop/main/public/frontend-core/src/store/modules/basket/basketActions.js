@@ -4,7 +4,8 @@ import basketService from '../../../services/basketService';
 export const BasketActionsTypes = {
   FETCH_PRODUCTS: 'FETCH_PRODUCTS',
   UPDATE_PRODUCT: 'UPDATE_PRODUCT',
-  REMOVE_PRODUCT: 'REMOVE_PRODUCT'
+  REMOVE_PRODUCT: 'REMOVE_PRODUCT',
+  ADD_PRODUCT: 'ADD_PRODUCT'
 };
 
 export const BasketActions = {
@@ -43,6 +44,15 @@ export const BasketActions = {
       })
       .catch(() => {
         commit(BasketMutationsTypes.FETCH_PRODUCTS_ERROR, 'An error occured while removing product');
+      });
+  },
+  [BasketActionsTypes.ADD_PRODUCT]({ commit }, payload) {
+    const { productId, variationId, amount } = payload;
+
+    return basketService()
+      .addProduct(productId, variationId, amount)
+      .then(data => {
+        commit(BasketMutationsTypes.FETCH_PRODUCTS_SUCCESS, data);
       });
   }
 };

@@ -36,7 +36,7 @@
       :disabled="!variation.id"
       version="primary"
       reversed
-      @click="addToCart"
+      @click="addToCartClickHandler"
     >
       {{ $t('buy-box.addToCart') }}
     </base-button>
@@ -54,10 +54,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import BaseButton from '../Base/BaseButton/BaseButton';
 import BuyBoxModal from './BuyBoxModal';
 import BuyBoxModalError from './BuyBoxModalError';
-import basketService from '../../services/basketService';
+import { BasketActionsTypes } from '../../store/modules/basket/basketActions';
 
 export default {
   name: 'buy-box',
@@ -110,15 +111,22 @@ export default {
     }
   },
   methods: {
-    addToCart() {
-      basketService().addProduct(this.productId, this.variation.id, 1)
+    ...mapActions('basket', {
+      addProduct: BasketActionsTypes.ADD_PRODUCT
+    }),
+    addToCartClickHandler() {
+      this.addProduct({
+        productId: this.productId,
+        variationId: this.variationId,
+        amount: 1
+      })
         .then(() => {
           this.showModalSuccess = true;
         })
         .catch(error => {
           this.errorMessage = error.response.data.message;
           this.showModalError = true;
-        })
+        });
     }
   }
 };

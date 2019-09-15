@@ -1,9 +1,11 @@
 import { GenericController } from './GenericController';
 import { CategoriesModule } from '../categories/CategoriesModule';
+import { BasketModule } from '../basket/BasketModule';
 
 export class GenericModule {
   public readonly genericController = new GenericController(
-    CategoriesModule.getInstance().categoriesService
+    CategoriesModule.getInstance().categoriesService,
+    BasketModule.getInstance().basketService
   );
 
   private static instance: GenericModule;

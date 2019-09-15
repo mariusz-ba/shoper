@@ -1,10 +1,8 @@
+import { initialState } from '../../../utils/js/initialState';
+
 export const BasketState = {
   error: '',
-  products: [],
-  summary: {
-    totalPrice: 0,
-    summaryPrice: 0,
-    deliveryPrice: 0
-  },
+  products: initialState.basketProducts.products,
+  summary: initialState.basketProducts.summary,
   isFetching: false
 };
