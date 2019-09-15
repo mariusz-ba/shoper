@@ -22,7 +22,8 @@ export class GenericController implements Controller {
 
     res.render('index', {
       categoriesTree,
-      basketProducts
+      basketProducts,
+      sessionInformation: req.session.user || null
     });
   }
 }

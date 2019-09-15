@@ -21,19 +21,24 @@
       class="main-header-actions__action main-header-actions__action--account"
       :to="{ name: $store.state.routesNames.loginPage.name }"
     >
+      <span
+        v-if="isAuthenticated"
+        class="main-header-actions__badge main-header-actions__badge--logged_in"
+      ></span>
       <span class="main-header-actions__action-name">
-        {{ $t('main-header-actions.account') }}
+        {{ isAuthenticated ? $t('main-header-actions.account') : $t('main-header-actions.signIn') }}
       </span>
     </router-link>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'main-header-actions',
   computed: {
+    ...mapState('auth', ['isAuthenticated']),
     ...mapGetters('basket', ['totalAmount'])
   },
   methods: {
@@ -83,6 +88,10 @@ export default {
 
     &--account {
       @include iconFont('icon-user');
+
+      @include media-tablet-up {
+        width: 6.5rem;
+      }
     }
 
     &--basket {
@@ -100,18 +109,31 @@ export default {
 
   &__badge {
     position: absolute;
-    top: -0.6rem;
-    right: -0.6rem;
+    top: -0.8rem;
+    right: -0.8rem;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
     color: $colorBlack;
     background: $colorMercury;
     border-radius: 50%;
     font-size: $fontSizeXSmall;
     font-weight: $fontWeightRegular;
+
+    &--logged_in {
+      color: $colorWhite;
+      background: $colorMalachite;
+
+      @include iconFont('icon-tick') {
+        font-size: 0.8rem;
+      }
+
+      @include media-tablet-up {
+        right: 0.7rem;
+      }
+    }
   }
 
   &__action-name {

@@ -26,5 +26,9 @@ export const routesNames = {
   loginPage: {
     path: '/login',
     name: 'loginPage'
+  },
+  accountPage: {
+    path: '/account',
+    name: 'accountPage'
   }
 };
