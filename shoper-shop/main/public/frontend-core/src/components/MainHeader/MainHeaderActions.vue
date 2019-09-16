@@ -19,14 +19,21 @@
     </router-link>
     <router-link
       class="main-header-actions__action main-header-actions__action--account"
-      :to="{ name: $store.state.routesNames.loginPage.name }"
+      :to="{
+        name: isAuthenticated
+          ? $store.state.routesNames.accountPage.name
+          : $store.state.routesNames.loginPage.name
+      }"
     >
       <span
         v-if="isAuthenticated"
         class="main-header-actions__badge main-header-actions__badge--logged_in"
       ></span>
       <span class="main-header-actions__action-name">
-        {{ isAuthenticated ? $t('main-header-actions.account') : $t('main-header-actions.signIn') }}
+        {{ isAuthenticated
+          ? $t('main-header-actions.account')
+          : $t('main-header-actions.signIn')
+        }}
       </span>
     </router-link>
   </div>

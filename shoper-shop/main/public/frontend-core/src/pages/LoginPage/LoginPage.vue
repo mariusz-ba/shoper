@@ -61,6 +61,7 @@ export default {
     }),
     loginSubmitHandler(data) {
       this.signIn(data)
+        .then(this.loginSuccessHandler)
         .catch(err => {
           const messages = [err.response.data.message];
 
@@ -72,6 +73,7 @@ export default {
     },
     registerSubmitHandler(data) {
       this.signUp(data)
+        .then(this.loginSuccessHandler)
         .catch(err => {
           const messages = err.response.data.data;
 
@@ -81,6 +83,9 @@ export default {
             this.$refs.registerForm.setErrors(messagesParsed);
           }
         });
+    },
+    loginSuccessHandler() {
+      this.$router.push({ name: this.$store.state.routesNames.accountPage.name });
     },
     expandButtonClickHandler() {
       this.registerOpened = true;
