@@ -3,13 +3,13 @@ import { BasketProductDto } from './dto/BasketProductDto';
 import { NotFoundException } from '../../core/exceptions/NotFoundException';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
 import { calculatePrice } from '../../core/price/calculatePrice';
-import { BasketRequest } from './interfaces/BasketRequest';
+import { SessionRequest } from '../../core/interfaces/SessionRequest';
 import { BasketResponse } from './interfaces/BasketResponse';
 
 export class BasketService {
   constructor(private readonly productsService: ProductsService) {}
 
-  getProducts(req: BasketRequest): BasketProductDto[] {
+  getProducts(req: SessionRequest): BasketProductDto[] {
     if (!req.session.basket) {
       req.session.basket = [];
     }
@@ -17,7 +17,7 @@ export class BasketService {
     return req.session.basket;
   }
 
-  async getProductsDetails(req: BasketRequest): Promise<BasketResponse> {
+  async getProductsDetails(req: SessionRequest): Promise<BasketResponse> {
     const products = this.getProducts(req);
     const basketProducts = await this.productsService.getBasketProducts(products);
 
@@ -41,7 +41,7 @@ export class BasketService {
   }
 
   async addProduct(
-    req: BasketRequest,
+    req: SessionRequest,
     productDto: BasketProductDto
   ): Promise<BasketResponse> {
     const products = this.getProducts(req);
@@ -76,7 +76,7 @@ export class BasketService {
   }
 
   async removeProduct(
-    req: BasketRequest,
+    req: SessionRequest,
     productId: number,
     variationId: number
   ): Promise<BasketResponse> {
@@ -96,7 +96,7 @@ export class BasketService {
   }
 
   async updateProduct(
-    req: BasketRequest,
+    req: SessionRequest,
     productDto: BasketProductDto
   ): Promise<BasketResponse> {
     const products = this.getProducts(req);

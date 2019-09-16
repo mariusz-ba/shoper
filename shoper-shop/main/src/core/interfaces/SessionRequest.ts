@@ -1,5 +1,5 @@
 import { Request } from 'express';
 
-export interface BasketRequest extends Request {
+export interface SessionRequest extends Request {
   session: Express.Session;
 }

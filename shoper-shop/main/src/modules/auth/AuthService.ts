@@ -2,7 +2,7 @@ import { UnauthorizedException } from '../../core/exceptions/UnauthorizedExcepti
 import { InternalServerErrorException } from '../../core/exceptions/InternalServerErrorException';
 import { CreateUserDto } from './dto/CreateUserDto';
 import { AuthCredentialsDto } from './dto/AuthCredentialsDto';
-import { AuthRequest } from './interfaces/AuthRequest';
+import { SessionRequest } from '../../core/interfaces/SessionRequest';
 import { SessionInformation } from './interfaces/SessionInformation';
 import { UserRepository } from './UserRepository';
 
@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async signIn(
-    req: AuthRequest,
+    req: SessionRequest,
     authCredentialsDto: AuthCredentialsDto
   ): Promise<SessionInformation> {
     const user = await this.userRepository.validateUserPassword(authCredentialsDto);
@@ -32,12 +32,12 @@ export class AuthService {
     return sessionInformation;
   }
 
-  async signOut(req: AuthRequest) {
+  async signOut(req: SessionRequest) {
     await this.destroySession(req);
   }
 
   async createUser(
-    req: AuthRequest,
+    req: SessionRequest,
     createUserDto: CreateUserDto
   ): Promise<SessionInformation> {
     const user = await this.userRepository.createUser(createUserDto);
@@ -62,7 +62,7 @@ export class AuthService {
   }
 
   private async regenerateSession(
-    req: AuthRequest,
+    req: SessionRequest,
     sessionInformation: SessionInformation
   ): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ export class AuthService {
     });
   }
 
-  private async destroySession(req: AuthRequest): Promise<void> {
+  private async destroySession(req: SessionRequest): Promise<void> {
     return new Promise((resolve, reject) => {
       // Persist user basket when regenrating session
       const basket = req.session.basket;

@@ -5,7 +5,7 @@ import { BasketProductDto } from './dto/BasketProductDto';
 import { exceptionsCatcher } from '../../middleware/exceptionsCatcher';
 import { BadRequestException } from '../../core/exceptions/BadRequestException';
 import { BasketService } from './BasketService';
-import { BasketRequest } from './interfaces/BasketRequest';
+import { SessionRequest } from '../../core/interfaces/SessionRequest';
 
 const validator = new Validator();
 
@@ -20,11 +20,11 @@ export class BasketController implements Controller {
     this.router.delete('/:productId/:variationId', exceptionsCatcher(this.removeProduct.bind(this)));
   }
 
-  async getBasket(req: BasketRequest, res: Response) {
+  async getBasket(req: SessionRequest, res: Response) {
     res.json(await this.basketService.getProductsDetails(req));
   }
 
-  async addProduct(req: BasketRequest, res: Response) {
+  async addProduct(req: SessionRequest, res: Response) {
     const { productId, variationId } = req.params;
     const { amount } = req.body;
 
@@ -42,7 +42,7 @@ export class BasketController implements Controller {
     res.json(await this.basketService.addProduct(req, productDto));
   }
 
-  async removeProduct(req: BasketRequest, res: Response) {
+  async removeProduct(req: SessionRequest, res: Response) {
     const productId = Number(req.params.productId) || req.params.productId;
     const variationId = Number(req.params.variationId) || req.params.variationId;
 
@@ -56,7 +56,7 @@ export class BasketController implements Controller {
     res.json(await this.basketService.removeProduct(req, productId, variationId));
   }
 
-  async updateProduct(req: BasketRequest, res: Response) {
+  async updateProduct(req: SessionRequest, res: Response) {
     const { productId, variationId } = req.params;
     const { amount } = req.body;
 

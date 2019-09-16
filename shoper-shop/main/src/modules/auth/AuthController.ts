@@ -6,7 +6,7 @@ import { BadRequestException } from '../../core/exceptions/BadRequestException';
 import { UnauthorizedException } from '../../core/exceptions/UnauthorizedException';
 import { AuthCredentialsDto } from './dto/AuthCredentialsDto';
 import { CreateUserDto } from './dto/CreateUserDto';
-import { AuthRequest } from './interfaces/AuthRequest';
+import { SessionRequest } from '../../core/interfaces/SessionRequest';
 import { AuthService } from './AuthService';
 
 const validator = new Validator();
@@ -21,7 +21,7 @@ export class AuthController implements Controller {
     this.router.post('/signup', exceptionsCatcher(this.createUser.bind(this))); 
   }
 
-  async signIn(req: AuthRequest, res: Response) {
+  async signIn(req: SessionRequest, res: Response) {
     const authCredentialsDto = new AuthCredentialsDto();
     authCredentialsDto.email = req.body.email;
     authCredentialsDto.password = req.body.password;
@@ -37,13 +37,13 @@ export class AuthController implements Controller {
     res.json(sessionInformation);
   }
 
-  async signOut(req: AuthRequest, res: Response) {
+  async signOut(req: SessionRequest, res: Response) {
     await this.authService.signOut(req);
 
     res.json({ loggedIn: false });
   }
 
-  async createUser(req: AuthRequest, res: Response) {
+  async createUser(req: SessionRequest, res: Response) {
     const createUserDto = new CreateUserDto();
     createUserDto.email = req.body.email;
     createUserDto.password = req.body.password;
