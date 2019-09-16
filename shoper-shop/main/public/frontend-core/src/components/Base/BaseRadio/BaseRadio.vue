@@ -80,7 +80,6 @@ export default {
 @import '../../../utils/scss/variables/fonts';
 
 .base-radio {
-  padding: .5rem 0;
   color: $colorMineShaft;
 
   &--disabled {

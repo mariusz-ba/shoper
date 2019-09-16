@@ -7,11 +7,12 @@
     @submit.prevent="submitHandler"
   >
     <validation-provider rules="required" v-slot="{ errors }" slim>
-      <div class="register-form__gender-picker">
-        <base-radio id="register-gender-male" val="MALE" label="Male" v-model="gender" />
-        <base-radio id="register-gender-female" val="FEMALE" label="Female" v-model="gender" />
-        <p v-if="errors">{{ errors[0] }}</p>
-      </div>
+      <gender-picker
+        class="register-form__input"
+        :label="$t('register-form.gender')"
+        v-model="gender"
+        :error="errors[0]"
+      />
     </validation-provider>
     <validated-input
       validation-id="firstName"
@@ -96,16 +97,16 @@
 <script>
 import BaseButton from '../Base/BaseButton/BaseButton';
 import BaseCheckbox from '../Base/BaseCheckbox/BaseCheckbox';
-import BaseRadio from '../Base/BaseRadio/BaseRadio';
 import ValidatedInput from '../ValidatedInput/ValidatedInput';
+import GenderPicker from '../GenderPicker/GenderPicker';
 
 export default {
   name: 'register-form',
   components: {
     BaseButton,
     BaseCheckbox,
-    BaseRadio,
-    ValidatedInput
+    ValidatedInput,
+    GenderPicker
   },
   data() {
     return {
