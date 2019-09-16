@@ -86,12 +86,6 @@ export default {
     MainHeaderFlyoutCategories,
     MainHeaderSearch
   },
-  props: {
-    categoriesTree: {
-      type: Array,
-      default: () => []
-    }
-  },
   data() {
     return {
       brandImage,
@@ -100,6 +94,9 @@ export default {
     };
   },
   computed: {
+    categoriesTree() {
+      return this.$store.state.categoriesTree;
+    },
     categories() {
       return this.categoriesTree[0] && this.categoriesTree[0].children
         ? this.categoriesTree[0].children
