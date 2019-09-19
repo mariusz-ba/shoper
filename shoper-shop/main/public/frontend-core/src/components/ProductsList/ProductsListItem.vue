@@ -5,11 +5,16 @@
       :to="productUrl"
     >
       <div class="products-list-item__image-wrapper">
-        <img
-          class="products-list-item__image"
-          :src="product.images[0].url"
-          :alt="product.name"
-        />
+        <lazy-image
+          :image-width="606"
+          :image-height="875"
+        >
+          <img
+            class="products-list-item__image"
+            :src="product.images[0].url"
+            :alt="product.name"
+          />
+        </lazy-image>
         <span
           v-if="!available"
           class="products-list-item__image-badge"
@@ -43,8 +48,13 @@
 </template>
 
 <script>
+import LazyImage from '../LazyImage/LazyImage';
+
 export default {
   name: 'products-list-item',
+  components: {
+    LazyImage
+  },
   props: {
     product: {
       type: Object,
