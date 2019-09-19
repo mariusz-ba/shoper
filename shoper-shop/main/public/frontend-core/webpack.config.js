@@ -27,7 +27,7 @@ function createWebpackConfig(environment) {
       rules: [
         vueLoaderRule(),
         babelLoaderRule(),
-        styleLoaderRule(env),
+        styleLoaderRule(),
         fontsLoaderRule(),
         imagesLoaderRule()
       ]
@@ -65,11 +65,11 @@ function babelLoaderRule() {
   };
 }
 
-function styleLoaderRule(env) {
+function styleLoaderRule() {
   return {
     test: /\.s?[ac]ss/,
     use: [
-      env === 'dev' ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
+      MiniCssExtractPlugin.loader,
       'css-loader',
       'sass-loader'
     ]
