@@ -6,6 +6,7 @@
     >
       <div class="products-list-item__image-wrapper">
         <lazy-image
+          style="display: block;"
           :image-width="606"
           :image-height="875"
         >
@@ -25,8 +26,8 @@
       <div class="products-list-item__details">
         <div class="products-list-item__header">
           <div class="products-list-item__header-left">
-            <h3 class="products-list-item__name">{{ product.name }}</h3>
             <h4 class="products-list-item__category">{{ product.category.name }}</h4>
+            <h3 class="products-list-item__name">{{ product.name }}</h3>
           </div>
           <div class="products-list-item__header-right">
             <p class="products-list-item__price">{{ product.price }}</p>
@@ -91,8 +92,19 @@ export default {
 <style lang="scss">
 @import '../../utils/scss/variables/fonts';
 @import '../../utils/scss/variables/colors';
+@import '../../utils/scss/mixins/media';
 
 .products-list-item {
+  @include media-tablet-up {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 5rem;
+
+    &:hover &__details {
+      bottom: 0;
+    }
+  }
+
   &__link {
     cursor: pointer;
     text-decoration: none;
@@ -112,17 +124,35 @@ export default {
   &__image-badge {
     position: absolute;
     top: 1rem;
-    left: 1rem;
-    max-width: 50%;
+    left: 0;
     font-size: $fontSizeXSmall;
-    font-weight: $fontWeightRegular;
-    padding: .3rem;
-    background: $colorGallery;
-    border: 1px solid $colorBoulder;
+    font-weight: $fontWeightBold;
+    text-transform: uppercase;
+    background: $colorWhite;
+    border: 1px solid $colorGallery;
+    border-left: 0;
+    padding: 1rem .7rem;
+
+    @include media-tablet-up {
+      top: 2rem;
+      max-width: 50%;
+      font-size: $fontSizeSmall;
+      padding: 1rem;
+    }
   }
 
   &__details {
     padding: 1rem;
+
+    @include media-tablet-up {
+      position: absolute;
+      bottom: -3rem;
+      left: 0;
+      width: 100%;
+      height: auto;
+      background: $colorWhite;
+      transition: bottom .125s linear;
+    }
   }
 
   &__header {
@@ -134,16 +164,23 @@ export default {
     flex: 1;
   }
 
-  &__name,
+  &__header-right {
+    text-align: right;
+  }
+
+  &__category,
   &__price {
-    font-size: $fontSizeMedium;
-    font-weight: $fontWeightMedium;
+    font-size: $fontSizeSmall;
+    line-height: 1.5;
+  }
+
+  &__name {
+    font-size: $fontSizeSmall;
+    font-weight: $fontWeightRegular;
   }
 
   &__category {
-    font-size: $fontSizeRegular;
-    font-weight: $fontWeightRegular;
-    line-height: 1.5;
+    font-weight: $fontWeightBold;
   }
 
   &__variations {
@@ -153,10 +190,9 @@ export default {
   }
 
   &__variation {
-    padding: .2rem .5rem;
+    padding: .2rem 0;
     font-size: $fontSizeSmall;
-    font-weight: $fontWeightMedium;
-    border: 1px solid $colorBoulder;
+    font-weight: $fontWeightRegular;
 
     &:not(:last-of-type) {
       margin-right: 1rem;

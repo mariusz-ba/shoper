@@ -27,7 +27,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../utils/scss/variables/colors';
 @import '../../utils/scss/mixins/media';
 
 .products-list {
@@ -42,7 +41,7 @@ export default {
 
   &__item {
     &:hover {
-      box-shadow: 0 0 5px $colorDustGray;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     }
   }
 }
