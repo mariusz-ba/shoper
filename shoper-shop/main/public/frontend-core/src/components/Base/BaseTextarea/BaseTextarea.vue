@@ -1,14 +1,16 @@
 <template>
   <div
     class="base-textarea"
-    :class="{'base-textarea--disabled': disabled}"
+    :class="{
+      'base-textarea--error': error,
+      'base-textarea--disabled': disabled
+    }"
   >
     <div class="base-textarea__container">
       <textarea
         ref="textarea"
         :id="id"
         class="base-textarea__textarea"
-        :class="{'base-textarea__textarea--error': error}"
         :rows="rows"
         :name="name"
         :value="value"
@@ -86,7 +88,19 @@ export default {
 @import '../../../utils/scss/variables/fonts';
 
 .base-textarea {
+  $root: &;
+
   color: $colorMineShaft;
+
+  &--error {
+    #{$root}__label {
+      color: $colorRed;
+    }
+
+    #{$root}__textarea {
+      border-color: $colorRed;
+    }
+  }
 
   &--disabled {
     color: $colorSilverChaliceDark;
@@ -109,13 +123,9 @@ export default {
     border: 1px solid $colorBoulder;
     background: $colorWhite;
 
-    &--error {
-      border-color: $colorShiraz;
-    }
-
     &:focus {
-      border-color: $colorElectricViolet;
-      box-shadow: 0 0 0 1px $colorElectricViolet;
+      border-color: $colorAzureRadiance;
+      box-shadow: 0 0 0 1px $colorAzureRadiance;
     }
 
     &[disabled] {
@@ -156,7 +166,7 @@ export default {
     margin-top: .4rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
-    color: $colorShiraz;
+    color: $colorRed;
   }
 }
 </style>

@@ -1,14 +1,16 @@
 <template>
   <div
     class="base-input"
-    :class="{'base-input--disabled': disabled}"
+    :class="{
+      'base-input--error': error,
+      'base-input--disabled': disabled
+    }"
   >
     <div class="base-input__container">
       <input
         ref="input"
         :id="id"
         class="base-input__input"
-        :class="{'base-input__input--error': error}"
         :name="name"
         :value="value"
         :type="inputType"
@@ -106,7 +108,19 @@ export default {
 @import '../../../utils/scss/mixins/iconFont';
 
 .base-input {
+  $root: &;
+
   color: $colorMineShaft;
+
+  &--error {
+    #{$root}__label {
+      color: $colorRed;
+    }
+
+    #{$root}__input {
+      border-color: $colorRed;
+    }
+  }
 
   &--disabled {
     color: $colorSilverChaliceDark;
@@ -150,13 +164,9 @@ export default {
     border: 1px solid $colorBoulder;
     background: $colorWhite;
 
-    &--error {
-      border-color: $colorShiraz;
-    }
-
     &:focus {
-      border-color: $colorElectricViolet;
-      box-shadow: 0 0 0 1px $colorElectricViolet;
+      border-color: $colorAzureRadiance;
+      box-shadow: 0 0 0 1px $colorAzureRadiance;
     }
 
     &[disabled] {
@@ -198,7 +208,7 @@ export default {
     margin-top: .4rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
-    color: $colorShiraz;
+    color: $colorRed;
   }
 }
 </style>

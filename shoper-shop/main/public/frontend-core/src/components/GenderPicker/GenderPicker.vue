@@ -89,7 +89,7 @@ export default {
     margin-top: .4rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
-    color: $colorShiraz;
+    color: $colorRed;
   }
 }
 </style>

@@ -124,21 +124,21 @@ export default {
   }
 
   &--danger {
-    color: $colorMonza;
-    border-color: $colorMonza;
+    color: $colorRed;
+    border-color: $colorRed;
 
     &:hover {
       color: $colorWhite;
-      background: $colorMonza;
+      background: $colorRed;
     }
 
     &#{$root}--reversed {
       color: $colorWhite;
-      background: $colorMonza;
-      border-color: $colorMonza;
+      background: $colorRed;
+      border-color: $colorRed;
 
       &:hover {
-        color: $colorMonza;
+        color: $colorRed;
         background: transparent;
       }
     }

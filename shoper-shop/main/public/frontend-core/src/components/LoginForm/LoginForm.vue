@@ -3,7 +3,6 @@
     ref="observer"
     tag="form"
     class="login-form"
-    v-slot="{ valid }"
     @submit.prevent="submitHandler"
   >
     <validated-input
@@ -31,7 +30,6 @@
     <base-button
       class="login-form__submit-button"
       version="primary"
-      :disabled="!valid"
       reversed
     >
       {{ $t('login-form.submitButton') }}
@@ -57,6 +55,14 @@ export default {
   },
   methods: {
     submitHandler() {
+      this.$refs.observer.validate()
+        .then(valid => {
+          if (valid) {
+            this.submitForm();
+          }
+        });
+    },
+    submitForm() {
       this.$emit('submit', {
         email: this.email,
         password: this.password

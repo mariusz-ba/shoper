@@ -161,7 +161,19 @@ export default {
 @import '../../../utils/scss/mixins/iconFont';
 
 .base-select {
+  $root: &;
+
   color: $colorMineShaft;
+
+  &--error {
+    #{$root}__label {
+      color: $colorRed;
+    }
+
+    #{$root}__container {
+      border-color: $colorRed;
+    }
+  }
 
   &--disabled {
     color: $colorSilverChaliceDark;
@@ -184,8 +196,8 @@ export default {
 
     &:focus,
     &--opened {
-      border-color: $colorElectricViolet;
-      box-shadow: 0 0 0 1px $colorElectricViolet;
+      border-color: $colorAzureRadiance;
+      box-shadow: 0 0 0 1px $colorAzureRadiance;
     }
 
     &--disabled {
@@ -250,9 +262,9 @@ export default {
     left: -1px;
     right: -1px;
     max-height: 200px;
-    border: 1px solid $colorElectricViolet;
+    border: 1px solid $colorAzureRadiance;
     border-top: none;
-    box-shadow: 0 -2px 0 -1px $colorMercury, 0 0 0 1px $colorElectricViolet;
+    box-shadow: 0 -2px 0 -1px $colorMercury, 0 0 0 1px $colorAzureRadiance;
     background: $colorWhite;
   }
 
@@ -291,7 +303,7 @@ export default {
     margin-top: .4rem;
     font-size: $fontSizeRegular;
     font-weight: $fontWeightRegular;
-    color: $colorShiraz;
+    color: $colorRed;
   }
 }
 </style>

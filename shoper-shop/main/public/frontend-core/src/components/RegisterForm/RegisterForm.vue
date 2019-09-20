@@ -3,7 +3,6 @@
     ref="observer"
     tag="form"
     class="register-form"
-    v-slot="{ valid }"
     @submit.prevent="submitHandler"
   >
     <validation-provider rules="required" v-slot="{ errors }" slim>
@@ -86,7 +85,6 @@
     <base-button
       class="register-form__submit-button"
       version="primary"
-      :disabled="!valid"
       reversed
     >
       {{ $t('register-form.submitButton') }}
@@ -121,6 +119,14 @@ export default {
   },
   methods: {
     submitHandler() {
+      this.$refs.observer.validate()
+        .then(valid => {
+          if (valid) {
+            this.submitForm();
+          }
+        });
+    },
+    submitForm() {
       this.$emit('submit', {
         email: this.email,
         firstName: this.firstName,

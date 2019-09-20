@@ -173,7 +173,7 @@ export default {
   }
 
   &__error {
-    background: $colorShiraz;
+    background: $colorRed;
     color: $colorWhite;
     margin-bottom: 2rem;
     padding: 1.5rem 1rem;
