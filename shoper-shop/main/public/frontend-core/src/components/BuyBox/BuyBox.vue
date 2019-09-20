@@ -13,23 +13,13 @@
       v-if="stocks && stocks.length"
       class="buy-box__size-picker"
     >
-      <p class="buy-box__size-picker-title">{{ $t('buy-box.title') }}</p>
-      <select v-model="variationId">
-        <option
-          value=""
-          disabled
-        >
-          {{ $t('buy-box.title') }}
-        </option>
-        <option
-          v-for="stock in stocks"
-          :key="stock.id"
-          :value="stock.variation.id"
-          :disabled="!stock.amount"
-        >
-          {{ stock.variation.name }}
-        </option>
-      </select>
+      <base-select
+        id="amount-mobile"
+        class="buy-box__size-picker-select"
+        :label="$t('buy-box.sizePickerLabel')"
+        :options="variationsOptions"
+        v-model="variationId"
+      />
     </div>
     <base-button
       class="buy-box__button"
@@ -56,6 +46,7 @@
 <script>
 import { mapActions } from 'vuex';
 import BaseButton from '../Base/BaseButton/BaseButton';
+import BaseSelect from '../Base/BaseSelect/BaseSelect';
 import BuyBoxModal from './BuyBoxModal';
 import BuyBoxModalError from './BuyBoxModalError';
 import { BasketActionsTypes } from '../../store/modules/basket/basketActions';
@@ -64,6 +55,7 @@ export default {
   name: 'buy-box',
   components: {
     BaseButton,
+    BaseSelect,
     BuyBoxModal,
     BuyBoxModalError
   },
@@ -108,6 +100,13 @@ export default {
         category: this.categoryName,
         variation: this.variation
       };
+    },
+    variationsOptions() {
+      return this.stocks.map(stock => ({
+        label: stock.variation.name,
+        value: stock.variation.id,
+        disabled: !stock.amount
+      }));
     }
   },
   methods: {
@@ -168,11 +167,6 @@ export default {
 
   &__size-picker {
     margin-bottom: 2rem;
-  }
-
-  &__size-picker-title {
-    margin-bottom: 1rem;
-    font-size: $fontSizeMedium;
   }
 
   &__button {

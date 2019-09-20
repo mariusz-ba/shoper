@@ -50,9 +50,10 @@
           class="base-select__option"
           :class="{
             'base-select__option--selected': index === selectedIndex,
-            'base-select__option--active': option.value === value
+            'base-select__option--active': option.value === value,
+            'base-select__option--disabled': option.disabled
           }"
-          @click="inputHandler(option.value)"
+          @click="inputHandler(option.value, option.disabled)"
         >
           {{ option.label }}
         </div>
@@ -69,6 +70,7 @@
           v-for="option in options"
           :key="option.value"
           :value="option.value"
+          :disabled="option.disabled"
         >
           {{ option.label }}
         </option>
@@ -129,7 +131,11 @@ export default {
     }
   },
   methods: {
-    inputHandler(value) {
+    inputHandler(value, disabled) {
+      if (disabled) {
+        return;
+      }
+
       this.$refs.container.blur();
       this.$emit('input', value);
     },
@@ -274,7 +280,9 @@ export default {
     font-weight: $fontWeightRegular;
 
     &:hover {
-      background: $colorGallery;
+      &:not(&--disabled) {
+        background: $colorGallery;
+      }
     }
 
     &--active {
@@ -283,6 +291,10 @@ export default {
 
     &--selected {
       background: $colorGallery;
+    }
+
+    &--disabled {
+      color: $colorBoulder;
     }
   }
 
