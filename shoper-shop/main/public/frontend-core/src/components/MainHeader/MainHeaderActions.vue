@@ -32,7 +32,7 @@
       <span class="main-header-actions__action-name">
         {{ isAuthenticated
           ? $t('main-header-actions.account')
-          : $t('main-header-actions.signIn')
+          : $t('main-header-actions.sign_in')
         }}
       </span>
     </router-link>

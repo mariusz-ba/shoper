@@ -8,22 +8,22 @@
     <validated-input
       validation-id="email"
       validation-rules="required|email"
-      :validation-name="$t('login-form.emailLabel')"
+      :validation-name="$t('global.form.email.label')"
       v-model="email"
       id="login-email"
       class="login-form__input"
-      :label="$t('login-form.emailLabel')"
+      :label="$t('global.form.email.label')"
       type="email"
       required
     />
     <validated-input
       validation-id="password"
       validation-rules="required"
-      :validation-name="$t('login-form.passwordLabel')"
+      :validation-name="$t('global.form.password.label')"
       v-model="password"
       id="login-password"
       class="login-form__input"
-      :label="$t('login-form.passwordLabel')"
+      :label="$t('global.form.password.label')"
       type="password"
       required
     />
@@ -32,7 +32,7 @@
       version="primary"
       reversed
     >
-      {{ $t('login-form.submitButton') }}
+      {{ $t('login-form.submit') }}
     </base-button>
   </validation-observer>
 </template>

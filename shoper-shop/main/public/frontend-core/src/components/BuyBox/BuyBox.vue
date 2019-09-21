@@ -16,10 +16,22 @@
       <base-select
         id="amount-mobile"
         class="buy-box__size-picker-select"
-        :label="$t('buy-box.sizePickerLabel')"
+        :label="$t('buy-box.size_picker_label')"
         :options="variationsOptions"
         v-model="variationId"
-      />
+      >
+        <template v-slot:option="{ label, amount }">
+          <div class="buy-box__size-picker-select-option">
+            <span>{{ label }}</span>
+            <span>
+            {{ amount === 0
+              ? $t('buy-box.out_of_stock')
+              : $t('buy-box.on_stock', [amount])
+            }}
+            </span>
+          </div>
+        </template>
+      </base-select>
     </div>
     <base-button
       class="buy-box__button"
@@ -28,7 +40,7 @@
       reversed
       @click="addToCartClickHandler"
     >
-      {{ $t('buy-box.addToCart') }}
+      {{ $t('buy-box.add_to_cart') }}
     </base-button>
     <buy-box-modal
       :visible="showModalSuccess"
@@ -105,7 +117,8 @@ export default {
       return this.stocks.map(stock => ({
         label: stock.variation.name,
         value: stock.variation.id,
-        disabled: !stock.amount
+        disabled: !stock.amount,
+        amount: stock.amount
       }));
     }
   },
@@ -167,6 +180,12 @@ export default {
 
   &__size-picker {
     margin-bottom: 2rem;
+  }
+
+  &__size-picker-select-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__button {

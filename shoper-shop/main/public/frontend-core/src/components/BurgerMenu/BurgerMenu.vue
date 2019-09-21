@@ -7,7 +7,7 @@
       <span class="burger-menu__header-title">{{ $t('burger-menu.title') }}</span>
       <button
         class="burger-menu__close-button"
-        :title="$t('burger-menu.closeButton')"
+        :title="$t('burger-menu.close_button')"
         @click="closeButtonClickHandler"
       >
       </button>

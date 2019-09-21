@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="login-page__columns">
       <div class="login-page__column">
-        <h3 class="login-page__headline">{{ $t('login-page.loginHeadline') }}</h3>
+        <h3 class="login-page__headline">{{ $t('login-page.login.headline') }}</h3>
         <login-form
           ref="loginForm"
           @submit="loginSubmitHandler"
@@ -12,8 +12,8 @@
         ref="registerColumn"
         class="login-page__column"
       >
-        <h3 class="login-page__headline">{{ $t('login-page.registerHeadline') }}</h3>
-        <p class="login-page__subline">{{ $t('login-page.registerSubline') }}</p>
+        <h3 class="login-page__headline">{{ $t('login-page.register.headline') }}</h3>
+        <p class="login-page__subline">{{ $t('login-page.register.subline') }}</p>
         <base-button
           v-if="!registerOpened"
           class="login-page__expand-button"
@@ -22,7 +22,7 @@
           reversed
           @click="expandButtonClickHandler"
         >
-          {{ $t('login-page.registerExpand') }}
+          {{ $t('login-page.register.expand') }}
         </base-button>
         <register-form
           v-else

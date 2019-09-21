@@ -30,11 +30,11 @@ const i18n = new VueI18n(translations);
 configure({
   defaultMessage: (name, values) => {
     const rule = values._rule_;
-    const validations = i18n.messages[i18n.locale].validations;
+    const messages = i18n.messages[i18n.locale];
 
     const path = name === '{field}'
-      ? `validations.${rule}${validations[rule].unnamed ? '.unnamed' : ''}`
-      : `validations.${rule}${validations[rule].named ? '.named' : ''}`;
+      ? `validations.${rule}${messages[`validations.${rule}.unnamed`] ? '.unnamed' : ''}`
+      : `validations.${rule}${messages[`validations.${rule}.named`] ? '.named' : ''}`;
 
     return i18n.t(path, values);
   }

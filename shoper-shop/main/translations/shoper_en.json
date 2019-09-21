@@ -1,0 +1,82 @@
+{
+  "validations.required.unnamed": "This field is required",
+  "validations.required.named": "{_field_} is required",
+  "validations.password.match": "Password does not match",
+  "validations.email": "Invalid email address",
+  "validations.min": "This field must have at least {length} characters",
+
+  "global.form.first_name.label": "First name",
+  "global.form.last_name.label": "Last name",
+  "global.form.gender.label": "Gender",
+  "global.form.email.label": "E-Mail",
+  "global.form.password.label": "Password",
+  "global.form.password_confirm.label": "Confirm password",
+  "global.form.password_confirm.name": "Password confirmation",
+
+  "gender-picker.male": "Male",
+  "gender-picker.female": "Female",
+
+  "main-header.about": "About",
+  "main-header.search": "Search",
+  "main-header-actions.search": "Search",
+  "main-header-actions.basket": "Basket",
+  "main-header-actions.account": "My Account",
+  "main-header-actions.sign_in": "Sign in",
+  "main-header-search.placeholder": "Search for products",
+
+  "burger-menu.title": "Menu",
+  "burger-menu.close_button": "Close",
+  "burger-menu-tree.overview": "Overview",
+
+  "basket-page.empty": "Your basket is empty",
+  "basket-page.title": "Your basket ({amount})",
+  "basket-products-list.product": "Product",
+  "basket-products-list.variation": "Variation",
+  "basket-products-list.amount": "Amount",
+  "basket-products-list.price": "Price",
+  "basket-product.variation": "Variation",
+  "basket-product.amount": "Amount",
+  "basket-product.remove": "Remove",
+  "basket-summary.summary": "Summary",
+  "basket-summary.delivery": "Delivery",
+  "basket-summary.total": "Total",
+
+  "buy-box.size_picker_label": "Pick your size",
+  "buy-box.add_to_cart": "Add to cart",
+  "buy-box.out_of_stock": "Out of stock",
+  "buy-box.on_stock": "{0} on stock",
+  "buy-box-modal.title": "Product was added to basket",
+  "buy-box-modal.variation": "Variation",
+  "buy-box-modal.close": "Close",
+  "buy-box-modal.basket": "Go to basket",
+  "buy-box-modal-error.title": "An error occured",
+  "buy-box-modal-error.close": "Close",
+
+  "login-page.login.headline": "I already have an account",
+  "login-page.register.headline": "I don't have account",
+  "login-page.register.subline": "Enjoy the advantages of your personal customer account and shop quickly and easily in the future.",
+  "login-page.register.expand": "Create an account",
+  "login-form.submit": "Sign in",
+
+  "register-form.submit": "Register",
+  "register-form.privacy": "I agree to the privacy policy",
+
+  "products-list-page.title": "Page {page} out of {total}",
+  "products-list-page.sorting": "Sorting",
+  "products-list-page.oldest": "Oldest",
+  "products-list-page.newest": "Newest",
+  "products-list-page.price_asc": "Price ascending",
+  "products-list-page.price_desc": "Price descending",
+  "products-list-item.out_of_stock": "Sold out",
+
+  "filters.price": "Price",
+  "filters.price_from": "From",
+  "filters.price_to": "To",
+  "filters.variations": "Variations",
+  "filters.submit": "Filter",
+
+  "pagination.previous": "Previous",
+  "pagination.next": "Next",
+
+  "not-found-page.title": "This page does not exist"
+}

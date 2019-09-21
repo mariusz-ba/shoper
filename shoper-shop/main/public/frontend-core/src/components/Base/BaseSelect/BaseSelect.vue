@@ -55,7 +55,12 @@
           }"
           @click="inputHandler(option.value, option.disabled)"
         >
-          {{ option.label }}
+          <slot
+            name="option"
+            v-bind="option"
+          >
+            {{ option.label }}
+          </slot>
         </div>
       </div>
       <select
@@ -280,9 +285,7 @@ export default {
     font-weight: $fontWeightRegular;
 
     &:hover {
-      &:not(&--disabled) {
-        background: $colorGallery;
-      }
+      background: $colorGallery;
     }
 
     &--active {
@@ -295,6 +298,10 @@ export default {
 
     &--disabled {
       color: $colorBoulder;
+
+      &:hover {
+        background: transparent;
+      }
     }
   }
 

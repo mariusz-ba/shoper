@@ -26,8 +26,8 @@
           :options="[
             { value: 'oldest', label: $t('products-list-page.oldest') },
             { value: 'newest', label: $t('products-list-page.newest') },
-            { value: 'priceAsc', label: $t('products-list-page.priceAsc') },
-            { value: 'priceDesc', label: $t('products-list-page.priceDesc') }
+            { value: 'priceAsc', label: $t('products-list-page.price_asc') },
+            { value: 'priceDesc', label: $t('products-list-page.price_desc') }
           ]"
         />
       </div>

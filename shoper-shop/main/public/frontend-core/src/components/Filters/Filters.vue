@@ -10,7 +10,7 @@
         class="filters__price-input"
         name="priceFrom"
         type="number"
-        :label="$t('filters.priceFrom')"
+        :label="$t('filters.price_from')"
       />
       <base-input
         v-model="priceTo"
@@ -18,7 +18,7 @@
         class="filters__price-input"
         name="priceTo"
         type="number"
-        :label="$t('filters.priceTo')"
+        :label="$t('filters.price_to')"
       />
     </filter-group>
     <filter-group

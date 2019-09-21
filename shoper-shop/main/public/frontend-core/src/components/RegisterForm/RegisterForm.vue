@@ -8,7 +8,7 @@
     <validation-provider rules="required" v-slot="{ errors }" slim>
       <gender-picker
         class="register-form__input"
-        :label="$t('register-form.gender')"
+        :label="$t('global.form.gender.label')"
         v-model="gender"
         :error="errors[0]"
       />
@@ -16,54 +16,54 @@
     <validated-input
       validation-id="firstName"
       validation-rules="required"
-      :validation-name="$t('register-form.firstName')"
+      :validation-name="$t('global.form.first_name.label')"
       v-model="firstName"
       id="register-first-name"
       class="register-form__input"
-      :label="$t('register-form.firstName')"
+      :label="$t('global.form.first_name.label')"
       type="text"
       required
     />
     <validated-input
       validation-id="lastName"
       validation-rules="required"
-      :validation-name="$t('register-form.lastName')"
+      :validation-name="$t('global.form.last_name.label')"
       v-model="lastName"
       id="register-last-name"
       class="register-form__input"
-      :label="$t('register-form.lastName')"
+      :label="$t('global.form.last_name.label')"
       type="text"
       required
     />
     <validated-input
       validation-id="email"
       validation-rules="required|email"
-      :validation-name="$t('register-form.email')"
+      :validation-name="$t('global.form.email.label')"
       v-model="email"
       id="register-email"
       class="register-form__input"
-      :label="$t('register-form.email')"
+      :label="$t('global.form.email.label')"
       type="email"
       required
     />
     <validated-input
       validation-id="password"
       validation-rules="required|min:6"
-      :validation-name="$t('register-form.password')"
+      :validation-name="$t('global.form.password.label')"
       v-model="password"
       id="register-password"
       class="register-form__input"
-      :label="$t('register-form.password')"
+      :label="$t('global.form.password.label')"
       type="password"
       required
     />
     <validated-input
       validation-rules="required|password:password"
-      :validation-name="$t('register-form.passwordConfirmName')"
+      :validation-name="$t('global.form.password_confirm.name')"
       v-model="confirm"
       id="register-confirm"
       class="register-form__input"
-      :label="$t('register-form.passwordConfirm')"
+      :label="$t('global.form.password_confirm.label')"
       type="password"
       required
     />
@@ -79,7 +79,7 @@
         :error="errors[0]"
         required
       >
-        {{ $t('register-form.privacyPolicy') }}
+        {{ $t('register-form.privacy') }}
       </base-checkbox>
     </validation-provider>
     <base-button
@@ -87,7 +87,7 @@
       version="primary"
       reversed
     >
-      {{ $t('register-form.submitButton') }}
+      {{ $t('register-form.submit') }}
     </base-button>
   </validation-observer>
 </template>
