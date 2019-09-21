@@ -6,7 +6,7 @@
       class="breadcrumbs__item"
       :to="getCategoryRoute(category.id)"
     >
-      {{ category.name }}
+      <span>{{ category.name }}</span>
     </router-link>
   </div>
 </template>
@@ -36,6 +36,7 @@ export default {
 <style lang="scss">
 @import '../../utils/scss/variables/fonts';
 @import '../../utils/scss/variables/colors';
+@import '../../utils/scss/mixins/iconFont';
 
 .breadcrumbs {
   display: flex;
@@ -54,14 +55,18 @@ export default {
       &::after {
         color: $colorDustGray;
       }
+
+      span {
+        border-bottom: 2px solid $colorBlack;
+      }
     }
 
     &:not(:last-of-type) {
       margin-right: 1rem;
 
-      &::after {
+      @include iconFont('icon-arrow-right', after) {
         margin-left: 1rem;
-        content: '\B7';
+        font-size: 0.8rem;
       }
     }
   }

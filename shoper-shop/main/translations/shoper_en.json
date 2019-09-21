@@ -67,6 +67,7 @@
   "products-list-page.newest": "Newest",
   "products-list-page.price_asc": "Price ascending",
   "products-list-page.price_desc": "Price descending",
+  "products-list-page.count": "1 Product | {count} Products",
   "products-list-item.out_of_stock": "Sold out",
 
   "filters.price": "Price",

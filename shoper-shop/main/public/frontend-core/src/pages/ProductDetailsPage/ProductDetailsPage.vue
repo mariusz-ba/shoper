@@ -75,12 +75,13 @@ export default {
     position: relative;
 
     @include media-tablet-up {
+      width: 50%;
       padding: 0 2rem;
     }
 
     &--gallery {
       @include media-tablet-up {
-        width: 60%;
+        padding-right: 5rem;
       }
     }
 
@@ -89,7 +90,7 @@ export default {
 
       @include media-tablet-up {
         padding-top: 0;
-        width: 40%;
+        padding-left: 5rem;
       }
     }
   }

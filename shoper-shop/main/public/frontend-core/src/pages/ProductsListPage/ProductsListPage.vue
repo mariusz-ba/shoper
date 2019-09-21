@@ -12,12 +12,10 @@
       <breadcrumbs
         v-if="categoryPath.length"
         class="products-list-page__breadcrumbs"
-        :categories="categoryPath"
+        :categories="categoryPath.slice(1)"
       />
       <div class="products-list-page__header">
-        <h2 class="products-list-page__title">
-          {{ $t('products-list-page.title', { page: pageNumber, total: pagesLimit }) }}
-        </h2>
+        <h2 class="products-list-page__title">{{ category.name }}</h2>
         <base-select
           id="sorting"
           class="products-list-page__sorting"
@@ -30,6 +28,12 @@
             { value: 'priceDesc', label: $t('products-list-page.price_desc') }
           ]"
         />
+      </div>
+      <div
+        v-if="productsCount"
+        class="products-list-page__count"
+      >
+        {{ $tc('products-list-page.count', productsCount, { count: productsCount }) }}
       </div>
       <products-list :products="productsList" />
       <pagination
@@ -98,10 +102,10 @@ export default {
       'productsCount',
       'variations'
     ]),
-    ...mapGetters('products', ['productsList']),
-    pageNumber() {
-      return this.$route.query.page || 1;
-    },
+    ...mapGetters('products', [
+      'productsList',
+      'category'
+    ]),
     pagesLimit() {
       return Math.ceil(this.productsCount / this.productsOnPage);
     },
@@ -154,6 +158,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../utils/scss/variables/colors';
+@import '../../utils/scss/variables/fonts';
 @import '../../utils/scss/mixins/media';
 
 .products-list-page {
@@ -192,9 +198,11 @@ export default {
 
   &__title {
     margin-bottom: 2rem;
+    font-size: $fontSizeLarge;
 
     @include media-tablet-up {
       margin-bottom: 0;
+      font-size: $fontSizeXLarge;
     }
   }
 
@@ -205,6 +213,24 @@ export default {
     @include media-tablet-up {
       margin-bottom: 0;
       width: 200px;
+    }
+  }
+
+  &__count {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-column-gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    color: $colorMineShaft;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background: $colorSilverChaliceDark;
     }
   }
 
