@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     optionLabel() {
-      const option = this.options.find(option => option.value === this.value);
+      const option = this.options.find(option => option.value == this.value);
       return option ? option.label : this.label;
     }
   },

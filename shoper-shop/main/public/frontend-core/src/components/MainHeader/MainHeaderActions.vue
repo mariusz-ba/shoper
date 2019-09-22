@@ -131,7 +131,7 @@ export default {
 
     &--logged_in {
       color: $colorWhite;
-      background: $colorMalachite;
+      background: $colorMountainMeadow;
 
       @include iconFont('icon-tick') {
         font-size: 0.8rem;

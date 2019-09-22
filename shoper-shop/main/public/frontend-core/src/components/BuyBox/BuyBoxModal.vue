@@ -23,6 +23,7 @@
         <base-button
           class="buy-box-modal__button"
           version="success"
+          reversed
           @click="basketClickHandler"
         >
           {{ $t('buy-box-modal.basket') }}

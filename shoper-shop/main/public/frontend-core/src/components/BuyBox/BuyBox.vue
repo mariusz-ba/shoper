@@ -103,7 +103,7 @@ export default {
   },
   computed: {
     variation() {
-      const variationStock = this.stocks.find(stock => stock.variation.id === this.variationId);
+      const variationStock = this.stocks.find(stock => stock.variation.id === Number(this.variationId));
       return variationStock ? variationStock.variation : {};
     },
     productDetails() {
@@ -147,11 +147,16 @@ export default {
 <style lang="scss">
 @import '../../utils/scss/mixins/media';
 @import '../../utils/scss/variables/fonts';
+@import '../../utils/scss/mixins/iconFont';
 
 .buy-box {
   &__header {
     display: flex;
     margin-bottom: 2rem;
+
+    @include media-tablet-up {
+      margin-bottom: 5rem;
+    }
   }
 
   &__header-names {
@@ -191,7 +196,15 @@ export default {
   &__button {
     height: 5rem;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: $fontSizeMedium;
+
+    @include iconFont('icon-basket') {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
 
     @include media-tablet-up {
       height: 6rem;

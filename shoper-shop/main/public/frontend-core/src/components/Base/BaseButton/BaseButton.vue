@@ -103,21 +103,21 @@ export default {
   }
 
   &--success {
-    color: $colorMalachite;
-    border-color: $colorMalachite;
+    color: $colorMountainMeadow;
+    border-color: $colorMountainMeadow;
 
     &:hover {
       color: $colorWhite;
-      background: $colorMalachite;
+      background: $colorMountainMeadow;
     }
 
     &#{$root}--reversed {
       color: $colorWhite;
-      background: $colorMalachite;
-      border-color: $colorMalachite;
+      background: $colorMountainMeadow;
+      border-color: $colorMountainMeadow;
 
       &:hover {
-        color: $colorMalachite;
+        color: $colorMountainMeadow;
         background: transparent;
       }
     }
