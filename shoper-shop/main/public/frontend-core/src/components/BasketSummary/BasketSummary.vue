@@ -3,15 +3,15 @@
     <div class="basket-summary__container">
       <div class="basket-summary__row">
         <span>{{ $t('basket-summary.summary') }}: </span>
-        <span>{{ summaryPrice }}</span>
+        <span>{{ summaryPrice.toFixed(2) }}</span>
       </div>
       <div class="basket-summary__row">
         <span>{{ $t('basket-summary.delivery') }}: </span>
-        <span>{{ deliveryPrice }}</span>
+        <span>{{ deliveryPrice.toFixed(2) }}</span>
       </div>
       <div class="basket-summary__row basket-summary__row--total">
         <span>{{ $t('basket-summary.total') }}: </span>
-        <span>{{ totalPrice }}</span>
+        <span>{{ totalPrice.toFixed(2) }}</span>
       </div>
     </div>
   </div>

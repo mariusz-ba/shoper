@@ -18,30 +18,34 @@
       class="base-radio__label"
       :for="id"
     >
-      <div
-        class="base-radio__circle"
-        :class="{'base-radio__circle--disabled': disabled}"
-      ></div>
-      <span
-        v-if="label"
-        class="base-radio__text"
-        :class="{'base-radio__text--required': required}"
-      >
-        {{ label }}
-      </span>
+      <slot :checked="value === val">
+        <div class="base-radio__label-content">
+          <div
+            class="base-radio__circle"
+            :class="{'base-radio__circle--disabled': disabled}"
+          ></div>
+          <span
+            v-if="label"
+            class="base-radio__text"
+            :class="{'base-radio__text--required': required}"
+          >
+            {{ label }}
+          </span>
+        </div>
+      </slot>
     </label>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'base-input',
+  name: 'base-radio',
   props: {
     id: String,
-    val: String,
+    val: [Boolean, String, Number],
     name: String,
     label: String,
-    value: [Boolean, String, Array],
+    value: [Boolean, String, Number, Array],
     error: String,
     disabled: {
       type: Boolean,
@@ -115,7 +119,7 @@ export default {
     }
   }
 
-  &__label {
+  &__label-content {
     display: flex;
     align-items: center;
     cursor: pointer;

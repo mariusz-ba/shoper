@@ -14,6 +14,7 @@ import { CategoriesModule } from './modules/categories/CategoriesModule';
 import { GenericModule } from './modules/generic/GenericModule';
 import { BasketModule } from './modules/basket/BasketModule';
 import { AuthModule } from './modules/auth/AuthModule';
+import { UsersModule } from './modules/users/UsersModule';
 
 export class App {
   private listenning: Boolean = false;
@@ -62,6 +63,7 @@ export class App {
       ProductsModule.getInstance().productsController,
       CategoriesModule.getInstance().categoriesController,
       BasketModule.getInstance().basketController,
+      UsersModule.getInstance().usersController,
       GenericModule.getInstance().genericController
     ].forEach(controller => {
       this.app.use(controller.path, controller.router);

@@ -12,6 +12,12 @@
   "global.form.password.label": "Password",
   "global.form.password_confirm.label": "Confirm password",
   "global.form.password_confirm.name": "Password confirmation",
+  "global.form.street_nr.label": "Street nr",
+  "global.form.street_name.label": "Street name",
+  "global.form.additional_address.label": "Additional address",
+  "global.form.zip_code.label": "Zip code",
+  "global.form.town.label": "Town",
+  "global.form.country.label": "Country",
 
   "gender-picker.male": "Male",
   "gender-picker.female": "Female",
@@ -52,6 +58,11 @@
   "buy-box-modal-error.title": "An error occured",
   "buy-box-modal-error.close": "Close",
 
+  "checkout-login.login.headline": "I already have an account",
+  "checkout-login.register.headline": "I don't have account",
+  "checkout-login.register.subline": "Enjoy the advantages of your personal customer account and shop quickly and easily in the future.",
+  "checkout-login.register.expand": "Create an account",
+
   "login-page.login.headline": "I already have an account",
   "login-page.register.headline": "I don't have account",
   "login-page.register.subline": "Enjoy the advantages of your personal customer account and shop quickly and easily in the future.",
@@ -79,5 +90,11 @@
   "pagination.previous": "Previous",
   "pagination.next": "Next",
 
-  "not-found-page.title": "This page does not exist"
+  "not-found-page.title": "This page does not exist",
+
+  "checkout-steps.login": "Login",
+  "checkout-steps.delivery": "Delivery",
+  "checkout-steps.payment": "Payment",
+  "checkout-steps.summary": "Summary",
+  "checkout-steps.success": "Success"
 }

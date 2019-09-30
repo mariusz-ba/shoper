@@ -12,6 +12,14 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.vue';
 import LoginPage from '../pages/LoginPage/LoginPage.vue';
 import AccountPage from '../pages/AccountPage/AccountPage.vue';
 
+// Checkout
+import Checkout from '../pages/Checkout/Checkout.vue';
+import CheckoutLogin from '../pages/CheckoutLogin/CheckoutLogin.vue';
+import CheckoutDelivery from  '../pages/CheckoutDelivery/CheckoutDelivery.vue';
+import CheckoutPayment from '../pages/CheckoutPayment/CheckoutPayment.vue';
+import CheckoutSummary from '../pages/CheckoutSummary/CheckoutSummary.vue';
+import CheckoutSuccess from '../pages/CheckoutSuccess/CheckoutSuccess.vue';
+
 Vue.use(VueRouter);
 
 export const routes = [
@@ -54,6 +62,39 @@ export const routes = [
     path: routesNames.accountPage.path,
     name: routesNames.accountPage.name,
     component: AccountPage
+  },
+  // Checkout
+  {
+    path: routesNames.checkout.path,
+    name: routesNames.checkout.name,
+    component: Checkout,
+    children: [
+      {
+        path: routesNames.checkoutLogin.path,
+        name: routesNames.checkoutLogin.name,
+        component: CheckoutLogin
+      },
+      {
+        path: routesNames.checkoutDelivery.path,
+        name: routesNames.checkoutDelivery.name,
+        component: CheckoutDelivery
+      },
+      {
+        path: routesNames.checkoutPayment.path,
+        name: routesNames.checkoutPayment.name,
+        component: CheckoutPayment
+      },
+      {
+        path: routesNames.checkoutSummary.path,
+        name: routesNames.checkoutSummary.name,
+        component: CheckoutSummary
+      },
+      {
+        path: routesNames.checkoutSuccess.path,
+        name: routesNames.checkoutSuccess.name,
+        component: CheckoutSuccess
+      }
+    ]
   }
 ];
 

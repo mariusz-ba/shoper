@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const paths = {
   bundleEntry: path.join(__dirname, 'src/main.js'),
@@ -13,6 +14,7 @@ const paths = {
 
 function createWebpackConfig(environment) {
   const env = environment.dev ? 'dev' : 'prod';
+  const analyze = environment.analyze;
 
   return {
     mode: getMode(env),
@@ -33,12 +35,9 @@ function createWebpackConfig(environment) {
       ]
     },
     resolve: {
-      alias: {
-        vue$: 'vue/dist/vue.esm.js'
-      },
       extensions: ['.js', '.vue', '.json']
     },
-    plugins: getPlugins()
+    plugins: getPlugins(analyze)
   };
 }
 
@@ -102,13 +101,16 @@ function imagesLoaderRule() {
   };
 }
 
-function getPlugins() {
+function getPlugins(analyze) {
   const vueLoaderPlugin = new VueLoaderPlugin();
   const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: paths.cssFilename
   });
+  const bundleAnalyzerPlugin = new BundleAnalyzerPlugin();
 
-  return [vueLoaderPlugin, miniCssExtractPlugin];
+  return analyze
+    ? [vueLoaderPlugin, miniCssExtractPlugin, bundleAnalyzerPlugin]
+    : [vueLoaderPlugin, miniCssExtractPlugin];
 }
 
 module.exports = createWebpackConfig;

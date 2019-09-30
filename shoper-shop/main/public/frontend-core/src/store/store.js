@@ -5,6 +5,7 @@ import { GlobalState } from './global/globalState';
 import { AuthModule } from './modules/auth/authModule';
 import { BasketModule } from './modules/basket/basketModule';
 import { ProductsModule } from './modules/products/productsModule';
+import { CheckoutModule } from './modules/checkout/checkoutModule';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export const store = new Vuex.Store({
   modules: {
     auth: AuthModule,
     basket: BasketModule,
-    products: ProductsModule
+    products: ProductsModule,
+    checkout: CheckoutModule
   }
 });

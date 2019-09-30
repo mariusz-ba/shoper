@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack --env.dev --watch",
     "build-dev": "webpack --env.dev",
-    "build-prod": "webpack --env.prod"
+    "build-prod": "webpack --env.prod",
+    "analyze-dev": "webpack --env.dev --env.analyze",
+    "analyze-prod": "webpack --env.prod --env.analyze"
   },
   "author": "Mariusz Baran <mariusz.baran23@gmail.com>",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "vue-template-compiler": "^2.6.10",
     "webfont": "^9.0.0",
     "webpack": "^4.39.1",
+    "webpack-bundle-analyzer": "^3.5.1",
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {

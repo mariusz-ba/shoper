@@ -32,7 +32,13 @@
         v-show="value"
         class="base-select__value"
       >
-        {{ optionLabel }}
+        <slot
+          name="value"
+          :value="value"
+          :label="optionLabel"
+        >
+          {{ optionLabel }}
+        </slot>
       </span>
       <span
         class="base-select__icon"

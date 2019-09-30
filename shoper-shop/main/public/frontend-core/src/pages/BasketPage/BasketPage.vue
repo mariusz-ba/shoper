@@ -7,6 +7,22 @@
       {{ $t('basket-page.empty') }}
     </h3>
     <template v-else>
+      <div class="basket-page__header">
+        <base-button
+          class="basket-page__button"
+          @click="continueShoppingClickHandler"
+        >
+          Continue shopping
+        </base-button>
+        <base-button
+          class="basket-page__button basket-page__button--checkout"
+          version="success"
+          reversed
+          @click="checkoutClickHandler"
+        >
+          Checkout
+        </base-button>
+      </div>
       <h3 class="basket-page__title">
         {{ $t('basket-page.title', { amount: totalAmount }) }}
       </h3>
@@ -20,6 +36,16 @@
         :delivery-price="summary.deliveryPrice"
         :total-price="summary.totalPrice"
       />
+      <div class="basket-page__footer">
+        <base-button
+          class="basket-page__button basket-page__button--checkout"
+          version="success"
+          reversed
+          @click="checkoutClickHandler"
+        >
+          Checkout
+        </base-button>
+      </div>
     </template>
   </div>
 </template>
@@ -28,12 +54,14 @@
 import { mapState, mapGetters, mapActions } from 'vuex';
 import { BasketActionsTypes } from '../../store/modules/basket/basketActions';
 import { store } from '../../store/store';
+import BaseButton from '../../components/Base/BaseButton/BaseButton';
 import BasketProductsList from '../../components/BasketProductsList/BasketProductsList';
 import BasketSummary from '../../components/BasketSummary/BasketSummary';
 
 export default {
   name: 'basket-page',
   components: {
+    BaseButton,
     BasketProductsList,
     BasketSummary
   },
@@ -61,6 +89,12 @@ export default {
     },
     productRemoveHandler(data) {
       this.removeProduct(data)
+    },
+    checkoutClickHandler() {
+      this.$router.push({ name: this.$store.state.routesNames.checkoutLogin.name });
+    },
+    continueShoppingClickHandler() {
+      this.$router.push({ name: this.$store.state.routesNames.homePage.name });
     }
   }
 };
@@ -68,6 +102,7 @@ export default {
 
 <style lang="scss">
 @import '../../utils/scss/variables/fonts';
+@import '../../utils/scss/mixins/iconFont';
 @import '../../utils/scss/mixins/media';
 
 .basket-page {
@@ -87,6 +122,56 @@ export default {
 
     @include media-tablet-up {
       font-size: $fontSizeXMedium;
+    }
+  }
+
+  &__header {
+    margin-bottom: 2rem;
+
+    @include media-tablet-up {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__footer {
+    margin-top: 2rem;
+
+    @include media-tablet-up {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    height: 5rem;
+
+    &:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
+
+    @include media-tablet-up {
+      width: auto;
+
+      &:not(:last-of-type) {
+        margin-bottom: 0;
+      }
+    }
+
+    &--checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include iconFont('icon-lock') {
+        font-size: 1.4rem;
+        margin-right: 1rem;
+      }
+
+      @include media-tablet-up {
+        min-width: 300px;
+      }
     }
   }
 }

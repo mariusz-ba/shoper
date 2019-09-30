@@ -44,9 +44,9 @@ export default {
   name: 'base-checkbox',
   props: {
     id: String,
-    val: [String, Number],
+    val: [Boolean, String, Number],
     name: String,
-    value: [Boolean, String, Array],
+    value: [Boolean, String, Number, Array],
     error: String,
     disabled: {
       type: Boolean,

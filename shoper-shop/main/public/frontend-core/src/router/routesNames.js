@@ -30,5 +30,30 @@ export const routesNames = {
   accountPage: {
     path: '/account',
     name: 'accountPage'
+  },
+  // Checkout
+  checkout: {
+    path: '/checkout',
+    name: 'checkout',
+  },
+  checkoutLogin: {
+    path: 'login',
+    name: 'checkoutLogin'
+  },
+  checkoutDelivery: {
+    path: 'delivery',
+    name: 'checkoutDelivery'
+  },
+  checkoutPayment: {
+    path: 'payment',
+    name: 'checkoutPayment'
+  },
+  checkoutSummary: {
+    path: 'summary',
+    name: 'checkoutSummary'
+  },
+  checkoutSuccess: {
+    path: 'success',
+    name: 'checkoutSuccess'
   }
 };
